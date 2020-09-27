@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="xx">
+        <input type="text" v-model="xx2"> 为了修改这里可以触发上面的更新
+        <div>{{valid}}</div>
+     </div>
+    <script>
+        new Vue({
+            data: {
+                xx: '234',
+                xx2: '989'
+            },  
+            computed: {
+                valid() {
+                   // 修改才打印
+                    console.log('computd');
+                    return this.xx.length > 3
+                },
+                valid3(){
+                    return function() {
+                        // 每次都会打印
+                        console.log('return funciton');
+                        return this.xx.length > 0;
+                    }
+                }
+            },
+            methods: {
+                valid2() {
+                    console.log('methids');
+                    // 每次都会打印
+                    return this.xx.length > 3
+                }
+            }
+        }).$mount('#app')
+
+    </script>
+</body>
+</html>

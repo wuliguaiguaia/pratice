@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <!-- 调节network slow 3g ，会出现 {{xx}}的闪动，因为自上而下先有html，再去加载的vue -->
+    <!-- 引入全部vue，运行时编译及渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.runtime.js"></script>
+    <!-- 引入部分vue，仅引入渲染部分；vue-cli会先静态编译模板代码，，运行时只引入runtime -->
+    <script>
+        new Vue({
+            data: {
+                xx: '234',
+                xx2: '989'
+            }, 
+            // 提前编译好,直接使用编译后的结果, 而不用在运行时编译，提升用户体验
+            // vue-cli？
+            render(createElement) {
+                return createElement('div', null, [
+                    createElement('span', this.xx)
+                ])
+            }
+        }).$mount('#app')
+
+    </script>
+</body>
+
+</html>

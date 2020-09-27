@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: red;
+                width: 20%;
+                height: 200vh;
+            }
+            body:after {
+                content: 'alias.com';
+                position: fixed;
+                top: calc(var(--top, -999) * 1px);
+                left: calc(var(--left, -999) * 1px);
+                transform: translate(-50%, calc(-100% - 20px));
+                opacity: 0;
+                transition: transform .3s, opacity .5s;
+                z-index: 999;
+            }
+
+            body:active:after {
+                transform: translate(-50%, -100%);
+                opacity: 1;
+                transition: 0s;
+            } 
+        </style>
+    </head>
+    <body>
+        <script>
+            window.addEventListener('scroll', (e) => {
+                document.body.style.setProperty('--left', e.clientX)
+                document.body.style.setProperty('--top', e.clientY)
+                if(document.documentElement.scrollHeight - (window.screen.height + window.scrollY) < 30) {
+                    console.log('fsdfsdf');
+                }
+            })
+        </script>
+    </body>
+</html>

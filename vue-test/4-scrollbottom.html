@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #app {
+            width: 100%;
+            height: 200vh;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">{{message}}</div>
+    <script>
+        let MyPlugin = {};
+        MyPlugin.install = (Vue, options) => {
+            Vue.mixin({
+                created () {
+                    this.scrollBottom();
+                },
+                methods: {
+                    scrollBottom () {
+                        window.addEventListener('scroll', this.debounce(() => {
+                            if (document.documentElement.scrollHeight - (window.screen.height + window.scrollY) < 50) {
+                                console.log(213);
+                            }
+                        }, 2000))
+                    },
+                    debounce (fn, time) {
+                        let timer = null;
+                        return function (...args) {
+                             clearTimeout(timer);
+                             timer = setTimeout(()=>{
+                                 fn();
+                             },time);
+                        }
+                    }
+                }
+            })
+        }
+        Vue.use(MyPlugin, { name: 'alias' });
+
+        let MyPlugin2 = {};
+        MyPlugin.install = (Vue, options) => {
+            Vue.component({
+                name: 'alias',
+                data() {
+                    return {
+                        msg: 'fds'
+                    }
+                },
+                render(creatElement) {
+                    return creatElement(
+                        'div',
+                        {
+                            attrs: {
+                                id: '213'
+                            }
+                        }
+                    )
+
+                }
+            })
+
+        }
+        Vue.use(MyPlugin2);
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello world'
+            },
+            created() {
+                console.log('created');
+            }
+        })
+    </script>
+</body>
+
+</html>

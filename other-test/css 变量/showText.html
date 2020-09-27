@@ -1,0 +1,32 @@
+
+<html>
+
+<head>
+  <style>
+    body::after {
+      content: "alias.com";
+      position: absolute;
+      top: calc(var(--y, -9999) * 1px);
+      left: calc(var(--x, -9999) * 1px);
+      opacity: 0;
+      transform: translate(-50%, calc(-50% - 20px));
+      transition: transform 1s, opacity .8s
+    }
+
+    body:active::after {
+      opacity: .3;
+      transform: translate(-50%, -50%);
+      transition: 0s;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    document.addEventListener('mousedown', e => {
+      document.body.style.setProperty('--x', e.pageX);
+      document.body.style.setProperty('--y', e.pageY);
+    })
+  </script>
+</body>
+</html>

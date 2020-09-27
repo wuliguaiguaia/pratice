@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            /* scroll-behavior: smooth; */
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <li class="1">11</li>
+    <li class="2">21</li>
+    <li class="3">31</li>
+    <li class="4">41</li>
+    <li class="5">51</li>
+    <li class="6">61</li>
+    <li class="7">71</li>
+    <li class="8">81</li>
+    <li class="9">91</li>
+    <li class="10">101</li>
+    <li class="11">111</li>
+    <li class="12">121</li>
+    <li class="13">131</li>
+    <li class="14">141</li>
+    <li class="15">151</li>
+    <li class="16">161</li>
+    <li class="17">171</li>
+    <li class="18">181</li>
+    <li class="19">191</li>
+    <li class="20">201</li>
+    <li class="21">211</li>
+    <li class="22">221</li>
+    <li class="23">231</li>
+    <li class="24">241</li>
+    <li class="25">251</li>
+    <li class="26">261</li>
+    <li class="27">271</li>
+    <li class="28">281</li>
+    <li class="29">291</li>
+    <li class="30">301</li>
+    <li class="31">311</li>
+    <li class="32">321</li>
+    <li class="33">331</li>
+    <li class="34">341</li>
+    <li class="35">351</li>
+    <li class="36">361</li>
+    <li class="37">371</li>
+    <li class="38">381</li>
+    <li class="39">391</li>
+    <li class="40">401</li>
+    <li class="41">411</li>
+    <li class="42">421</li>
+    <li class="43">431</li>
+    <li class="44">441</li>
+    <li class="45">451</li>
+    <li class="46">461</li>
+    <li class="47">471</li>
+    <li class="48">481</li>
+    <li class="49">491</li>
+    <li class="50">501</li>
+    <li class="51">511</li>
+    <li class="52">521</li>
+    <li class="53">531</li>
+    <li class="54">541</li>
+    <li class="55">551</li>
+    <li class="56">561</li>
+    <li class="57">571</li>
+    <li class="58">581</li>
+    <li class="59">591</li>
+    <li class="60">601</li>
+    <li class="61">611</li>
+    <li class="62">621</li>
+    <li class="63">631</li>
+    <li class="64">641</li>
+    <li class="65">651</li>
+    <li class="66">661</li>
+    <li class="67">671</li>
+    <li class="68">681</li>
+    <li class="69">691</li>
+    <li class="70">701</li>
+    <li class="71">711</li>
+    <li class="72">721</li>
+    <li class="73">731</li>
+    <li class="74">741</li>
+    <li class="75">751</li>
+    <li class="76">761</li>
+    <li class="77">771</li>
+    <li class="78">781</li>
+    <li class="79">791</li>
+    <li class="80">801</li>
+    <li class="81">811</li>
+    <li class="82">821</li>
+    <li class="83">831</li>
+    <li class="84">841</li>
+    <li class="85">851</li>
+    <li class="86">861</li>
+    <li class="87">871</li>
+    <li class="88">881</li>
+    <li class="89">891</li>
+    <li class="90">901</li>
+    <li class="91">911</li>
+    <li class="92">921</li>
+    <li class="93">931</li>
+    <li class="94">941</li>
+    <li class="95">951</li>
+    <li class="96">961</li>
+    <li class="97">971</li>
+    <li class="98">981</li>
+    <li class="99">991</li>
+    <li class="100">1001</li>
+    <div class="vo">00</div>
+
+    <div id="form">
+        <input type="password" >
+        <input type="text" name="" id="">
+    </div>
+    <script>
+        const formatDuration = ms => {
+                if (ms < 0) ms = -ms;
+                const time = {
+                    day: Math.floor(ms / 86400000),
+                    hour: Math.floor(ms / 3600000) % 24,
+                    minute: Math.floor(ms / 60000) % 60,
+                    second: Math.floor(ms / 1000) % 60,
+                    millisecond: Math.floor(ms) % 1000
+                };
+                return Object.entries(time)
+                    .filter(val => val[1] !== 0)
+                    .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+                    .join(', ');
+            };
+
+            // 事例
+            console.log(formatDuration(1001));
+            console.log(formatDuration(34325055574));
+
+
+
+
+
+            const formToObject = form =>
+                    Array.from(new FormData(form)).reduce(
+                        (acc, [key, value]) => ({
+                            ...acc,
+                            [key]: value
+                        }),
+                        {}
+                    );
+
+                // 事例
+                console.log(formToObject(document.querySelector('#form'))); 
+        // 1.
+            history.scrollRestoration = "manual"//将其设置为手动
+
+        // function fn1() {
+        //     window.scrollTo({
+        //         left: 0,
+        //         top: document.body.scrollHeight,
+        //         // behavior: 'smooth'
+        //     })
+        // }
+        // function fn2 () {
+        //     window.scrollTo({
+        //         left:0,
+        //         top:0,
+        //         // behavior: 'smooth'
+        //     })
+        // }
+        // function fn3() {
+        //     window.scrollTo({
+        //         left: 0,
+        //         top: document.body.scrollHeight,
+        //     })
+        // }
+        // fn1()  // 滚下去
+
+        // setTimeout(() => {
+        //     fn2()  // 再滚上来
+        // }, 2000);
+
+        // 2.
+
+        // setTimeout(() => {
+        //     fn3()
+        // }, 3000);
+
+
+        // 3.
+        // function fn4(){
+        //     let top = document.documentElement.scrollTop ||  document.body.scrollTop;
+        //     if(top > 0) {
+        //         window.requestAnimationFrame(fn4)
+        //         window.scrollTo(0 , top-top/8)   // 
+        //     }
+        // }
+        // setTimeout(fn4, 3000)
+    </script>
+</body>
+</html>
