@@ -20,8 +20,8 @@ const path = require('path');
     printBackground: true, // 默认 false，不包括背景信息
     format: 'A4', // 或者是 width，height，但 format 优先级较高
     displayHeaderFooter: true, // 是否展示页眉页脚
-    headerTemplate: '<p class="title" style="text-align: center; width:100%; height: 20px; line-height: 20px;margin-top: -14px;font-size: 10px; color: #555;">fdsfsd</p>',
-    footerTemplate: '<p>fdsfdsfds</p>',
+    // headerTemplate: '<p class="title" style="text-align: center; width:100%; height: 20px; line-height: 20px;margin-top: -14px;font-size: 10px; color: #555;">fdsfsd</p>',
+    // footerTemplate: '<p>fdsfdsfds</p>',
     margin: { // 设置页面上下margin 用于显示页眉页脚
       top: 30,
       bottom: 30

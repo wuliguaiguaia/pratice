@@ -13,5 +13,3 @@ puppeteer-core 和 puppeteer 区别是：puppeteer 会自动安装 chromium，�
 可以在 lunch 时指定executablePath：比如 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
 
 
-
-使用puppeteer 
