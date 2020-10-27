@@ -37,4 +37,7 @@
 # 测试
 /3dRender
 
+/puppeteer-test/toss-puppeteer
+/toss-puppeteer
+
 /node-test
