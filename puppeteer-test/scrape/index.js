@@ -11,7 +11,7 @@ let scrape = async () => {
   await page.click(
     "#homepage > ul > li:nth-child(8) > a"
   );
-  await page.waitFor(1000);
+  // await page.waitFor(1000); // 暂不需要
 
   const result = await page.evaluate(() => {
     const parent = document.querySelector('.module-categories.module');
