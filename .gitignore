@@ -8,7 +8,11 @@
 
 /vue3-app-vite/node_modules/
 
+/electron-test/node_modules
+
 /echarts-test/
+
+/router-test/
 
 /design-patterns/
 
@@ -30,3 +34,9 @@
 
 /mini-vue3/kkb-03
 
+
+
+##  https://github.com/SHERlocked93/graphql-demo.git
+/graphql-demo/
+
+/3dRender/
