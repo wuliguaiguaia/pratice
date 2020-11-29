@@ -22,7 +22,7 @@ function r(filename) {
     exports: {}
   };
 
-  result(r, module, module.exports);
+  result(r, module, module.exports); // 再传入require实现内部调用
 
   return module.exports; // 返回值就是文件内用 module.exports 导出的内容
 }
