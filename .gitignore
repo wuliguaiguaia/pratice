@@ -10,6 +10,10 @@
 
 /electron-test/node_modules
 
+/gpu-test/node_modules
+
+/nest-test/node_modules
+
 /echarts-test/
 
 /router-test/
@@ -33,7 +37,6 @@
 /mini-vue3/kkb-02
 
 /mini-vue3/kkb-03
-
 
 
 ##  https://github.com/SHERlocked93/graphql-demo.git
