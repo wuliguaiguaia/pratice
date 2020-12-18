@@ -18,10 +18,31 @@ server.listen(8888, '127.0.0.1', (err, res) => {
 
 
 
+const _path = path.resolve(__dirname, test.txt);
+const promisify = func => {
+    return function (...args) {
+        return new Promise((resolve, reject) => {
+            args.push((err, res) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(res);
+            })
+
+            func.apply(func, args);
+        })
+    }
+}
 
 
+const server = http.createServer((err, res) => {
+    
+})
 
+server.listen(8888, '127.0.0.1', () => {
 
+})
 
 
 
