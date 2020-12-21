@@ -14,6 +14,9 @@
 
 /nest-test/node_modules
 
+# https://github.com/jakearchibald/idb
+/indexDB-test/idb
+
 /echarts-test/
 
 /router-test/
