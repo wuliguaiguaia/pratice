@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      border: 1px solid yellow;
+    }
+    .box {
+      border: 1px solid blue;
+      height: calc(100vw + 100px);
+    }
+    .pic-container {
+      border: 1px solid red;
+      height: 0;
+    }
+
+    img {
+      float: left;
+      display: inline-block;
+    }
+
+.error {
+  width: 350px;
+  height: 150px;
+}
+   
+
+  </style>
+</head>
+<body>
+  <div class="box">nothing</div>
+  <div class="box">
+    <img class="lazy-load" width="350px" height="150px" 
+    data-src="https://imadges-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/a34d5645-8f4c-4536-afc4-e4ea77d62415/d319cgn-718cad87-976f-42cb-bdee-b00428f891d0.png" 
+    alt="一张无所谓的图"
+    onerror="this.classList.add('error')">
+    <span class="text">440 × 783 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi sit quisquam eum. Natus quidem fuga provident eius minus voluptatem eligendi. Perspiciatis voluptates totam mollitia magni, atque illum doloribus soluta et voluptatum, similique vitae sit eos! Quo cumque, exercitationem aut esse obcaecati rem aliquid, cupiditate aspernatur voluptas perferendis alias aperiam quia reiciendis quod fuga eligendi voluptatum magni fugit quidem iste distinctio expedita! Architecto consectetur optio maiores officia accusantium, minima eaque eum dicta aperiam, facilis velit temporibus neque aut! Qui nostrum dolore quidem quae maxime incidunt. Voluptate nemo dolorum non minima aliquam distinctio! Nostrum praesentium sequi incidunt fuga nam eum earum ut voluptatum labore numquam culpa totam rerum illo dolor repellat, distinctio recusandae quasi nobis? Soluta cupiditate nobis corporis, expedita veniam quam non ratione modi facilis commodi nam, possimus ut animi ullam obcaecati dicta in ex ipsum! Cupiditate consequuntur ab eius fugit non vero mollitia ullam amet architecto impedit cumque enim laudantium ex, pariatur blanditiis rerum necessitatibus repellat vitae. Sunt corrupti ullam temporibus totam quas accusantium iste qui dolorum cumque minima exercitationem corporis, architecto, sed unde enim porro in quae eaque aliquam sit, earum repellat deserunt at quia! Corporis, maiores eaque ut, id commodi voluptatibus velit debitis facilis nulla nobis animi ea.</span>
+  </div>
+  <script>
+    function lazyload () {
+      const imgs = document.querySelectorAll('img.lazy-load');
+      
+      const loadImage = img => {
+        let src = img.dataset.src;
+        img.setAttribute('src', src);
+      }
+
+      const intersectionObserver = new IntersectionObserver((items, observer) => {
+        items.forEach((item) => {
+          if(item.isIntersecting) {
+            console.log('src可以进行替换了');
+            loadImage(item.target);
+            observer.unobserve(item.target);
+          }
+        })
+      });
+
+
+      imgs.forEach((img) => {
+        // intersectionObserver.observe(img);
+      });
+    }
+    lazyload();
+  </script>
+</body>
+</html>
