@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 300px;
+      height: 300px;
+      border: 1px solid red;
+    }
+
+    div.position {
+      position: absolute;
+      top: 100px
+    }
+
+    div.transform {
+      transform: translateY(100px);
+    }
+  </style>
+</head>
+<body>
+    <div>f'd's'f's'd'f'd's'f'd's'f'd's'f</div>
+<script>
+  let divs = document.querySelectorAll('div');
+    setTimeout(() => {
+      divs.forEach(div => {
+        div.classList.add('transform')
+        // div.classList.add('position')
+      })
+    }, 3000)
+</script>
+</body>
+</html>
