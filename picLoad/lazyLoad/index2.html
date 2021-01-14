@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    img {
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <br/>Lazy loading加载数量与屏幕高度有关，高度越小加载数量越少，但并不是线性关系。
+    <br/>Lazy loading加载数量与网速有关，网速越慢，加载数量越多，但并不是线性关系。(多加载，这样快速滑动才不会有图片来不及加载导致空白的场景出现。)
+    <br/>Lazy loading加载没有缓冲，滚动即会触发新的图片资源加载。
+    <br/>Lazy loading加载在窗口resize尺寸变化时候也会触发，例如屏幕高度从小变大的时候。
+    <br/>Lazy loading加载也有可能会先加载后面的图片资源，例如页面加载时滚动高度很高的时候。
+
+    
+
+      <div v-for="(item,index) in imgSrc" :key="`${item}_${index}`">
+        <img :src="item" loading="lazy">
+        <p :class="[`p${index}`]">fdsfdsfsdfdsfdsfdsfdsfdsf</p>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  new Vue({
+      el: '#app',
+      data: {
+        imgSrc: [
+          "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg",
+          "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2396395246,715775841&fm=26&gp=0.jpg",
+          "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=224866248,765861809&fm=26&gp=0.jpg",
+          "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2670715487,1547868437&fm=26&gp=0.jpg",
+          "https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2988957523,3295751190&fm=26&gp=0.jpg",
+          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2698110318,782174384&fm=26&gp=0.jpg",
+          "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1102788601,953675482&fm=26&gp=0.jpg",
+          "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2004055534,3969071219&fm=26&gp=0.jpg"
+        ]
+      }
+    });
+</script>
+
+</html>

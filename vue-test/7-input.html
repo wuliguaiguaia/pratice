@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input v-model.trim="l" @input="o">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      data: {
+        l:  'fds'
+      },
+      methods: {
+       o () {
+         this.l = this.l.toUpperCase().replace(/[\W]/g, '')
+       }
+      }
+    }).$mount('#app')
+  </script>
+</body>
+
+</html>
