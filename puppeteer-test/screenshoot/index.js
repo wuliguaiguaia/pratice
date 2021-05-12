@@ -11,7 +11,7 @@ async function getPic() {
     deviceScaleFactor: 2,
   });
   await page.goto("https://www.baidu.com/"); // 转到一个url
-  await page.screenshot({ path: "./baidu.png" }); // 截屏
+  await page.screenshot({ path: "screenshot/baidu.png" }); // 截屏
 
   await browser.close(); // 关闭浏览器
 }
