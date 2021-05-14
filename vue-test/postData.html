@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 直接从app传递放在了 attrs 上，这里必须是子组件的子组件 -->
+    <alias></alias>
+  </div>
+  <script>
+  Vue.component('wwww', {
+    props: {
+      dialogData: {
+        type: Object
+      },
+      show: Number
+    },
+    data() {
+      return {
+        postData: {}
+      }
+    },
+    watch: {
+      show: {
+        handler(val) {
+          console.log(1111111);
+          this.postData = this.dialogData;
+        },
+        immediate: true
+      }
+    },
+    template: `<input v-model="postData.name">`
+  })
+  Vue.component('alias', {
+     data() {
+      return {
+        dialogData: {
+          name: 'rwe',
+          age: 12
+        },
+        show: 0
+      }
+    },
+    template: `<wwww :dialogData='dialogData' :show="show"/>`
+  })
+  new Vue({
+    el: '#app'
+  })
+  </script>
+</body>
+
+</html>
