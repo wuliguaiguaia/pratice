@@ -5,8 +5,8 @@
     "host": "localhost",
     "port": 3306,
     "username": "root",
-    "password": "mysql0619",
-    "database": "test001",
+    "password": "mysql123",
+    "database": "test101",
     "synchronize": true,
     "logging": true,
     "entities": [

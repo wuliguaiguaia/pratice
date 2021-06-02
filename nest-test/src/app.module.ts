@@ -1,8 +1,11 @@
+import { ArticleModule } from './modules/article/article.module';
+import { UserModule } from './modules/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Global, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
+import { CategoryService } from './modules/category/category.service';
+import { CategoryModule } from './modules/category/category.module';
 import * as config from 'config';
 
 @Global()
@@ -21,13 +24,15 @@ import * as config from 'config';
         charset: 'utf8mb4',
         entities: ['dist/**/*.entity{.ts,.js}'],
         // 生产和测试环境中要设置成 false， 防止字段改动导致内容丢失，本地开发可以设置成 true
-        // synchronize: config.get('db.synchronize'),
-        logging: true
-      })
+        synchronize: config.get('db.synchronize'), // true: 每次运行应用程序时实体都将与数据库同步
+        logging: true,
+      }),
     }),
-    UserModule
+    UserModule,
+    ArticleModule,
+    CategoryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CategoryService],
 })
 export class AppModule {}
