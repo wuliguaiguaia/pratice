@@ -6,12 +6,11 @@
     <title>Document</title>
     <style>
         html {
-            scroll-behavior: smooth;
+            /* scroll-behavior: smooth; */
         }
     </style>
 </head>
 <body>
-    CSS scroll-behavior和JS scrollIntoView让页面滚动平滑  https://www.zhangxinxu.com/wordpress/2018/10/scroll-behavior-scrollintoview-%e5%b9%b3%e6%bb%91%e6%bb%9a%e5%8a%a8/
     <div id="box"></div>
     <li class="1">11</li>
     <li class="2">21</li>
@@ -120,42 +119,42 @@
         <input type="text" name="" id="">
     </div>
     <script>
-        // const formatDuration = ms => {
-        //         if (ms < 0) ms = -ms;
-        //         const time = {
-        //             day: Math.floor(ms / 86400000),
-        //             hour: Math.floor(ms / 3600000) % 24,
-        //             minute: Math.floor(ms / 60000) % 60,
-        //             second: Math.floor(ms / 1000) % 60,
-        //             millisecond: Math.floor(ms) % 1000
-        //         };
-        //         return Object.entries(time)
-        //             .filter(val => val[1] !== 0)
-        //             .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
-        //             .join(', ');
-        //     };
+        const formatDuration = ms => {
+                if (ms < 0) ms = -ms;
+                const time = {
+                    day: Math.floor(ms / 86400000),
+                    hour: Math.floor(ms / 3600000) % 24,
+                    minute: Math.floor(ms / 60000) % 60,
+                    second: Math.floor(ms / 1000) % 60,
+                    millisecond: Math.floor(ms) % 1000
+                };
+                return Object.entries(time)
+                    .filter(val => val[1] !== 0)
+                    .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+                    .join(', ');
+            };
 
-        //     // 事例
-        //     console.log(formatDuration(1001));
-        //     console.log(formatDuration(34325055574));
-
-
+            // 事例
+            console.log(formatDuration(1001));
+            console.log(formatDuration(34325055574));
 
 
 
-        //     const formToObject = form =>
-        //             Array.from(new FormData(form)).reduce(
-        //                 (acc, [key, value]) => ({
-        //                     ...acc,
-        //                     [key]: value
-        //                 }),
-        //                 {}
-        //             );
 
-        //         // 事例
-        //         console.log(formToObject(document.querySelector('#form'))); 
-        // // 1.
-        //     history.scrollRestoration = "manual"//将其设置为手动
+
+            const formToObject = form =>
+                    Array.from(new FormData(form)).reduce(
+                        (acc, [key, value]) => ({
+                            ...acc,
+                            [key]: value
+                        }),
+                        {}
+                    );
+
+                // 事例
+                console.log(formToObject(document.querySelector('#form'))); 
+        // 1.
+            history.scrollRestoration = "manual"//将其设置为手动
 
         // function fn1() {
         //     window.scrollTo({
