@@ -127,7 +127,7 @@ export class UserService {
   async removeUser(id: number) {
     return await this.queryBuilder
       .delete()
-      .from(UserInfoEntity, 'user')
+      .from(UserInfoEntity)
       .where('id = :id', { id })
       .execute();
   }

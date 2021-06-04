@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import {
   CreateArticleDto,
@@ -14,7 +23,7 @@ export class ArticleController {
    * 获取文章列表
    */
   @Get()
-  async getArticleList(@Body() articleDto: QueryArticleDto) {
+  async getArticleList(@Query() articleDto: QueryArticleDto) {
     return await this.articleService.getArticleList(articleDto);
   }
 
@@ -36,8 +45,8 @@ export class ArticleController {
   /**
    * 删除文章
    */
-  @Delete()
-  async removeArticle(@Body() id: number) {
-    return await this.articleService.removeArticle(id);
+  @Delete(':id')
+  async removeArticle(@Param('id') id: string) {
+    return await this.articleService.removeArticle(+id);
   }
 }

@@ -1,8 +1,6 @@
-import { roleEnum } from './../../common/constants/role';
 /*
  * service 提供操作数据库服务接口
  */
-// import { ArticleService } from './../article/article.service';
 import { ArticleEntity } from './../../entities/article.entity';
 import {
   CreateArticleDto,
@@ -16,6 +14,7 @@ import {
   getConnection,
   getRepository,
 } from 'typeorm';
+import { roleEnum } from './../../common/constants/role';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @EntityRepository(ArticleEntity)

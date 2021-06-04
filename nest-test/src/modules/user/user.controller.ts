@@ -6,6 +6,7 @@ import {
   Post,
   Put,
   Param,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto, QueryUserDto } from './dto/user.dto';
@@ -18,7 +19,7 @@ export class UserController {
    * 获取用户列表
    */
   @Get()
-  async getUserList(@Body() userDto: QueryUserDto) {
+  async getUserList(@Query() userDto: QueryUserDto) {
     return await this.userService.getUserList(userDto);
   }
 
@@ -37,6 +38,7 @@ export class UserController {
   async addUser(@Body() userDto: CreateUserDto) {
     return await this.userService.addUser(userDto);
   }
+
   /**
    * 更新用户
    */
@@ -48,8 +50,8 @@ export class UserController {
   /**
    * 删除用户
    */
-  @Delete()
-  async removeUser(@Body() id: number) {
-    return await this.userService.removeUser(id);
+  @Delete(':id') // Delete 只能用param？
+  async removeUser(@Param('id') id: string) {
+    return await this.userService.removeUser(+id);
   }
 }

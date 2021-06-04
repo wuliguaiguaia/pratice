@@ -9,17 +9,9 @@ export class CreateArticleDto {
   @IsNotEmpty({
     message: '类别不能为空',
   })
-  category: number[];
-
+  category: () => string; // ?
   keywords: string;
   content: string;
-}
-
-export class UpdateArticleDto extends CreateArticleDto {
-  @IsNotEmpty({
-    message: '文章id不能为空',
-  })
-  id: number;
 }
 
 export class QueryArticleDto {
@@ -29,4 +21,11 @@ export class QueryArticleDto {
   page: number;
 
   prepage: number;
+}
+
+export class UpdateArticleDto extends CreateArticleDto {
+  @IsNotEmpty({
+    message: '文章id不能为空',
+  })
+  id: number;
 }

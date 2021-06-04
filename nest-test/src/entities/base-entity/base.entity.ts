@@ -1,4 +1,3 @@
-import { MysqlDataType } from './../../common/constants/database/mysql';
 /**
  * 表实体基类
  * 嵌入式实体
@@ -16,14 +15,17 @@ export abstract class BaseEntity {
   id: number;
 
   @CreateDateColumn({
+    // 自动设置为实体的插入时间。 不需要在此列中手动写入值，该值会自动设置
+    name: 'create_time',
     comment: '创建时间',
   })
-  create_time: MysqlDataType.TIMESTAMP;
+  createTime: Date;
 
   @UpdateDateColumn({
+    name: 'update_time',
     comment: '更新时间',
   })
-  update_time: MysqlDataType.TIMESTAMP;
+  updateTime: Date;
 
   // @Column({
   //   type: MysqlDataType.TINYINT,

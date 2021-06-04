@@ -2,13 +2,10 @@ import { ArticleModule } from './modules/article/article.module';
 import { UserModule } from './modules/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Global, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { CategoryService } from './modules/category/category.service';
 import { CategoryModule } from './modules/category/category.module';
 import * as config from 'config';
 
-@Global()
+@Global() // 全局模块
 @Module({
   imports: [
     // 数据库连接配置
@@ -32,7 +29,5 @@ import * as config from 'config';
     ArticleModule,
     CategoryModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, CategoryService],
 })
 export class AppModule {}
