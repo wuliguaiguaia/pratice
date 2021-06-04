@@ -1,6 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateCategoryDto {
+  // 类验证器
   @IsNotEmpty({
     message: '分类名不能为空',
   })

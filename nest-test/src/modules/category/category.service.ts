@@ -1,6 +1,9 @@
 /*
  * 分类服务
  */
+
+import { ApiErrorCode } from './../../common/exceptions/api.code.enum';
+import { ApiException } from './../../common/exceptions/api.exception';
 import { CategoryEntity } from './../../entities/category.entity';
 import {
   CreateCategoryDto,
@@ -37,11 +40,10 @@ export class CategoryService {
       values: { name: categoryDto.name },
     });
     if (list.length > 0) {
-      throw new Error('分类名不能重复');
-      // throw new ApiException(
-      //   ApiErrorCode.TABLE_OPERATE_ERROR,
-      //   '分类手机号不能重复',
-      // );
+      throw new ApiException(
+        ApiErrorCode.TABLE_OPERATE_ERROR,
+        '分类名不能重复',
+      );
     }
     return await this.queryBuilder
       .insert()

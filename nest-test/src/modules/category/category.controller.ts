@@ -8,15 +8,21 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
   Query,
+  UseFilters,
 } from '@nestjs/common';
+// import { Logger } from 'winston';
 
 @Controller('category')
 export class CategoryController {
+  // logger: Logger;
   constructor(private readonly cateogoryService: CategoryService) {}
 
   /**
@@ -33,7 +39,12 @@ export class CategoryController {
 
   @Post()
   async addCategory(@Body() categoryDto: CreateCategoryDto) {
-    return await this.cateogoryService.addCategory(categoryDto);
+    const r = await this.cateogoryService.addCategory(categoryDto);
+    if (r.raw) {
+      return {
+        id: r.raw.insertId,
+      };
+    }
   }
 
   /**
