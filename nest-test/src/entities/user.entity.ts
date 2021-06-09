@@ -1,4 +1,4 @@
-import { roleEnum } from './../common/constants/role';
+import { RoleEnum } from './../common/constants/role';
 import { MysqlDataType } from './../common/constants/database/mysql';
 /**
  * 用户实体
@@ -38,7 +38,7 @@ export class UserInfoEntity extends BaseEntity {
     nullable: false,
     comment: '用户角色',
   })
-  role: roleEnum;
+  role: RoleEnum;
 
   @OneToMany(() => ArticleEntity, (article) => article.user)
   articles: ArticleEntity[];

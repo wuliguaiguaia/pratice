@@ -1,3 +1,6 @@
+import { RolesGuard } from './../../common/guards/role.guard';
+import { RoleEnum } from './../../common/constants/role';
+import { Roles } from './../../common/decorators/role.decorator';
 import {
   Body,
   Controller,
@@ -7,6 +10,7 @@ import {
   Put,
   Param,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto, QueryUserDto } from './dto/user.dto';
@@ -19,6 +23,8 @@ export class UserController {
    * 获取用户列表
    */
   @Get()
+  @UseGuards(RolesGuard)
+  @Roles(RoleEnum.ADMIN)
   async getUserList(@Query() userDto: QueryUserDto) {
     return await this.userService.getUserList(userDto);
   }

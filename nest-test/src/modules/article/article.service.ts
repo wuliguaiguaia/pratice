@@ -14,7 +14,6 @@ import {
   getConnection,
   getRepository,
 } from 'typeorm';
-import { roleEnum } from './../../common/constants/role';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @EntityRepository(ArticleEntity)
@@ -66,10 +65,10 @@ export class ArticleService {
    * 根据类型查询文章
    * @param whereCondition
    */
-  async getArticleByRole(role: roleEnum) {
+  async getArticleByCategory(category: number) {
     return await this.getArticleByCondition({
-      condition: 'role = :role',
-      values: { role },
+      condition: 'category = :category',
+      values: { category },
     });
   }
 

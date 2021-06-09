@@ -1,19 +1,22 @@
+/**
+ * 自定义API异常
+ */
+import { ApiErrorCode, ApiErrorMap } from './api.code.enum';
 import { HttpStatus } from '@nestjs/common';
 import { HttpException } from '@nestjs/common';
-import { ApiErrorCode, ApiErrorMap } from './api.code.enum';
 
 export class ApiException extends HttpException {
   public errorCode: ApiErrorCode;
-  public errMessage: string;
+  public errorMessage: string;
 
   constructor(
     errorCode: ApiErrorCode,
-    errMessage = '',
+    errorMessage = '',
     status: HttpStatus = HttpStatus.OK,
   ) {
-    super(errMessage, status);
-    this.errMessage = errMessage || ApiErrorMap[errorCode];
+    super(errorMessage, status);
     this.errorCode = errorCode;
+    this.errorMessage = errorMessage || ApiErrorMap[this.errorCode];
   }
 
   getErrorCode(): ApiErrorCode {
@@ -21,6 +24,6 @@ export class ApiException extends HttpException {
   }
 
   getErrorMessage(): string {
-    return this.errMessage;
+    return this.errorMessage;
   }
 }

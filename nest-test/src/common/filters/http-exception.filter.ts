@@ -1,3 +1,7 @@
+/**
+ * 全局异常捕获
+ */
+
 import {
   HttpException,
   ExceptionFilter,
@@ -6,10 +10,6 @@ import {
 } from '@nestjs/common';
 
 import { Request, Response } from 'express';
-
-/**
- * 全局异常捕获
- */
 
 @Catch()
 // implements 继承 interface
