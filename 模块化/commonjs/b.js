@@ -1,0 +1,1 @@
+module.exports = {val: +new Date()}
