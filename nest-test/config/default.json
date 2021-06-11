@@ -1,27 +1,8 @@
 {
-  "port": 3000,
-  "db": {
-    "type": "mysql",
-    "host": "127.0.0.1",
-    "port": 3306,
-    "username": "root",
-    "password": "mysql123",
-    "database": "test001",
-    "synchronize": true,
-    "logging": true,
-    "entities": [
-      "src/entities/**/*.ts"
-    ],
-    "migrations": [
-      "src/migration/**/*.ts"
-    ],
-    "subscribers": [
-      "src/subscriber/**/*.ts"
-    ],
-    "cli": {
-      "entitiesDir": "src/entities",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-    }
+  "github": {
+    "clientID": "a3e03d162eec52ad399a",
+    "clientSecrets": "2309689e6c5054b93851f849e32b367d5f207960",
+    "accessTokenUri": "https://github.com/login/oauth/access_token",
+    "userInfoUri": "`https://api.github.com/user"
   }
 }
