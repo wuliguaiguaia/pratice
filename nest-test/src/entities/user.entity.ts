@@ -32,13 +32,13 @@ export class UserInfoEntity extends BaseEntity {
     comment: '手机号',
   })
   mobile: string;
-
+  
   @Column({
     type: MysqlDataType.TINYINT,
     nullable: false,
     comment: '用户角色',
   })
-  role: RoleEnum;
+  role: RoleEnum; // 可以是多个
 
   @OneToMany(() => ArticleEntity, (article) => article.user)
   articles: ArticleEntity[];
