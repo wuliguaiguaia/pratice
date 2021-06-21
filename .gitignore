@@ -14,7 +14,7 @@
 
 /gpu-test/node_modules
 
-/nest-test/node_modules
+/nest-test
 
 # https://github.com/jakearchibald/idb
 /indexDB-test/idb
