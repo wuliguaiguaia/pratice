@@ -9,6 +9,11 @@ export class CreateUserDto {
   name: string;
 
   @IsNotEmpty({
+    message: '密码不能为空',
+  })
+  password: string;
+
+  @IsNotEmpty({
     message: '手机号不能为空',
   })
   mobile: string;
@@ -43,3 +48,15 @@ export class UpdateUserDto extends CreateUserDto {
 }
 
 export class DeleteUserDto {}
+
+export class LoginDto {
+  @IsNotEmpty({
+    message: '手机号不能为空',
+  })
+  mobile: string;
+
+  @IsNotEmpty({
+    message: '密码不能为空',
+  })
+  password: string;
+}

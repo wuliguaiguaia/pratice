@@ -1,5 +1,5 @@
 {
-  "port": 3003,
+  "port": 3009,
   "db": {
     "type": "mysql",
     "host": "127.0.0.1",
@@ -8,7 +8,10 @@
     "password": "mysql123",
     "database": "test001",
     "synchronize": true,
-    "logging": true,
+    "logging": [
+      "error"
+    ],
+    "maxQueryExecutionTime": 1000,
     "entities": [
       "src/entities/**/*.ts"
     ],

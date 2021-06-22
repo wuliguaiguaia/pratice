@@ -10,14 +10,18 @@ import {
 } from '@nestjs/common';
 
 import { Request, Response } from 'express';
+import { Logger } from '@nestjs/common';
 
 @Catch()
-// implements 继承 interface
 export class HttpExceptionFilter implements ExceptionFilter {
+  constructor(private readonly logger: Logger) {}
+
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const req = ctx.getRequest<Request>();
     const res = ctx.getResponse<Response>();
+    const { url, method, query, body } = req;
+    let responseData = {};
 
     if (exception instanceof HttpException) {
       const status = exception.getStatus();
@@ -30,21 +34,33 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? (exception as any).getErrorMessage()
         : exception.getResponse();
 
-      res.status(status).json({
+      responseData = {
         errNo,
         errStr: errStr.message || errStr,
         data: null,
         date: new Date().toISOString(),
         path: req.url,
-      });
+      };
+
+      res.status(status).json(responseData);
     } else {
       const status = 500;
-      res.status(status).json({
+      responseData = {
         errNo: status,
         errStr: exception.message || '服务器内部异常',
         date: new Date().toISOString(),
         path: req.url,
-      });
+      };
+      res.status(status).json(responseData);
     }
+
+    const msg = {
+      url,
+      method,
+      params: query,
+      body,
+      data: responseData,
+    };
+    this.logger.error(msg);
   }
 }

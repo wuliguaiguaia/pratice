@@ -1,3 +1,5 @@
+import { ApiErrorCode } from './../../common/exceptions/api.code.enum';
+import { ApiException } from './../../common/exceptions/api.exception';
 /*
  * service 提供操作数据库服务接口
  */
@@ -35,11 +37,10 @@ export class UserService {
       values: { mobile: userDto.mobile },
     });
     if (list.length > 0) {
-      throw new Error('用户手机号名不能重复');
-      // throw new ApiException(
-      //   ApiErrorCode.TABLE_OPERATE_ERROR,
-      //   '用户手机号不能重复',
-      // );
+      throw new ApiException(
+        ApiErrorCode.TABLE_OPERATE_ERROR,
+        '用户手机号不能重复',
+      );
     }
     return await this.queryBuilder
       .insert()
@@ -95,8 +96,8 @@ export class UserService {
   async getUserByMobile(mobile: string) {
     return await this.getUserByCondition({
       condition: 'mobile = :mobile',
-      value: { mobile },
-    })?.[0];
+      values: { mobile },
+    });
   }
 
   /**

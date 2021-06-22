@@ -16,7 +16,8 @@ export class RolesGuard implements CanActivate {
     if (!roles || roles.length === 0) return true;
 
     const request = context.switchToHttp().getRequest();
-    const userInfo = request.userInfo;
+
+    const userInfo = request.session?.userInfo;
     if (!userInfo) throw new ApiException(ApiErrorCode.NOT_HAVE_AUTH);
 
     if (roles.some((r) => r === Number(userInfo.role))) return true;

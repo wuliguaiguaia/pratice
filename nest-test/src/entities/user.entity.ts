@@ -26,13 +26,21 @@ export class UserInfoEntity extends BaseEntity {
 
   @Column({
     type: MysqlDataType.VARCHAR,
+    comment: '密码',
+    length: 100,
+    nullable: false,
+  })
+  password: string;
+
+  @Column({
+    type: MysqlDataType.VARCHAR,
     length: 11,
     unique: true,
     nullable: false,
     comment: '手机号',
   })
   mobile: string;
-  
+
   @Column({
     type: MysqlDataType.TINYINT,
     nullable: false,

@@ -8,7 +8,10 @@
     "password": "mysql123",
     "database": "test101",
     "synchronize": false,
-    "logging": true,
+    "logging": [
+      "error"
+    ],
+    "maxQueryExecutionTime": 1000,
     "entities": [
       "src/entities/**/*.ts"
     ],
