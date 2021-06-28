@@ -1,85 +1,10 @@
-// // process.stdin.on('data', function (chunk) {
-// //     console.log('stream by stdin', chunk)
-// //     console.log('stream by stdin', chunk.toString())
-// // })
-
-// const path = require('path');
-// const fs = require('fs');
-// const http = require('http');
- 
-// const server = http.createServer((err, res) => {
-//     res.end('hello world 2')
-// })
-
-// server.listen(8888, '127.0.0.1', (err, res) => {
-//     console.log(0);
-// })
-
-
-
-
-// const _path = path.resolve(__dirname, test.txt);
-// const promisify = func => {
-//     return function (...args) {
-//         return new Promise((resolve, reject) => {
-//             args.push((err, res) => {
-//                 if (err) {
-//                     reject(err);
-//                     return;
-//                 }
-//                 resolve(res);
-//             })
-
-//             func.apply(func, args);
-//         })
-//     }
-// }
-
-
-// const server = http.createServer((err, res) => {
-    
-// })
-
-// server.listen(8888, '127.0.0.1', () => {
-
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // const promisify = (func) => {
-// //     return function (...args) {
-// //         return new Promise((resolve, reject) => {
-// //             args.push((err, res) => {
-// //                 if (err) reject(err);
-// //                 resolve(res);
-// //             })
-// //             func.apply(func, args);
-// //         })
-// //     }
-// // }
-
-// // const server = http.createServer((err, res) => {
-// //     res.writeHead(200, { 'x-fds': 'fsd' })
-// //     res.end('hello world');
-// // })
-
-// // server.listen(8888, '127.0.0.1', (err, res) => {
-// //     console.log('listen 8888');
-// // })
-url = './test.txt'
-const res = await fetch(url)
-console.log(res);
+console.log(process.memoryUsage());
+/**
+  * {
+  *   rss: 21102592, 给这个进程分配了多少物理内存(占总分配内存的一部分) 这些物理内存中包含堆，栈，和代码段
+  *   heapTotal: 4182016,
+  *   heapUsed: 3279872,
+  *   external: 200065, V8管理的，绑定到Javascript的C++对象的内存使用情况
+  *   arrayBuffers: 11146
+  * }
+ */
