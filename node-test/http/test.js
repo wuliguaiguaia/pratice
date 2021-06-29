@@ -11,4 +11,7 @@ const server = http.createServer((req, res) => { // 创建服务器并返回
 
 server.listen(port, host, () => {
   console.log('服务运行在', host,":" , port);
-} )
+})
+
+console.log(http.METHODS);
+console.log(http.STATUS_CODES);

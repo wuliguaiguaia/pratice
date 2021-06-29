@@ -8,7 +8,7 @@ const http = require('http');
 因此，必须监听要处理的主体内容，并且其是按数据块处理的。 */
 
 const server = http.createServer((req, res) => {
-  console.log(req);
+  console.log(req, '===', res);
   let data = '';
   req.on('data', (chunk) => {
     console.log(chunk);
@@ -25,3 +25,13 @@ const server = http.createServer((req, res) => {
 server.listen(3000, () => {
   console.log('server is running in localshot:3000');
 })
+
+server.on('close', () => {
+  console.log('server closed');
+})
+
+
+// 设置从客户端接收整个请求的超时值（以毫秒为单位）。
+server.requestTimeout = 5
+
+
