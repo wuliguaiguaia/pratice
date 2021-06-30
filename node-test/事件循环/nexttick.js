@@ -17,3 +17,18 @@ process.nextTick(() => {
 nextTick
 settimoutout 0
 */
+
+
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+process.nextTick(() => {
+  console.log('nextTick');
+})
+setImmediate(() => {
+  console.log('setImmediate');
+})
+
+nextTick
+setTimeout
+setImmediate

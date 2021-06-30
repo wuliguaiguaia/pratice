@@ -15,17 +15,22 @@ const options = {
   }
 };
 
-const req = http.request(options, (res) => {
+const req = http.request(options);
+req.on('response', (res) => {
   console.log(`STATUS: ${res.statusCode}`);
+  console.log(`STATUS_Message: ${res.statusMessage}`);
   console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
   res.setEncoding('utf8');
+
+  let data = '';
   res.on('data', (chunk) => {
+    data += chunk
     console.log(`BODY: ${chunk}`);
   });
   res.on('end', () => {
-    console.log('No more data in response.');
+    console.log('No more data in response.', data);
   });
-});
+})
 
 req.on('error', (e) => {
   console.error(`problem with request: ${e.message}`);
