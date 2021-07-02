@@ -110,4 +110,4 @@ switch (process.platform) {
 }
 
 server.listen(port);
-console.log('Server running in localhost:', port, ';\n----------\nThe static file directory is', dirname);
+console.log(`Server running in localhost:${port}`, `\n----------\nThe static file directory is ${dirname}`);

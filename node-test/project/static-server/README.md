@@ -36,9 +36,14 @@ brew cleanup // 修复 source ~/.zshrc 报错
 
 ```
 $ nse 8000 example
-Server running in localhost: 8002 ;
+Server running in localhost:8002
 ----------
 The static file directory is example
+
+$ nse 8000
+Server running in localhost:8002
+----------
+The static file directory is /Users/alias/code/pratice/node-test/project
 ```
 
 ### question
