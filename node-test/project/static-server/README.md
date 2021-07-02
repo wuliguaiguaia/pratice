@@ -17,6 +17,29 @@
   测试
     curl --header "Range:0-10" -i http://localhost:8000/index.html
 
+7、将其变成可执行文件
 
-### issue
+```
+#!/usr/bin/env node
+
+chmod +x 
+
+export PATH="/Users/alias/code/pratice/node-test/project/static-server:$PATH"
+alias nse="app.js"
+
+brew cleanup // 修复 source ~/.zshrc 报错
+```
+
+8、自动打开浏览器
+
+### 使用
+
+```
+$ nse 8000 example
+Server running in localhost: 8002 ;
+----------
+The static file directory is example
+```
+
+### question
 1、请求头没有if-modified-since ，只有在 cache-control 设置的时间过期后才有

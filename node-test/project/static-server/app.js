@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
@@ -5,6 +6,9 @@ const mime = require('./mime').types;
 const config = require('./config');
 const zlib = require('zlib');
 const utils = require('./utils');
+const child_process = require('child_process');
+const port = process.argv[2] || 8000;
+const dirname = process.argv[3] || path.resolve();
 
 const server = http.createServer();
 
@@ -16,16 +20,14 @@ server.on('request', (req, res) => {
   if (pathname === '') {
     pathname = config.Welcome.file;
   }
-  let filePath = path.resolve('example', pathname);
-  
+
+  let filePath = path.resolve(dirname, pathname);
+
   /* 文件夹返回 其下index.html */
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
     pathname = path.join(pathname) + '/' + config.Welcome.file;
-    filePath = path.resolve('example', pathname);
+    filePath = path.resolve(dirname, pathname);
   }
-  
-  const stats = fs.statSync(filePath);
-  console.log('size', stats.size);
 
   if (!fs.existsSync(filePath)) {
     res.writeHead(404, { 'Content-type': 'text/plain' });
@@ -63,6 +65,7 @@ server.on('request', (req, res) => {
     const reqRange = req.headers.range;
 
     if (reqRange) {
+      const stat = fs.statSync(filePath);
       const range = utils.parseRange(reqRange, stats.size);
       console.log(range);
       if (range) {
@@ -97,5 +100,14 @@ server.on('request', (req, res) => {
   }
 })
 
-server.listen(8000);
-console.log('server running in localhost:8000');
+/* 自动打开浏览器 */
+switch (process.platform) {
+  case "win32":
+    child_process.exec(`start http://127.0.0.1:${port}`);
+    break;
+  default:
+    child_process.exec(`open http://127.0.0.1:${port}`);
+}
+
+server.listen(port);
+console.log('Server running in localhost:', port, ';\n----------\nThe static file directory is', dirname);
