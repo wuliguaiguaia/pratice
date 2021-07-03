@@ -23,4 +23,13 @@ let bufcopy = Buffer.alloc(2) // 分配 2 个字节
 buf.copy(bufcopy, 0, 0, 2) // 开始位置、结束位置、以及新的 buffer 长度
 console.log(bufcopy.toString()); // hh
 
+console.log('===');
+
+/* 切片 buffer */
+const buf1 = Buffer.from('Hey!')
+buf1.slice(0).toString() //Hey!
+const slice = buf1.slice(0, 2)
+console.log(slice.toString()) //He
+buf1[1] = 111 //o
+console.log(slice.toString()) //Ho
 
