@@ -8,12 +8,13 @@ const zlib = require('zlib');
 const utils = require('./utils');
 const child_process = require('child_process');
 const port = process.argv[2] || 8000;
-const dirname = process.argv[3] || path.resolve();
+let originDirname = process.argv[3] || path.resolve();
 
 const server = http.createServer();
 
 server.on('request', (req, res) => {
   let pathname = new URL(req.url, 'http://127.0.0.1').pathname.slice(1);
+  let dirname = originDirname;
 
   // pathname = path.normalize(pathname.replace(/\.\./g, '')); // 防止 curl -i http://localhost:8000/../app.js
 
@@ -23,10 +24,13 @@ server.on('request', (req, res) => {
 
   let filePath = path.resolve(dirname, pathname);
 
+  console.log(filePath, pathname);
   /* 文件夹返回 其下index.html */
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-    pathname = path.join(pathname) + '/' + config.Welcome.file;
+    dirname = filePath;
+    pathname = config.Welcome.file;
     filePath = path.resolve(dirname, pathname);
+    console.log(filePath);
   }
 
   if (!fs.existsSync(filePath)) {

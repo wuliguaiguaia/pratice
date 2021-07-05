@@ -48,3 +48,6 @@ The static file directory is /Users/alias/code/pratice/node-test/project
 
 ### question
 1、请求头没有if-modified-since ，只有在 cache-control 设置的时间过期后才有
+
+2、http://127.0.0.1:8000/example 下 <script src='./main.js'></script> 请求打到 http://127.0.0.1:8000/main.js，
+一般是打包到绝对路径
