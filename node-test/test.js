@@ -8,3 +8,16 @@ console.log(process.memoryUsage());
   *   arrayBuffers: 11146
   * }
  */
+
+
+/* 自定义模块查找路径 */
+console.log(module.paths);
+
+/* node 已有扩展加载方式 */
+
+console.log(require.extensions);
+/* [Object: null prototype] {
+  '.js': [Function (anonymous)],
+  '.json': [Function (anonymous)],
+  '.node': [Function (anonymous)]
+} */
