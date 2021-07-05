@@ -17,7 +17,7 @@ server.on('request', (req, res) => {
   myURL.searchParams.set('a', 'b');
 
   console.log(req.url);
-  const test2 = new URL(req.url, 'http:127.0.0.1'); // 不能是localhost
+  const test2 = new URL(req.url, 'http://127.0.0.1'); // 不能是localhost
   console.log(test2);
 
   /* 
