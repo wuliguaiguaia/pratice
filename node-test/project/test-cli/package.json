@@ -1,0 +1,21 @@
+{
+  "name": "test-cli",
+  "version": "1.0.0",
+  "description": "command line interface",
+  "main": "app.js",
+  "bin": {
+    "cli": "./app.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "clui": "^0.3.6",
+    "commander": "^8.0.0",
+    "inquirer": "^8.1.1"
+  }
+}
