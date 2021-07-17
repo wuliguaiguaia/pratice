@@ -33,7 +33,9 @@ http.get('https://unsplash.com/napi/search/photos?query=food&per_page=20&page=2&
       }).then(res => {
         const data = res.data;
         const img = Buffer.from(data, 'binary');
-        fs.writeFileSync(path.join(filePath, `${item.id}`), img);
+        fs.writeFile(path.join(filePath, `${item.id}`), img, (e) => {
+          console.log(e);
+        });
       })
     });
   })

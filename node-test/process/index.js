@@ -9,3 +9,6 @@ console.log(process.argv);
 
 const minimist = require('minimist')
 console.log(minimist(process.argv.slice(2)));
+
+// 3、返回当前工作目录
+console.log(process.cwd());
