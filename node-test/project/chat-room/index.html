@@ -1,0 +1,39 @@
+<script>
+  var ws = new WebSocket("ws://localhost:3000");
+ 
+  ws.onopen = function (evt) { // 指定连接成功后的回调函数
+    console.log("Connection open ...");
+    ws.send("Hello WebSockets!"); // 发送数据
+  };
+
+
+  // 如果要指定多个回调函数，可以使用addEventListener方法。
+  /* ws.addEventListener('open', function (event) {
+    ws.send('Hello Server!');
+  }); */
+
+
+  ws.onmessage = function (evt) { // .data 接受数据
+    console.log("Received Message: " + evt.data);
+    ws.close();
+  };
+
+  ws.onclose = function (evt) {
+    console.log("Connection closed.");
+  };
+
+
+  switch (ws.readyState) {
+    case WebSocket.CONNECTING: // 值为0，表示正在连接。
+      break;
+    case WebSocket.OPEN: // 值为1，表示连接成功，可以通信了。
+      break;
+    case WebSocket.CLOSING: // 值为2，表示连接正在关闭。
+      break;
+    case WebSocket.CLOSED: // 值为3，表示连接已经关闭，或者打开连接失败。
+      break;
+    default:
+      // this never happens
+      break;
+  }
+</script>
