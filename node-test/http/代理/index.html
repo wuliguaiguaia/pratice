@@ -1,0 +1,13 @@
+<script>
+  const xhr = new XMLHttpRequest()
+  xhr.open('post', 'http://127.0.0.1:8086')
+   xhr.onreadystatechange = res => {
+      if (xhr.readyState === xhr.DONE) {
+        if (xhr.status === 200) {
+          console.log(res.target.responseText);
+        }
+      }
+    }
+    
+  xhr.send('dddd')
+</script>
