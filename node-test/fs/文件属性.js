@@ -1,4 +1,6 @@
 const fs = require('fs')
+
+/* 提供有关文件的信息 */
 fs.stat('./test.txt', (err, stats) => {
   if (err) {
     console.error(err)
@@ -23,10 +25,10 @@ fs.stat('./test.txt', (err, stats) => {
         mtimeMs: 1625037866990.775,
         ctimeMs: 1625037866990.775,
         birthtimeMs: 1625037815668.5525,
-        atime: 2021-06-30T07:24:28.218Z,
-        mtime: 2021-06-30T07:24:26.991Z,
-        ctime: 2021-06-30T07:24:26.991Z,
-        birthtime: 2021-06-30T07:23:35.669Z
+        atime: 2021-06-30T07:24:28.218Z, // 最后一次访问时间
+        mtime: 2021-06-30T07:24:26.991Z, // 最后一次修改时间
+        ctime: 2021-06-30T07:24:26.991Z, // 最后一次更改文件状态时间戳
+        birthtime: 2021-06-30T07:23:35.669Z // 创建时间的时间戳
       }
   */
   
