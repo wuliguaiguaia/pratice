@@ -10,11 +10,15 @@
   sfd
   <script>
     const xhr = new XMLHttpRequest();
-    xhr.open('get','localhost:8083')
+    xhr.open('POST','http://127.0.0.1:8083')
 
-    // xhr.onreadystatechange((res)=>{
-      
-    // })  
+    xhr.onreadystatechange = res => {
+      if(xhr.readyState === xhr.DONE){
+        if(xhr.status === 200){
+          console.log(res,'===');
+        }
+      }
+    }
     xhr.send('hhh')  
   </script>
 </body>
