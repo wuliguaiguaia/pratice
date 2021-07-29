@@ -16,6 +16,7 @@ const server = net.createServer((socket) => { /* 回调类似于 connection */
 
 server.listen(8124);
 /* telnet 127.0.0.1 8124 */
+/* TELENT: 远程控制web服务器 */
 
 /* 监听 Domain Socket  */
 // server.listen('/tmp/echo.sock');
