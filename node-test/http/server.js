@@ -13,6 +13,7 @@ server.on('request', (req, res) => {
   // console.log(req, '===', res);
   let data = '';
   req.on('data', (chunk) => {
+    // unit8Array 类型，使用toString转换
     data += chunk;
   })
   req.on('end', () => {
