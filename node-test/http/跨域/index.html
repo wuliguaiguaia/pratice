@@ -10,16 +10,22 @@
   sfd
   <script>
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','http://127.0.0.1:8083')
+    xhr.open('PUT','http://127.0.0.1:8083')
+
+    xhr.setRequestHeader('Accept', 'text/javascript')
+    xhr.setRequestHeader('Content-Type', 'application/json')
+  // 非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。
+  // 非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。
+  
 
     xhr.onreadystatechange = res => {
       if(xhr.readyState === xhr.DONE){
         if(xhr.status === 200){
-          console.log(res,'===');
+          console.log(xhr.getResponseHeader('Cache-Control'));
         }
       }
     }
-    xhr.send('hhh')  
+    xhr.send('{ds:ds}')  
   </script>
 </body>
 </html>

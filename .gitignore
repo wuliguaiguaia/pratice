@@ -16,6 +16,8 @@
 
 /nest-test/
 
+/node-test/**/*/node_modules
+
 # https://github.com/jakearchibald/idb
 /indexDB-test/idb
 
