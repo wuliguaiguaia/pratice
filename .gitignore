@@ -16,6 +16,9 @@
 
 /nest-test/
 
+/react-test/**/*/node_modules
+/react-test/node_modules
+
 /node-test/**/*/node_modules
 
 # https://github.com/jakearchibald/idb

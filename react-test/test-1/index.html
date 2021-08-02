@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>test</title>
+  <script src="./../react.development.js"></script>
+  <script src="./../react-dom.development.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <!-- 使用 npx babel --watch jsx-test  --out-dir jsx-test/dist  --presets react-app/prod 进行编译 -->
+  <script type="text/babel" src="./main.js"></script>
+</body>
+
+</html>
