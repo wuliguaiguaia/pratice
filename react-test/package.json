@@ -5,7 +5,7 @@
   "main": "like_button.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "jsx": "npx babel --watch jsx-test  --out-dir jsx-test/dist  --presets react-app/prod"
+    "jsx": "npx babel --watch 高阶组件 --out-dir 高阶组件  --presets react-app/prod"
   },
   "keywords": [],
   "author": "",

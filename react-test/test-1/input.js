@@ -9,11 +9,11 @@ class Test extends React.Component {
       this.setState({ value: this.state.value + 1 })
     }, 1000);
   }
- 
+
 
   componentDidMount() {
     // this.setState({ value: this.props.value })
-   
+
   }
 
   change(e, value) {
