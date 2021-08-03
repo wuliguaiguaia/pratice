@@ -23,13 +23,13 @@ export class AuthController {
     if (user.password !== password) {
       throw new ApiException(ApiErrorCode.TABLE_OPERATE_ERROR, '密码错误');
     } else {
-      req.session.userInfo = user;
+      req.session.userInfo = user; // 登录
     }
   }
 
   @Get('logout')
   async logout(@Req() req, @Res() res) {
-    req.session.destroy((err) => {
+    req.session.destroy((err) => { // 注销
       if (err) {
         throw new ApiException(ApiErrorCode.SYSTEM_EXCEPTION_ERROR);
       }

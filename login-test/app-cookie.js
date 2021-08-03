@@ -16,7 +16,8 @@ app.use(
 
 // Set-Cookie: session = eyJ0ZXN0IjoiaGV5In0 =; path = /; expires=Thu, 13 May 2021 11:54:04 GMT; httponly
 // Set-Cookie: session.sig = QBoXofGvnXbVoA8dDmfD - GMMM6E; path = /; expires=Thu, 13 May 2021 11:54:04 GMT; httponly
-// Cookie: session = eyJ0ZXN0IjoiaGV5In0 =; session.sig = QBoXofGvnXbVoA8dDmfD - GMMM6E
+// Cookie: session = eyJ0ZXN0IjoiaGV5In0 =; 
+//         session.sig = QBoXofGvnXbVoA8dDmfD - GMMM6E
 
 app.get('/', function (req, res) {
   req.session.isLogin = true
@@ -27,6 +28,7 @@ app.get('/', function (req, res) {
 
 app.get('/xx', function (req, res) {
   if (req.session.isLogin) console.log('logn')
+  console.log(req.session.isLogin);
   res.json({
     test: 'rrrr',
   })
