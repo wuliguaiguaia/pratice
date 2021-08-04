@@ -9,7 +9,7 @@ function Test() {
 
   return (
     <div>
-      {number} <button onClick={onclick}>number</button>
+      {number} <button onClick={onClick}>number</button>
       {name} <button onClick={onClickName}>name</button>
     </div>
   )
@@ -18,13 +18,13 @@ function Test() {
 let state = []
 let index = 0
 function useState(init) {
-  state[index] = state[index] || init
+  const curIndex  = index
+  state[curIndex] = state[curIndex] || init
   const setState = (newData) => {
-    state[index] = newData
-    debugger
+    state[curIndex] = newData
     render()
   }
-  let data = state[index]
+  let data = state[curIndex]
   index++
   return [data, setState]
 }
