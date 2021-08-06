@@ -1,24 +1,25 @@
 class Test extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: 0
-    }
-
-    this.timer = setInterval(() => {
-      this.setState({ value: this.state.value + 1 })
-    }, 1000);
+  state = {
+    number: 1
   }
- 
 
+  // react控制的事件处理程序：异步修改
   componentDidMount() {
-    // this.setState({ value: this.props.value })
-   
+    this.setState({ number: 3 }, () => {
+      console.log(this.state.number); // 3 // 使用回调获取异步更新后的数据
+    });
+    console.log(this.state.number); // 1
   }
 
-  change(e, value) {
-    this.setState({ value: e.target.value })
+  /* react控制之外的，同步修改 */
+  /* componentDidMount() {
+    document.body.addEventListener('click', this.resetState, false);
   }
+
+  resetState=()=> {
+    this.setState({ number: 3 });
+    console.log(this.state.number); // 3
+  } */
 
   render() {
     return <div>
