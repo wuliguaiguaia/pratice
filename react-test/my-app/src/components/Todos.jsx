@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { addTodo } from './../redux/actions/todos'
 
+
+/* 使用 hook 获取store  */
 export default function Todos(props) {
   let [value, setValue] = useState('')
   const todos = useSelector((state) => state.todos)
 
   const dispatch = useDispatch()
+
   const onSubmit = (e) => {
-    console.log(e);
     if (e.key === 'Enter') {
       dispatch(addTodo(value))
       setValue('')
