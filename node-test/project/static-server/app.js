@@ -115,5 +115,5 @@ switch (process.platform) {
 
 server.listen(port);
 server.on('listening', () => {
-  console.log(`Server running in localhost:${port}`, `\n----------\nThe static file directory is ${dirname}`);
+  console.log(`Server running in localhost:${port}`, `\n----------\nThe static file directory is ${originDirname}`);
 })
