@@ -47,6 +47,8 @@ class MyPromise {
               当前Promsie的状态才会改变，且状态取决于参数Promsie对象的状态
             */
             if (val instanceof MyPromise) {
+                debugger
+                // 如何做到上一个状态不结束，下面的代码就不会执行？ 下面promise.then内部会被自动resolve，自动执行then的某个参数，才能实现本次状态的修改，才保证了上层resolve，下层才会被执行，达到连续请求的效果
                 val.then(value => {
                     this._value = value
                     this._status = FULFILLED
@@ -62,7 +64,9 @@ class MyPromise {
                 runFulfilled(val)
             }
         }
+        throw new Error(12) /* 如果不设置回调函数，Promise内部抛出的错误，不会反应到外部 */
         // 为了支持同步的Promise，这里采用异步调用
+        // 为了保证执行顺序, 等待当前执行栈执行完成，还需要给constructor的resolve和reject函数里面使用setTimeout包裹起来，避免影响当前执行的任务。
         setTimeout(run, 0)
     }
     // 添加reject时执行的函数
@@ -157,7 +161,7 @@ class MyPromise {
     }
     // 添加静态all方法
     static all(list) {
-        return new MyPromise((resolve, reject) => {
+        return new MyPromise((resolve, reject) => { // 返回一个promise
             /**
              * 返回值的集合
              */
@@ -179,7 +183,7 @@ class MyPromise {
     }
     // 添加静态race方法
     static race(list) {
-        return new MyPromise((resolve, reject) => {
+        return new MyPromise((resolve, reject) => { // 返回一个promise
             for (let p of list) {
                 // 只要有一个实例率先改变状态，新的MyPromise的状态就跟着改变
                 this.resolve(p).then(res => {
@@ -192,12 +196,10 @@ class MyPromise {
     }
     finally(cb) {
         return this.then(
-            value => MyPromise.resolve(cb()).then(() => value),
-            reason => MyPromise.resolve(cb()).then(() => { throw reason })
+            value => MyPromise.resolve(cb())
+                .then(() => value),  // 返回promise携带结果值
+            reason => MyPromise.resolve(cb())
+                .then(() => { throw reason }) // 返回promise携带错误
         );
     }
 }
- 
-// console.log(Promise.resolve(123));
-// console.log(MyPromise.resolve(123));
-

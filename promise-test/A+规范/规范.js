@@ -99,6 +99,64 @@ new MyPromise((resolve, reject) => {
 
 
 
+/* 
+promise.then(function (x) {
+  console.log('会执⾏这个函数，同时传⼊ x 变量的值', x);
+});
+
+如果 x 有 then ⽅法且看上去像⼀个 Promise ，解决程序即尝试使 promise 接受 x 的状态；否则其⽤ x 的值来执⾏ promise 。
+如果 promise 和 x 指向同⼀对象，以 TypeError 为据因拒绝执⾏ promise
+  如果 x 为 promise
+    如果 x 处于等待态， promise 需保持为等待态直⾄ x 被执⾏或拒绝
+    如果 x 处于执⾏态，⽤相同的值执⾏ promise
+    如果 x 处于拒绝态，⽤相同的据因拒绝 promise
+*/
+
+var promise1 = function () {
+  return new MyPromise(function (resolve) {
+    setTimeout(function () {
+      console.log(1);
+      resolve();
+    }, 1000)
+  });
+}
+var promise2 = function () {
+  return new MyPromise(function (resolve) {
+    setTimeout(function () {
+      console.log(2);
+      resolve();
+    }, 2000);
+  });
+}
+promise1()
+  .then(function () {
+    return promise2(); // 此处返回⼀个 promise 实例
+  })
+  .then(function () { console.log('已完成') }, function () { console.log('已拒绝') });
+
+
+/* 
+  如果 x 为 Object 或 function（不常⻅）
+    ⾸先尝试执⾏ x.then
+      如果取 x.then 的值时抛出错误 e ，则以 e 为据因拒绝 promise
+      如果 then 是函数，将 x 作为函数的作⽤域 this 调⽤。传递两个回调函数作为参数，第⼀ 个参数叫做 resolvePromise ，第⼆个参数叫做 rejectPromise:
+    如果 resolvePromise 以值 y 为参数被调⽤，则运⾏[[Resolve]](promise, y)
+    如果 rejectPromise 以据因 r 为参数被调⽤，则以据因 r 拒绝 promise
+    如果 resolvePromise 和 rejectPromise 均被调⽤，或者被同⼀参数调⽤了多次，则优先
+    采⽤⾸次调⽤并忽略其他的调⽤
+    如果调⽤ then ⽅法抛出了异常 e
+    如果 resolvePromise 或 rejectPromise 已经被调⽤，则忽略
+    否则以 e 为据因拒绝 promise
+    如果 then 不为函数，以 x 为参数将 promise 变为已完成状态
+  如果 x 不为对象或者函数，以 x 为参数将 promise 变为已完成状态（重要且常⻅） 
+*/
+
+
+
+
+
+
+
 // 没有抛出错误
 /* function promise3() {
   return new Promise(function (resolve, reject) {
