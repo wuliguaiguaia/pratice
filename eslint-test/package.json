@@ -19,7 +19,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --fix"
+    "**/*.js": "eslint --fix"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
