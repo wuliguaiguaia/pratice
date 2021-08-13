@@ -7,6 +7,8 @@ Vue.config.productionTip = false
 ddd
 fdsfsd
 
+var xx= 'fsdf'
+
 new Vue({
   router,d
   store,
