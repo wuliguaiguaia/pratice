@@ -31,15 +31,19 @@
     </ul>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     msg: String
+  },
+  created () {
+    const s = 0
+    console.log(s)
   }
 }
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
