@@ -1,7 +1,7 @@
 import { Component } from "react"
 
 export default (mapStateToProps, mapDispatchToProps) => {
-  return () => {
+  return (WrappedComponent) => {
     return class extends Component {
       constructor(props, context) {
         super(props, context)
