@@ -6,6 +6,7 @@ const host = "127.0.0.1";
 const server = http.createServer();
 
 server.on('request', (req, res) => { // 创建服务器并返回
+  console.log('fdsfsdfdsfsdf');
   res.statusCode = 200;
   res.setHeader('content-xxx', 'cccc');
   res.end('hello');
