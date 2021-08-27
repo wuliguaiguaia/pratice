@@ -43,3 +43,7 @@ console.log(fs.lstatSync(path.resolve(__dirname, 'test-rename.txt')).isFile());
 fs.utimes(path.resolve(__dirname, 'test.txt'), 99999999, 999999999, () => {
   console.log(1);
 })
+
+
+console.log(fs.realpathSync(process.cwd())); // 返回解析的目录名。。
+console.log(process.cwd()); // 返回命令运行时的目录
