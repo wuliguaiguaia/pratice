@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 }) 
 
 /* 测试异步情况 */
-/* const sleep = (time) => new Promise(resolve => setTimeout(resolve, time * 1000))
+const sleep = (time) => new Promise(resolve => setTimeout(resolve, time * 1000))
 app.use(async (req, res, next) => {
   console.log('1 start express');
   await sleep(1).then(next)
@@ -35,7 +35,7 @@ app.use(async (req, res, next) => {
   console.log('2 start express');
   await sleep(2).then(next)
   console.log('2 end express');
-}) */
+})
 /* 
   1 start express
   2 start express

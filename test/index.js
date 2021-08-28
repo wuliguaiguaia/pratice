@@ -1,34 +1,50 @@
-let l = {
-  val: 1,
-  next: {
-    val: 3,
-    next: {
-      val: 3,
-      next: {
-        val: 3,
-        next: {
-          val: 9
+function copy(obj, map = new WeakMap()) {
+  let type = Object.prototype.toString.call(obj).split(' ')[1].slice(0, -1).toLocaleLowerCase()
+  let result
+  switch (type) {
+    case 'number':
+    case 'boolean':
+    case 'string':
+    case 'error':
+    case 'date':
+      const Ctor = obj.constructor;
+      return new Ctor(obj);
+    case 'array':
+      return Object.keys(obj).reduce((res, key) => {
+        let item = obj[key]
+        if (item instanceof Object) {
+          item = copy(item)
         }
+        obj[key] = item
+        return obj
+      }, [])
+    case 'object':
+      result = {}
+      if (map.get(obj)) {
+        return map.get(obj)
       }
-    }
+      map.set(obj, result)
+      for (let key in obj) {
+        result[key] = copy(obj[key], map)
+      }
+      return result
+      break
+    case 'set':
+      break
+    case 'map':
+      break
+    case 'function':
+      break
+    case 'symbol':
+      return Object(Symbol.prototype.valueOf.call(obj))
+      break
+    case 'regexp':
+      return Object(Symbol.prototype.valueOf.call(obj))
+    default:
+      return obj
   }
 }
-function fn(phead) {
-  let p = { next: phead }
-  let p1 = p, p2 = p.next
-  while (p2 && p2.next) {
-    if (p2.val === p2.next.val) {
-      while (p2.next && p2.next.val === p2.val) {
-        p2.next = p2.next.next;
-      }
-      p1.next = p2.next
-      p2 = p2.next
-    } else {
-      p1 = p1.next;
-      p2 = p2.next
-    }
-  }
-  return p.next;
-}
-
-console.log(JSON.stringify(fn(l)));
+const target = Symbol(123)
+console.log(target);
+x = copy(target)
+console.log(x);
