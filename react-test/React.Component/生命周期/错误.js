@@ -22,7 +22,6 @@ class Children extends React.Component {
     /* componentWillUnmount() 会在组件卸载及销毁之前直接调用。在此方法中执行必要的清理操作，
     例如，清除 timer，取消网络请求或清除在 componentDidMount() 中创建的订阅等。 */
     console.log('componentWillUnmount child');
-
   }
 }
 

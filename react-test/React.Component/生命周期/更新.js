@@ -19,9 +19,23 @@ class Test extends React.Component {
     })
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log('getDerivedStateFromProps');
+    // 它应返回一个对象来更新 state，如果返回 null 则不更新任何内容
+    return {
+      b: 2
+    }
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldComponentUpdate', nextState);
+    // 性能优化：根据 shouldComponentUpdate() 的返回值，判断 React 组件的输出是否受当前 state 或 props 更改的影响。
+
+    // 此方法仅作为性能优化的方式而存在。不要企图依靠此方法来“阻止”渲染，因为这可能会产生 bug。
+    // 你应该考虑使用内置的 PureComponent?? 组件，而不是手动编写 shouldComponentUpdate()
+
+    console.log('shouldComponentUpdate', nextProps, nextState);
     return true
+    // 返回 false 并不会阻止子组件在 state 更改时重新渲染
   }
 
   render() {
@@ -29,6 +43,8 @@ class Test extends React.Component {
     return (
       <div>
         {this.state.a}
+        <hr/>
+        {this.state.b}
       </div>
     )
   }
