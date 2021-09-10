@@ -1,8 +1,5 @@
 
-const map = {
-  "./moduleA":
-    "function(require, module, exports) {\nmodule.exports = Date.now()\n}"
-}
+const map = {"./moduleA":"function(require, module, exports) {\nmodule.exports = Date.now()\n}"}
 
 function require(id) {
   const module = map[id]
