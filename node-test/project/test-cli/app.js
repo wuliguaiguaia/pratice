@@ -20,7 +20,7 @@ program
   .description('this is first cli', { /* 描述，通过 -h 查看 */
     dir: '一些描述'
   }) 
-  .action((dir) => { /* 回调参数为 传入参数，通过commanser规则解析 */
+  .action((dir) => { /* 回调参数为 传入参数，通过commander规则解析 */
     inquirer.prompt([
       {
         type: 'list',
