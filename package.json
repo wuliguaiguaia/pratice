@@ -21,6 +21,6 @@
     "@babel/register": "^7.15.3",
     "core-js": "^2.6.12",
     "regenerator-runtime": "^0.10.5",
-    "webpack": "^5.52.0"
+    "webpack": "^5.52.1"
   }
 }
