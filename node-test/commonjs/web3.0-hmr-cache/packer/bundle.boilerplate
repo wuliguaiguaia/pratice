@@ -1,4 +1,3 @@
-const runtimeConfig = __runtimeConfig__
 const moduleDepMapList = __moduleDepMapList__
 const moduleList = [__moduleList__]
 
