@@ -22,7 +22,7 @@ const ast = parse(code, { sourceType: 'module' })
 
 debugger
 
-//把ats变成字符串
+//把ast变成字符串
 const result = babel.transformFromAstSync(ast, code, {
   presets: ['@babel/preset-env'] // 配置选项
 })
