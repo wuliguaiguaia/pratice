@@ -1,0 +1,1 @@
+(self.webpackChunkdefault=self.webpackChunkdefault||[]).push([[373],{659:function(){console.log("page 222222")}},function(e){e(e.s=659)}]);
