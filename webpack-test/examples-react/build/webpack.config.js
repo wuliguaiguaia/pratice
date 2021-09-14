@@ -73,7 +73,7 @@ module.exports = {
           loader: "less-loader",
           options: {
             additionalData: `
-              @import './src/common/less/var.less';
+              @import '@/common/less/var.less';
             `
           }
         })
@@ -84,7 +84,7 @@ module.exports = {
           loader: "stylus-loader",
           options: {
             stylusOptions: {
-              import: [resolve('./src/common/stylus/var.styl')]
+              import: [resolve('src/common/stylus/var.styl')]
             }
           }
         })

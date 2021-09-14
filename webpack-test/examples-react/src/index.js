@@ -13,7 +13,7 @@ import '@/js/common.js'
 console.log(JsxDemo)
 
 console.log(TsxDemo);
-
+import('@/js/async.js')
 
 console.log('scss分享变量给js', sassVars)
 console.log('less分享变量给js', lessVars)
