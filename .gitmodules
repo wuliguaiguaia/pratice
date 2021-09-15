@@ -1,0 +1,6 @@
+[submodule "mini-vite"]
+	path = mini-vite
+	url = https://github.com/wuliguaiguaia/mini-vite.git
+[submodule "mini-vue"]
+	path = mini-vue
+	url = https://github.com/wuliguaiguaia/mini-vue.git
