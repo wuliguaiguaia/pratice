@@ -33,10 +33,26 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  created() {
+    this.$addPerformanceTag('hello', 'start')
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$addPerformanceTag('screen', 'navigationStart');
+    })
+
+    setTimeout(() => {
+      this.$addPerformanceTag('hello', 'end')
+      this.$performanceReporter('hello', {data: '123'})
+    }, 3000);
+  },
+  destroyed() {
   }
 }
 </script>
