@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 当 JS 运行时错误发生时，window 会触发一个 ErrorEvent 接口的 error 事件，并执行window.onerror()。
+
+    /**
+     * @param {String}  message    错误信息
+     * @param {String}  source     出错文件
+     * @param {Number}  lineno     行号
+     * @param {Number}  colno      列号
+     * @param {Object}  error      Error对象（对象）
+     */
+    window.onerror = function (message, source, lineno, colno, error) {
+      // console.log("捕获到异常：", { message });
+      console.log("捕获到异常：", { message, source, lineno, colno, error });
+    };
+
+    // d
+    /* message: "Uncaught ReferenceError: d is not defined",
+      source: "http://127.0.0.1:5501/error-handler/web/window-onerror.js",
+      lineno: 15,
+      colno: 1,
+      error: ReferenceError: d is not defined
+        at http://127.0.0.1:5501/error-handler/web/window-onerror.js:1…}
+    */
+
+
+    // 同步错误可以捕获到，但是，请注意 window.error 无法捕获静态资源异常和 JS 代码错误。
+
+
+  </script>
+  <!-- <script src="./test/error.js"></script>
+  <script src="fdsfs.js"></script>  -->
+  <!-- window.onerror 无法捕捉js资源错误：  GET http://127.0.0.1:5501/error-handler/web/fdsfs.js net::ERR_ABORTED 404 (Not Found) -->
+  <script>
+    // 1、异步
+    /* setTimeout(() => {
+      wwww // 可以捕获到异步错误
+    }, 1000); */
+
+    // 2、可以捕捉到事件监听器
+    window.addEventListener('click', ()=>{
+      edddfdsfsd
+    })
+    
+    Promise.reject('222') // Uncaught (in promise) 222
+
+  </script>
+</body>
+</html>

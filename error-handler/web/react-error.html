@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../react-test/react.development.js"></script>
+  <script src="../../react-test/react-dom.development.js"></script>
+  <script src="../../react-test/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+  
+    function logErrorToMyService(error, info) {
+      console.log(error, info,'-------');
+    }
+
+    /* 
+      当渲染过程，生命周期，或子组件的构造函数中抛出错误时，会调用如下方法：
+        static getDerivedStateFromError()
+        componentDidCatch()
+    
+      但是需要注意的是， error boundaries 并不会捕捉下面这些错误：
+        事件处理器
+        异步代码
+        服务端的渲染代码
+        在 error boundaries 区域内的错误
+    */
+
+    class ErrorBoundary extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { hasError: false };
+      }
+
+      componentDidCatch(error, info) {
+        // 展示出错的UI
+        this.setState({ hasError: true });
+        // 将错误信息上报到日志服务器
+        logErrorToMyService(error, info);
+      }
+
+      render() {
+        if (this.state.hasError) {
+          // 可以展示自定义的错误样式
+          return <h1>Something went wrong.</h1>;
+        }
+        return this.props.children;
+      }
+    }
+    
+    function Test(){
+      d
+      document.querySelector('#root').addEventListener('click',(e)=>{
+        eee // 1、无法捕获事件处理器的错误
+      }) 
+
+      setTimeout(() => {
+        eee  // 2、无法捕捉异步错误
+      }, 1000);
+
+
+      return (<h1>test!!!</h1>)
+    }
+
+    ReactDOM.render(
+      <ErrorBoundary>
+        <Test />
+      </ErrorBoundary>,
+      document.querySelector('#root')
+    )
+  </script>
+</body>
+</html>
