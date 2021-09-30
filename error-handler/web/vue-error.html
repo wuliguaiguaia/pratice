@@ -42,7 +42,13 @@
         setTimeout(() => {
           www // 2、无法捕捉异步代码
         }, 1000);
-        ww
+        try{
+          fetch('../readme.md').then(async ()=>{
+            console.log(await res.text()); // 无法捕捉异步
+          }) // promise的错误 未catch直接报错，Uncaught (in promise)，不会走到 try 的catch
+        }catch(e){
+          console.log(e);
+        }
     },
     watch: {
       show: {
