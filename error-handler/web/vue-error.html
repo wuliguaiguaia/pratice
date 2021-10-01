@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <alias></alias>
+  </div>
+  <script>
+    
+  Vue.config.errorHandler = (err, vm, info) => {
+    console.error("通过vue errorHandler捕获的错误");
+    console.error(err);
+    console.error(vm);
+    console.error(info); // mounted hook 
+  };
+
+  Vue.component('wwww', {
+    props: {
+      dialogData: {
+        type: Object
+      },
+      show: Number
+    },
+    data() {
+      return {
+        postData: {}
+      }
+    },
+    mounted(){
+        document.querySelector('#app').addEventListener('click',(e)=>{
+          eee // 1、无法捕获事件处理器的错误
+        })
+        setTimeout(() => {
+          www // 2、无法捕捉异步代码
+        }, 1000);
+        try{
+          fetch('../readme.md').then(async ()=>{
+            console.log(await res.text()); // 无法捕捉异步
+          }) // promise的错误 未catch直接报错，Uncaught (in promise)，不会走到 try 的catch
+        }catch(e){
+          console.log(e);
+        }
+    },
+    watch: {
+      show: {
+        handler(val) {
+          console.log(1111111);
+          this.postData = this.dialogData;
+        },
+        immediate: true
+      }
+    },
+    template: `<input v-model="postData.name">`
+  })
+  Vue.component('alias', {
+     data() {
+      return {
+        dialogData: {
+          name: 'rwe',
+          age: 12
+        },
+        show: 0
+      }
+    },
+    template: `<wwww :dialogData='dialogData' :show="show"/>`
+  })
+  new Vue({
+    el: '#app'
+  })
+  </script>
+</body>
+
+</html>
