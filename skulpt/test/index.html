@@ -26,6 +26,15 @@ t.forward(75)
     <pre id="output"></pre>
     <div id="mycanvas"></div>
     <script>
+
+
+      // 第三方模块列表
+      var externalLibs = {
+        // 确保模块路径能访问到，这里我用的是相对路径./mod.js
+        "./mod/__init__.js": "./mod.js", 
+      };
+
+
       function outf(text) {
         var mypre = document.getElementById("output");
         mypre.innerHTML = mypre.innerHTML + text;
@@ -38,7 +47,6 @@ t.forward(75)
         ) {
           throw "File not found: '" + file + "'";
         }
-
         return Sk.builtinFiles.files[file];
       }
       function runit() {
@@ -47,12 +55,12 @@ t.forward(75)
         mypre.innerHTML = "";
         Sk.pre = "output";
         Sk.configure({
-          output: outf,
-          read: builtinRead,
+          output: outf, // 输出
+          read: builtinRead, // 导入模块
           __future__: Sk.python3,
         });
 
-        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "mycanvas";
+        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "mycanvas"; // 设置海龟绘图元素
         var myPromise = Sk.misceval.asyncToPromise(function() {
           return Sk.importMainWithBody("<stdin>", false, prog, true);
         });
