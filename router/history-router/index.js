@@ -20,7 +20,7 @@ class BaseRouter {
   }
   _bindPopState() {
     window.addEventListener('popstate', (e) => {
-      // e.state 只有当 replaceState 或 pushState的第一个参数有path时，才有内容
+      // e.state 只有当 replaceState 或 pushState的第一个参数有内容
       let { state = {} } = e
       if (state.path) {
         this.routes[state.path]?.()
@@ -50,4 +50,4 @@ container.addEventListener('click', e => {
 })
 
 /* 问题： */
-/* 页面刷新问题 */
+/* 页面刷新问题, 需要后端配合 */
