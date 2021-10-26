@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <child></child>
+        <child></child>
+     </div>
+    <script>
+        Vue.component('child', {
+            data:{
+                    xx: '1'
+            },
+            template: '<div>{{xx}}</div>'
+        })
+        new Vue({
+            data: {
+                value: 'One'
+            },  
+        }).$mount('#app')
+    </script>
+</body>
+</html>
