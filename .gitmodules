@@ -4,3 +4,6 @@
 [submodule "mini-vue"]
 	path = mini-vue
 	url = https://github.com/wuliguaiguaia/mini-vue.git
+[submodule "z-wheel"]
+	path = z-wheel
+	url = https://github.com/wuliguaiguaia/z-wheel.git
