@@ -1,8 +1,10 @@
-
 const template = `<div id="app">
    <h1>{{msg}}</h1>
    <input type="text" v-model="msg">
    <button @click="changeMsg">click me!</button>
+   <span v-for="item in sz">item</span>
+   <div v-if="isShow">if</div>
+   <div :dd="dd">ff</div>
 </div>`
 
 /* 正则 */
@@ -23,23 +25,22 @@ function parse(html) {
   while (html) {
     let matches = []
     if(matches = html.match(startTag)) {    // 匹配起始标签
-      const [matchText, tagName, attrStr, isClose] = matches
+      const [matchText, tag, attrStr, isClose] = matches
       html = html.slice(matchText.length)
-      const element = parseStartTag(tagName, attrStr)
+      const element = parseStartTag(tag, attrStr)
       if(!root) {
         root = element
       } else {
         const curElement = stack[stack.length - 1]
         curElement.children.push(element)
       }
-      console.log(isClose, autoCloseTag.includes(tagName));
-      if(!isClose && !autoCloseTag.includes(tagName)) { // 不是闭合标签
+      if(!isClose && !autoCloseTag.includes(tag)) { // 不是闭合标签
          stack.push(element) // 入栈
       }
     } else if(matches = html.match(endTag)){ // 匹配终止标签
-      const [matchText, tagName] = matches
+      const [matchText, tag] = matches
       html = html.slice(matchText.length + 1)
-      parseEndTag(stack, tagName) // 这里出栈
+      parseEndTag(stack, tag) // 这里出栈
     } else {                                // 匹配文本
       const curElement = stack[stack.length - 1] // 找到栈的最后一个元素
       const index = html.indexOf('<')
@@ -51,9 +52,9 @@ function parse(html) {
   }
   return root || {}
 }
-function parseStartTag(tagName, attrStr) {
+function parseStartTag(tag, attrStr) {
   const element = {
-    tagName,
+    tag,
     children: [],
     attrsMap: {},
     type: 1
@@ -167,6 +168,7 @@ function parseSpecialAttrs(element, attrsMap) {
       parseDirectives(element, 'on', key.slice(1), val); // on, click.passive, change
     } else if (key.startsWith(':')) {
       parseDirectives(element, 'bind', key.slice(1), val); // bind, data.sync,
+      attrs[key] = val
     } else {
       if (elSpecialAttr.includes(key)) {
         element[key] = val;
@@ -176,10 +178,10 @@ function parseSpecialAttrs(element, attrsMap) {
     }
   });
 }
-function parseEndTag(stack, tagName) {
+function parseEndTag(stack, tag) {
   while(stack.length) {
     let cur = stack.pop()
-    if(cur.tagName === tagName) {
+    if(cur.tag === tag) {
     	break
     }
   }
@@ -272,20 +274,14 @@ const genUtil = {
     el.forProcessed = true;
     const { alias, iterator } = el;
     return `_l(${el.for}, function(${alias}, ${iterator}) {
-            retrun ${this.element(el, state)};
+            return ${this.element(el, state)};
         })`;
   },
 
   if (el, state) {
     el.ifProcessed = true;
-    let code;
     const { exp, block } = el.ifCondition;
-    if (exp) {
-      code = `${exp} ? ${this.element(block, state)} : _e()`;
-    } else {
-      code = this.element(block, state);
-    }
-    return code;
+    return `${exp} ? ${this.element(block, state)} : _e()`;
   },
 
   children (el, state) {
@@ -309,19 +305,19 @@ const genUtil = {
   },
 
   _data (el, state) {
-    const { attrs, directives, events, key, staticClass } = el;
+    const {attrsMap, attrs:{directives, events, ...other}, key } = el;
     let code = '';
-    if (Object.keys(attrs).length) {
+    if (Object.keys(attrsMap).length) {
       let attrCode = ''; let domProps = '';
-      Object.keys(attrs).forEach(name => {
-        const val = attrs[name];
-        if (name.startsWith(':')) {
+      Object.keys(attrsMap).forEach(name => {
+        const val = attrsMap[name];
+        if (name.startsWith(':')) { // 处理v-bind
           if (!elSpecialAttr.includes(name.slice(1))) {
             domProps += `${name.slice(1)}:${val}`;
           }
         } else if (name === 'v-model') {
           domProps += `value:(${val})`;
-        } else if (!/v-|@/.test(name) && !elSpecialAttr.includes(name)) {
+        } else if (!/v-|@/.test(name) && !elSpecialAttr.includes(name)) { // 其他，不完整
           attrCode += `${name}:"${val}",`;
         }
       });
@@ -329,7 +325,7 @@ const genUtil = {
         code += `attrs: {${attrCode}},`;
       }
       if (domProps) {
-        code += `domProps: {${domProps}},`;
+        code += `domProps: {${domProps}},`; // 传递的参数
       }
     }
 
@@ -354,10 +350,6 @@ const genUtil = {
 
     if (key) {
       code += `key:${key}`;
-    }
-
-    if (staticClass) {
-      code += `staticClass:"${staticClass}"`;
     }
 
     return `{${code}}`;
@@ -396,4 +388,62 @@ const compile = (template) => {
 };
 
 const { render } = compile(template)
-// eval(render()) 将根据
+console.log(render);
+// 使用eval将调用 _c,_m,_l等生成完整的vnode
+eval(`function render1() {  ${render} };console.log(render1())`)
+
+
+
+/* 我生成的 */
+function render1 () {
+  with (this) {
+    return _c(
+      'div',
+      { attrs: { id: "app", }, },
+      [
+        _c('h1', {}, [_v("" + _s(msg) + "")]),
+        _c('input', {
+          attrs: { type: "text", }, domProps: { value: (msg) },
+          directives: [{ "name": "model", "value": "msg", "modifiers": {} }],
+          on: { change: function ($event) { msg = $event.target.value }, },
+        }, undefined),
+        _c('button', { on: { click: changeMsg, }, }, [_v("click me!")]),
+        _l(sz, function (item, undefined) {
+            return _c('span', {}, [_v("item")]);
+        }),
+        isShow ? _c('div', {}, [_v("if")]) : _e(),
+        _c('div', { domProps: { dd: dd }, }, [_v("ff")])
+      ]
+    )
+  }
+}
+
+/* vue源码生成的 */
+function render2() {
+  with (this) {
+    return _c(
+      'div',
+      { attrs: { "id": "app" } },
+      [
+        _c('h1', [_v(_s(msg))]),
+        _v(" "),
+        _c('input',
+          {
+            directives: [{ name: "model", rawName: "v-model", value: (msg), expression: "msg" }],
+            attrs: { "type": "text" }, domProps: { "value": (msg) },
+            on: { "input": function ($event) { if ($event.target.composing) return; msg = $event.target.value } }
+          }),
+        _v(" "),
+        _c('button', { on: { "click": changeMsg } }, [_v("click me!")]),
+        _v(" "),
+        _l((sz), function (item) { return _c('span', [_v("item")]) }),
+        _v(" "),
+        (isShow) ? _c('div', [_v("if")]) : _e(),
+        _v(" "),
+        _c('div', { attrs: { "dd": dd } }, [_v("ff")])
+      ],
+      2
+    )
+  }
+}
+
