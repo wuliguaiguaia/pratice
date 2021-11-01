@@ -16,7 +16,7 @@ class App extends React.Component<any, any> {
     });
   }
 
-  handleClick3 = () => { // !!!!
+  handleClick3 = () => {
     this.setState({
       num: this.state.num + 1,
     });

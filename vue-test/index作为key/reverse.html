@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+        <item
+          :key="index"
+          v-for="(item, index) in list"
+          :num="item.num"
+        ></item>
+      </ul>
+      <button @click="change">改变</button>
+     </div>
+    <script>
+        new Vue({
+            data: {
+                nums: [1,2,3],
+                list:[
+                    {
+                        id: 1,
+                        name: "Person1"
+                    },
+                    {
+                        id: 2,
+                        name: "Person2"
+                    },
+                    {
+                        id: 3,
+                        name: "Person3"
+                    },
+                    {
+                        id:4,
+                        name:"Person4"
+                    }
+                ]
+            },  
+            methods: {
+                change(){
+                     this.nums.splice(0, 1);
+                }
+            },
+            components: {
+                item: {
+                    props:['num'],
+                   template: "<li>{{num}}</li>",
+                }
+            }
+        }).$mount('#app')
+
+    </script>
+</body>
+</html>

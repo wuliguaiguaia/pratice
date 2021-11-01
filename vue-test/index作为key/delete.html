@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+        <item
+          :key="index"
+          v-for="(item, index) in nums"
+          :num="item"
+        ></item>
+      </ul>
+      <button @click="change">改变</button>
+     </div>
+    <script>
+        new Vue({
+            data: {
+                nums: [1,2,3],
+            },  
+            methods: {
+                change(){
+                    this.nums.splice(0, 1);
+                }
+            },
+            components: {
+                item: {
+                   props: ['num'], // 如果使用num做为依赖，就不会有问题，因为会进行prop的比较，不用num的话就只会删除第三个导致错误，因为diff不会进行文本节点的比较
+                   template: "<li>{{Math.random()}}</li>",
+                }
+            }
+/* sameNode 发现是同一节点时，会走patchnode
+ function patchVnode (oldVnode, vnode) {
+    if (oldVnode === vnode) {
+        return;
+    }
+
+    if (vnode.isStatic && oldVnode.isStatic && vnode.key === oldVnode.key) { // 走到这一步发现过关，就确实同一个节点
+        vnode.elm = oldVnode.elm;
+        vnode.componentInstance = oldVnode.componentInstance;
+        return;
+    } 
+    .....
+}*/
+        }).$mount('#app')
+
+    </script>
+</body>
+</html>

@@ -19,7 +19,6 @@ function Test() {
   }, [number])
   useEffect((val) => {
     console.log(val, '===');
-    
       // useEffect 如果返回一个函数的话，该函数会在组件卸载和更新时调用
       // useEffect 在执行副作用函数之前，会先调用上一次返回的函数
       // 如果要清除副作用，要么返回一个清除副作用的函数

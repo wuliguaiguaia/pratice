@@ -16,28 +16,22 @@
     
     如需基于之前的 state 来设置当前的 state，请阅读下述关于参数 updater 的内容。
 
-
     setState((state, props) => stateChange, callback)
     第二个参数为可选的回调函数，它将在 setState 完成合并并重新渲染组件后执行。通常，我们建议使用 **componentDidUpdate()**来代替此方式。
  */
-
 class Test extends React.Component {
-  name = 1
+  state = { number: 0 }
   componentDidMount() {
-    this.name = 2
-
-    this.forceUpdate(() => {
-      console.log(23423432432);
+    document.querySelector('#btn').addEventListener('click', () => {
+      this.setState({ number: this.state.number + 10 })
+      this.setState({ number: this.state.number + 10 })
+      console.log(this.state.number);
     })
   }
-
-  shouldComponentUpdate() {
-    console.log('shouldComponentUpdate');
-  }
-
   render() {
     return <div>
-      {this.name}
+      {this.state.number}
+      <button id="btn">click</button>
     </div>
   }
 }
