@@ -1,0 +1,132 @@
+<html>
+  <head>
+<script src="https://cdn.jsdelivr.net/gh/skulpt/skulpt-dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/skulpt/skulpt-dist/skulpt-stdlib.js"></script>
+  </head>
+
+  <body>
+    <h3>Try This</h3>
+    <form>
+      <textarea id="yourcode" cols="80" rows="10">
+import test
+def update(n):
+    print(n)
+test.run()
+      </textarea>
+    <br />
+      <button type="button" onclick="runit()">Run</button>
+    </form>
+    <h4>终端</h4>
+    <pre id="output" style="border: 2px solid grey; height: 50px"> </pre>
+    <h4>效果区</h4>
+    <div id="mycanvas"  style="border: 2px solid grey; height: 300px""></div>
+    <script>
+      var program = document.getElementById("yourcode").value;
+      var terminal = document.getElementById("output");
+      terminal.innerHTML = "";
+      Sk.pre = "output";
+      Sk.configure({
+        output: out, // 输出时调用函数
+        read: builtinRead,// 导入模块时调用
+        __future__: Sk.python3, // 使用python3语法
+      });
+      (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "mycanvas"; // 设置海龟绘图元素
+
+      
+      console.log('Sk.builtinFiles',Sk.builtinFiles);
+      function out(text) {
+        var terminal = document.getElementById("output");
+        terminal.innerHTML = terminal.innerHTML + text;
+      }
+
+      // 第三方模块列表
+      var externalLibs = {
+        "./test/__init__.js": "./lib/test.js", 
+      };
+
+      function builtinRead(file) {
+        console.log("Attempting file: " + Sk.ffi.remapToJs(file));
+        if (externalLibs[file] !== undefined) {
+          return Sk.misceval.promiseToSuspension(
+            fetch(externalLibs[file]).then(
+              function (resp){ return resp.text(); }
+            ));
+        }
+        if (
+          Sk.builtinFiles === undefined ||
+          Sk.builtinFiles.files[file] === undefined
+        ) {
+          throw "File not found: '" + file + "'";
+        }
+        return Sk.builtinFiles.files[file];
+      }
+      function runit() {
+        var myPromise = Sk.misceval.asyncToPromise(function() {
+          return Sk.importMainWithBody("<stdin>", false, program, true);
+        });
+
+        myPromise.then(
+          function(mod) {
+            console.log("success");
+          },
+          function(err) {
+            console.log(err.toString());
+          }
+        );
+      }
+    </script>
+    <script>
+      var $scope0 = (function($modname) {
+/*     2 */     var $blk = 0,
+/*     3 */         $exc = [],
+/*     4 */         $gbl = {},
+/*     5 */         $loc = $gbl,
+/*     6 */         $err = undefined;
+/*     7 */     $gbl.__name__ = $modname;
+/*     8 */     Sk.globals = $gbl;
+/*     9 */     try {
+/*    10 */         while (true) {
+/*    11 */             try {
+/*    12 */                 switch ($blk) {
+/*    13 */                 case 0:
+/*    14 */                     /* --- module entry --- */
+/*    15 */                     //
+/*    16 */                     // line 1:
+/*    17 */                     // print "hello world"
+/*    18 */                     // ^
+/*    19 */                     //
+/*    20 */                     Sk.currLineNo = 1;
+/*    21 */                     Sk.currColNo = 0
+/*    22 */
+/*    23 */
+/*    24 */                     Sk.currFilename = './simple.py';
+/*    25 */
+/*    26 */                     var $str1 = new Sk.builtins['str']('hello world');
+/*    27 */                     Sk.misceval.print_(new Sk.builtins['str']($str1).v);
+/*    28 */                     Sk.misceval.print_("\n");
+/*    29 */                     return $loc;
+/*    30 */                     throw new Sk.builtin.SystemError('internal error: unterminated block');
+/*    31 */                 }
+/*    32 */             } catch (err) {
+/*    33 */                 if ($exc.length > 0) {
+/*    34 */                     $err = err;
+/*    35 */                     $blk = $exc.pop();
+/*    36 */                     continue;
+/*    37 */                 } else {
+/*    38 */                     throw err;
+/*    39 */                 }
+/*    40 */             }
+/*    41 */         }
+/*    42 */     } catch (err) {
+/*    43 */         if (err instanceof Sk.builtin.SystemExit && !Sk.throwSystemExit) {
+/*    44 */             Sk.misceval.print_(err.toString() + '\n');
+/*    45 */             return $loc;
+/*    46 */         } else {
+/*    47 */             throw err;
+/*    48 */         }
+/*    49 */     }
+/*    50 */ })();
+    </script>
+  </body>
+</html>
+
