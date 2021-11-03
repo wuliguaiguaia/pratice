@@ -1,9 +1,21 @@
+// var mod = Sk.importModule("mod", false, false);
+// console.log(mod); // SuspensionError: Cannot call a function that blocks or suspends here on line 1
 var $builtinmodule = function (name) {
-  var test = {__name__: new Sk.builtin.str("test")}
-  test.add = new Sk.builtin.func(function (a, b) {
-    return Sk.ffi.unwrapo(a)
+  var test = { __name__: new Sk.builtin.str("test") }
+  test.getValue = new Sk.builtin.func(function (arr, index) {
+    return Sk.ffi.remapToPy(arr.v[index.v])
   });
+  // test.getValue.co_name = new Sk.builtin.str('test');  // 
+  // test.getValue.co_varnames = ['arr', 'index']
+  // test.getValue.co_varnames = 2 // 参数数量
+  // test.getValue.$defaults = []; // 默认参数
+  // test.run2 = function () {
+  //   // Sk.misceval.callsim(test)
+  // }
 
+  test.basicwrap = new Sk.builtin.func(function() {
+    return Sk.ffi.basicwrap('123')
+  });
   test.sleep = new Sk.builtin.func(function(delay) {
     return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
       Sk.setTimeout(function () {
