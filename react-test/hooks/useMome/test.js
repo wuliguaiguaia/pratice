@@ -1,13 +1,13 @@
-// useMemo：把创建函数和依赖项数组作为参数传入 useMemo，它仅会在某个依赖项改变时才重新计算 memoized 值。
-// 这种优化有助于避免在每次渲染时都进行高开销的计算
-
+/* 反案例，name 变了子组件也重新渲染了 */
 function Sub(props) {
-  console.log("Sub render");
+ console.log("Sub render");
   let { data, onClick } = props
   return (
     <button onClick={onClick}>{data.value}</button>
   )
 }
+
+
 function Test() {
   let [name, setName] = React.useState('')
   let [number, setNumber] = React.useState(0)
@@ -22,7 +22,6 @@ function Test() {
     <Sub data={data} onClick={addClick} />
   </>
 }
-
 
 ReactDOM.render(
   <Test></Test>,

@@ -9,25 +9,23 @@ const HelloFunc = props => {
   const handleChangeX = ()=>{
     setX(x + 1)
   }
-  //生命周期
-  //每次UI更新之后都会执行
-  React.useEffect(()=>{
-    console.log('UI更新之后')
+  //可代替生命周期
+  // 以下log的执行顺序和写的顺序一致，生命周期执行顺序和写的顺序一致
+  React.useEffect(() => {
+    console.log('每次UI更新之后都会执行, 渲染完后之后, componentDidUpdate')
   })
-  React.useEffect(()=>{
-    console.log('空数组仅第一次执行')
-  },[])
-  React.useEffect(()=>{
-    console.log("n变了之后会触发")
+  React.useEffect(() => {
+    console.log("n变了之后才会触发")
   }, [n])
   React.useEffect(()=>{
-    console.log("n和x都变了之后会触发")
-  }, [n,x])
-  React.useEffect(()=>{
+    console.log("n和x都变了之后才会触发")
+  }, [n, x])
+  React.useEffect(() => {
+    console.log('空数组，仅第一次执行，componentDIdMount')
     return ()=>{
-      console.log('会在组件卸载和更新时调用');
+      console.log('会在组件卸载调用, componentWillUnmount');
     }
-  })
+  }, [])
   return <>
     <div style={{marginTop: '100px'}}>函数式组件</div>
     <div>props：{props.message}</div>

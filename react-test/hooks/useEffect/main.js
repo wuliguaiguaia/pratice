@@ -7,22 +7,33 @@
 // 与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。
 // 大多数情况下，effect 不需要同步地执行。在个别情况下（例如测量布局），有单独的 useLayoutEffect Hook 供你使用，其 API 与 useEffect 相同。
 
-
+let index
 function Test() {
-  effectCursor = 0 /* note */
+  index = 0 /* 初始化 */
   const [number, setNumber] = React.useState(0)
   const [name, setName] = React.useState('p')
   const onClick = _ => setNumber(number + 1)
   const onClickName = _ => setName(name + 'k')
-  useEffect((val) => {
-    console.log(val);
-  }, [number])
-  useEffect((val) => {
-    console.log(val, '===');
       // useEffect 如果返回一个函数的话，该函数会在组件卸载和更新时调用
       // useEffect 在执行副作用函数之前，会先调用上一次返回的函数
       // 如果要清除副作用，要么返回一个清除副作用的函数
+  
+  useEffect(() => {
+    console.log('每次UI更新之后都会执行, 渲染完后之后, componentDidUpdate')
   })
+  useEffect(() => {
+    console.log("number变了之后才会触发")
+  }, [number])
+  useEffect(()=>{
+    console.log("number和name都变了之后才会触发")
+  }, [number, name])
+  useEffect(() => {
+    console.log('空数组，仅第一次执行，componentDIdMount')
+    return ()=>{
+      console.log('会在组件卸载调用, componentWillUnmount');
+    }
+  }, [])
+  
   return <div>
     {number}
     <br />
@@ -34,27 +45,41 @@ function Test() {
   </div>
 }
 
+
+// 前提是每次有数据更新都会执行？？？？
+// useEffect 回调没有参数？
 let alldeps = []
-let effectCursor = 0;
-function useEffect(cb, depArray) {
-  if (!depArray) { // 1、空，每次都执行
-    cb();
-    alldeps[effectCursor] = depArray
-    effectCursor++
+let unMountCbs = []
+function useEffect(cb, arr) {
+  if (!alldeps[index]) { // 1、空，每次都执行
+    let unMountCb = cb() // 保存组件销毁回调
+    unMountCb && !unMountCbs.includes(unMountCb) && unMountCbs.push(unMountCb)
+    alldeps[index] = arr
+    console.log(index, '===', alldeps);
+    index++
     return
   }
-
-  let deps = alldeps[effectCursor]
-  let hasChangeDeps = deps
-    ? depArray.some((item, i) => item != deps[i]) // 2、空数组每次都相等，只执行一次
-    : true // 3、第一次执行
-  if (hasChangeDeps) {
-    cb(depArray)
-    alldeps[effectCursor] = depArray
+  let originArr = alldeps[index]
+    console.log(originArr, arr);
+  let hasChange =  arr.some((item, i) => originArr[i] !== item) // 看是否有变化
+  if (hasChange) {
+    let unMountCb = cb()
+    unMountCb && unMountCbs.push(unMountCb)
+    alldeps[index] = arr
   }
-  effectCursor++
+  index++
 }
 
+// [undefined, [0], [0, 'p'], []]
+
+
+// 触发组件销毁
+setTimeout(() => {
+  console.log('某些情况下，组件需要销毁---');
+  unMountCbs.forEach(fn => {
+    fn()
+  });
+}, 5000)
 
 ReactDOM.render(
   <Test>das</Test>,
