@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-/* 样式使用变量 */
+/* 样式还可以使用变量啊 */
 let color = ref('purple')
 </script>
 
