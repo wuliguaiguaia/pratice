@@ -11,6 +11,7 @@ function Test() {
 }
 
 
+// 只调用一次情况
 let data
 function useState(init) {
   data = data || init

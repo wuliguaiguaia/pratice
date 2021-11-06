@@ -1,13 +1,11 @@
 /* 
   React 假设当你多次调用 useState 的时候，你能保证每次渲染时它们的调用顺序是不变的。
-  通过在函数组件里调用它来给组件添加一些内部 state，React会 在重复渲染时保留这个 state
+  通过在函数组件里调用它来给组件添加一些内部 state，React会在重复渲染时保留这个 state
   useState 唯一的参数就是初始 state
   useState 会返回一个数组：一个 state，一个更新 state 的函数
 
   类似 class 组件的 this.setState，但是它不会把新的 state 和旧的 state 进行合并，而是直接替换
  */
-
-
 
 // 每次渲染都是独立的闭包
 // 每一次渲染都有它自己的 Props 和 State
@@ -28,22 +26,20 @@ function Test() {
       {name} <button onClick={onClickName}>name</button>
     </div>
   )
-}
 
-let state = []
+const state = []
 let index = 0
+// 按index顺序存储
 function useState(init) {
-  const curIndex  = index
+  let curIndex = index
   state[curIndex] = state[curIndex] || init
-  const setState = (newData) => {
-    state[curIndex] = newData
-    render()
+  function setState(newDate) {
+    state[curIndex] = newDate
+    update()
   }
-  let data = state[curIndex]
   index++
-  return [data, setState]
+  return [state[curIndex], setState]
 }
-
 
 function render() {
   ReactDOM.render(
@@ -53,3 +49,8 @@ function render() {
   index = 0
 }
 render()
+
+
+function update() {
+  render()
+}

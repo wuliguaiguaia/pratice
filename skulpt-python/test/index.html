@@ -1,0 +1,103 @@
+<html>
+  <head>
+<script src="https://cdn.jsdelivr.net/gh/skulpt/skulpt-dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/skulpt/skulpt-dist/skulpt-stdlib.js"></script>
+  </head>
+
+  <body>
+    <h3>Try This</h3>
+    <form>
+      <textarea id="yourcode" cols="80" rows="10">
+a = input()
+print(a + 'fds')
+      </textarea>
+    <br />
+      <button type="button" onclick="runit()">Run</button>
+    </form>
+    <h4>终端</h4>
+    <div style="border: 2px solid grey; height: 50px">
+      <div id="input-area" style="display: none;">
+        <span id="prefix"></span>
+        <input id="input" type="text" style="border: none">
+      </div>
+      <div id="output"></div>
+    </div>
+    <h4>效果区</h4>
+    <div id="mycanvas"  style="border: 2px solid grey; height: 300px""></div>
+    <script>
+      let input = document.getElementById('input')
+      input.addEventListener('keyup',(e) =>{
+        if(e.keyCode === 13){
+          resolveInput(e.target.value)
+          input.blur()
+        }
+      })
+      let resolveInput = null
+
+      function inputfun(prompt) {
+        return new Promise((resolve) => {
+          const inputArea = document.getElementById("input-area");
+          inputArea.style.display = 'block'
+          const prefix = document.getElementById("prefix");
+          prefix.innerHTML = prompt || '请输入：'
+          input.focus()
+          resolveInput = resolve
+        })
+      }
+      function out(text) {
+        var output = document.getElementById('output')
+        output.innerHTML += text
+      }
+      // 第三方模块列表
+      var externalLibs = {
+        "./test/__init__.js": "./lib/test.js", 
+        "./mod/__init__.js": "./lib/mod.js", 
+      };
+
+      function builtinRead(file) {
+        console.log("Attempting file: " + Sk.ffi.remapToJs(file));
+        if (externalLibs[file] !== undefined) {
+          return Sk.misceval.promiseToSuspension(
+            fetch(externalLibs[file]).then(
+              function (resp){ return resp.text(); }
+            ));
+        }
+        if (
+          Sk.builtinFiles === undefined ||
+          Sk.builtinFiles.files[file] === undefined
+        ) {
+          throw "File not found: '" + file + "'";
+        }
+        return Sk.builtinFiles.files[file];
+      }
+
+      function runit() {
+        var program = document.getElementById("yourcode").value;
+        var prefix = document.getElementById("prefix");
+        prefix.innerHTML = "";
+        Sk.configure({
+          output: out, // 输出时调用函数
+          read: builtinRead, // 导入模块时调用
+          inputfun: inputfun, // 输入事件
+          inputfunTakesPrompt: true,
+          __future__: Sk.python3, // 使用python3语法
+        });
+        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "mycanvas"; // 设置海龟绘图元素
+
+        var myPromise = Sk.misceval.asyncToPromise(function() {
+          return Sk.importMainWithBody("<stdin>", false, program, true);
+        });
+
+        myPromise.then(
+          function(mod) {
+            console.log("success", mod);
+          },
+          function(err) {
+            console.log(err.toString());
+          }
+        );
+      }
+    </script>
+  </body>
+</html>
+

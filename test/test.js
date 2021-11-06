@@ -359,6 +359,20 @@ const genUtil = {
   // once() {}
 };
 
+function createElement (context, tag, data, children) {
+  // 一些判断确认输出
+  if(){
+    return createEmptyVNode() // 创建一个空的vnode
+  } else if(){
+    return createComponent() // 创建组件
+  } else {  // 创建 vnode
+    vnode = new VNode(
+        tag, data, children,
+        undefined, undefined, context
+    )
+    return vnode
+  }
+}
 class CodegenState {
   constructor () {
     this.staticRenderFns = [];
