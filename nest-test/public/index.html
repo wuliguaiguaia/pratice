@@ -15,7 +15,7 @@
   <!-- Refused to load the script 'http://localhost:3009/main.js' because it violates the following Content Security Policy
   directive: "script-src 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as
   a fallback. -->
-  <script src="./main.js"></script>
+  <!-- <script src="./main.js"></script> -->
   <script>
      const getusers = document.getElementById('getusers');
       getusers.addEventListener('click', (e) => {
@@ -33,7 +33,7 @@
         const xhr = new XMLHttpRequest();
         xhr.open('post', 'http://localhost:3009/login');
         xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.send(JSON.stringify({ mobile: '1882903448', password: 'fsdfsfsdf' }));
+        xhr.send(JSON.stringify({ mobile: '222', password: 'user2' }));
         xhr.onreadystatechange = (res) => {
           if (res.status >= 200 && xhr.readyState === 4) {
             console.log(123);

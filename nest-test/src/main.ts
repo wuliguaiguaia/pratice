@@ -95,6 +95,8 @@ async function bootstrap() {
    */
   app.use(clsMiddleware);
 
+  app.enableCors();
+
   /**
    * 日志
    */

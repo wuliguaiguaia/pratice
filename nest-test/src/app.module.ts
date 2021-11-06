@@ -1,4 +1,4 @@
-import { LoggerMiddleware } from './common/middleware/logger.middleware';
+// import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import {
   WinstonModule,
   utilities as nestWinstonModuleUtilities,
