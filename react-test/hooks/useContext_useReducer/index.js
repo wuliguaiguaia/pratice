@@ -18,6 +18,7 @@ const reducer = (state, action) => {
 
 /* 类似于 provider  */
 function Color(props) {
+  console.log(222);
   const [state, dispatch] = React.useReducer(reducer, { color: 'blue' })
   return <ColorContext.Provider value={{state, dispatch}}>
     {props.children}
@@ -25,7 +26,7 @@ function Color(props) {
 }
 
 /* 入口 */
-function App() {
+function Test() {
   return <Color>
     <Text />
     <Buttons />
@@ -50,6 +51,6 @@ function Buttons() {
 }
 
 ReactDOM.render(
-  <App/>,
+  <Test/>,
   document.getElementById('root')
 )
