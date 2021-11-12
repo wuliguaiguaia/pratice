@@ -22,7 +22,7 @@ const Test = props => {
     return () => {
       console.log(':::n变化，清空定时器, 会在 aaaa 前触发:::');
       clearInterval(timer)
-      setTimes(0)n变化
+      setTimes(0)
     }
   }, [n])
   return <>
@@ -30,10 +30,7 @@ const Test = props => {
     <div>state：{n}   <button onClick={handleChangeN}>改变n</button></div>
   </>
 }
-Test.defaultProps = {
-  message: '默认属性'
-}
-Test.displayName = 'HelloFunc'
+
 ReactDOM.render(
   <Test />,
   document.querySelector('#root')

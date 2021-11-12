@@ -1,13 +1,12 @@
 // 缓存方法
 
-const set = new Set();
+const set = new Set(); // 保存callback被声明的次数
 
 function Test() {
   const [count, setCount] = React.useState(1);
   const [val, setVal] = React.useState('');
 
-  const callback = React.useCallback(() => count, [count]); // 使用了 callback 不会重新声明函数
-  /* const callback = () => count */
+  const callback = () => count
   set.add(callback);
 
   const changeCount = () => setCount(count + 1)

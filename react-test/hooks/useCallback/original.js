@@ -18,16 +18,11 @@ function Test() {
   const [count, setCount] = React.useState(1);
   const [val, setVal] = React.useState('');
 
-  const callback = React.useCallback(() => count * 2, [count]); // 使用了 callback 不会重新声明函数
-
+  const callback =() => count * 2
   set.add(callback);
-  const MemoChild = React.useMemo(
-    () => <Child callback={callback} />,
-    []
-  )
- 
+
+  const changeValue = event => setVal(event.target.value) 
   const changeCount = () => setCount(count + 1)
-  const changeValue = event => setVal(event.target.value)
   return <div>
     <h4>count: {count}</h4>
     <h4>set.size: {set.size}</h4>
@@ -36,7 +31,7 @@ function Test() {
       <input value={val} onChange={changeValue} />
     </div>
     <hr />
-    {MemoChild}
+    <Child callback={callback} />
   </div>
 }
 

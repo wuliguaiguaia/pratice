@@ -17,22 +17,8 @@ function Toolbar(props) {
 }
 
 function Button() {
-  // 指定 contextType 读取当前的 themecontext。
-  // React 会往上找到最近的 theme Provider，然后使用它的值。
-  // 在这个例子中，当前的 theme 值为 “dark”。
   const theme = React.useContext(ThemeContext)
-  return <button>{ theme }</button>
-}
-
-function Button() {
-  // 指定 contextType 读取当前的 themecontext。
-  // React 会往上找到最近的 theme Provider，然后使用它的值。
-  // 在这个例子中，当前的 theme 值为 “dark”。
-  return <ThemeContext.Consumer>
-    {
-      theme => <button>{theme}</button>
-    }
-    </ThemeContext.Consumer>
+  return  <button>{theme}</button>
 }
 
 

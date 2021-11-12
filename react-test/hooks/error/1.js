@@ -1,7 +1,7 @@
 function Test() {
   if (Math.random() > 0.5) {
     const [s, ss] = React.useState(10000)
-    // return <h1>{s}</h1>
+    return <h1>{s}</h1>
   }
   const [value, setValue] = React.useState(0)
 

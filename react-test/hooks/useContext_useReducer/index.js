@@ -18,7 +18,6 @@ const reducer = (state, action) => {
 
 /* 类似于 provider  */
 function Color(props) {
-  console.log(222);
   const [state, dispatch] = React.useReducer(reducer, { color: 'blue' })
   return <ColorContext.Provider value={{state, dispatch}}>
     {props.children}
@@ -42,7 +41,7 @@ function Text() {
 
 /* 子组件2 */
 function Buttons() {
-  // 使用全局数据
+  // 修改数据
   const { dispatch } = React.useContext(ColorContext)
   return <div>
     <button onClick={() => { dispatch({ type: UPDATE_COLOR, color: 'green' }) }}> green </button>

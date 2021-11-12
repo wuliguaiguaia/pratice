@@ -1,3 +1,6 @@
+
+// 只调用一次情况
+
 function Test() {
   let [number, setNumber] = useState(0)
   const onClick = () => {
@@ -11,7 +14,6 @@ function Test() {
 }
 
 
-// 只调用一次情况
 let data
 function useState(init) {
   data = data || init

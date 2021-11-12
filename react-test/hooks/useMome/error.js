@@ -1,4 +1,4 @@
-/* 反案例，name 变了子组件也重新渲染了 */
+/* 反案例 */
 function Sub(props) {
  console.log("Sub render");
   let { number, onClick } = props
@@ -11,13 +11,17 @@ function Test() {
   let [value, setValue] = React.useState('')
   let [number, setNumber] = React.useState(0)
   const addClick = () => setNumber(number + 1)
+  const memoSub = React.useMemo(
+    () => <Sub number={number} onClick={addClick} />,
+    [number]
+  )
   return <>
     <input
       type="text"
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />
-    <Sub number={number} onClick={addClick} />
+    {memoSub}
   </>
 }
 

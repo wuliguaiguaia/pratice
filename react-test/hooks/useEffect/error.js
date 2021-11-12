@@ -3,11 +3,9 @@ function Test() {
   const [text, setText] = React.useState('')
   const change = () => setCount(count + 1)
   React.useEffect(() => {
-    fetch("http://127.0.0.1:5504/react-test/index.html").then(async res => {
-      let txt = await res.text()
-      setText(txt)
-    })
-  }, [])
+    console.log(11111);
+  })
+  
   return <div>
     {count}
     <button onClick={change}>click</button>
@@ -15,7 +13,8 @@ function Test() {
   </div>
 }
 
+
 ReactDOM.render(
-  <Test></Test>,
+  <Test />,
   document.querySelector('#root')
 )
