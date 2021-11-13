@@ -20,6 +20,7 @@ function Test() {
     () => <Sub data={data} onClick={addClick} />,
     [number]
   )
+  console.log(MemoSub);
   return <>
     <input
       type="text"

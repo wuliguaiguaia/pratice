@@ -50,7 +50,7 @@ class ProfilePage extends React.Component {
   render() {
     console.log(this.context);
     return (
-      <div>{user} {theme}</div>
+      <div>{this.props.user} {this.props.theme}</div>
     )
   }
 }

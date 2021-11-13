@@ -1,10 +1,5 @@
 /* useRef 获取DOM和保存变量 */
 
-
-/* 和 createRef 有什么区别？ */
-
-
-
 function Test() {
   /* 保存 DOM */
   const inputEl = React.useRef()
@@ -20,6 +15,7 @@ function Test() {
   React.useEffect(() => {
     textRef.current = text
     console.log(textRef);
+    console.log();
   }, [text])
   
   return <div>

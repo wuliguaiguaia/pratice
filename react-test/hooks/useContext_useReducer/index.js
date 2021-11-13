@@ -25,7 +25,7 @@ function Color(props) {
 }
 
 /* 入口 */
-function App() {
+function Test() {
   return <Color>
     <Text />
     <Buttons />
@@ -41,7 +41,7 @@ function Text() {
 
 /* 子组件2 */
 function Buttons() {
-  // 使用全局数据
+  // 修改数据
   const { dispatch } = React.useContext(ColorContext)
   return <div>
     <button onClick={() => { dispatch({ type: UPDATE_COLOR, color: 'green' }) }}> green </button>
@@ -50,6 +50,6 @@ function Buttons() {
 }
 
 ReactDOM.render(
-  <App/>,
+  <Test/>,
   document.getElementById('root')
 )

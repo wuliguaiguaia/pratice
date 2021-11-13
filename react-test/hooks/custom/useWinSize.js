@@ -15,6 +15,9 @@ function useWinSize() {
 
   React.useEffect(() => {
     window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('resize', onResize)
+    }
   }, [])
   return size
 }

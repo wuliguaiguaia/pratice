@@ -14,10 +14,7 @@ function Test() {
   const [name, setName] = React.useState('p')
   const onClick = _ => setNumber(number + 1)
   const onClickName = _ => setName(name + 'k')
-      // useEffect 如果返回一个函数的话，该函数会在组件卸载和更新时调用
-      // useEffect 在执行副作用函数之前，会先调用上一次返回的函数
-      // 如果要清除副作用，要么返回一个清除副作用的函数
-  
+   
   useEffect(() => {
     console.log('每次UI更新之后都会执行, 渲染完后之后, componentDidUpdate')
   })
@@ -46,8 +43,6 @@ function Test() {
 }
 
 
-// 前提是每次有数据更新都会执行？？？？
-// useEffect 回调没有参数？
 let alldeps = []
 let unMountCbs = []
 function useEffect(cb, arr) {
@@ -55,7 +50,6 @@ function useEffect(cb, arr) {
     let unMountCb = cb() // 保存组件销毁回调
     unMountCb && !unMountCbs.includes(unMountCb) && unMountCbs.push(unMountCb)
     alldeps[index] = arr
-    console.log(index, '===', alldeps);
     index++
     return
   }
@@ -63,14 +57,11 @@ function useEffect(cb, arr) {
     console.log(originArr, arr);
   let hasChange =  arr.some((item, i) => originArr[i] !== item) // 看是否有变化
   if (hasChange) {
-    let unMountCb = cb()
-    unMountCb && unMountCbs.push(unMountCb)
+    cb()
     alldeps[index] = arr
   }
   index++
 }
-
-// [undefined, [0], [0, 'p'], []]
 
 
 // 触发组件销毁

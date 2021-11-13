@@ -5,7 +5,7 @@ class App extends React.Component {
   render() {
     return (
       <ThemeContext.Provider value="dark">
-        <Toolbar theme="dark" />;
+        <Toolbar theme="dark" />
       </ThemeContext.Provider>
     )
   }
@@ -15,12 +15,12 @@ function Toolbar(props) {
   return (
     // 中间的组件再也不必指明往下传递 theme 了。
     <div>
-      <ThemedButton />
+      <Button />
     </div>
-  );
+  )
 }
 class Button extends React.Component {
-  // 指定 contextType 读取当前的 theme context。
+  // 指定 contextType 读取当前的 themecontext。
   // React 会往上找到最近的 theme Provider，然后使用它的值。
   // 在这个例子中，当前的 theme 值为 “dark”。
   static contextType = ThemeContext
@@ -28,12 +28,6 @@ class Button extends React.Component {
     return <button>{this.context}</button>
   }
 }
-class ThemedButton extends React.Component {
-  render() {
-    return <Button />;
-  }
-}
-
 
 ReactDOM.render(
   <App></App>,

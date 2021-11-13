@@ -26,10 +26,10 @@ function Test() {
       {name} <button onClick={onClickName}>name</button>
     </div>
   )
+}
 
 const state = []
 let index = 0
-// 按index顺序存储
 function useState(init) {
   let curIndex = index
   state[curIndex] = state[curIndex] || init
