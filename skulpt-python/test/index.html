@@ -8,11 +8,16 @@
     <h3>Try This</h3>
     <form>
       <textarea id="yourcode" cols="80" rows="10">
-a = input()
-print(a + 'fds')
+import time
+print(0)
+time.sleep(2)
+print(1)
+time.sleep(2)
+print(2)
       </textarea>
     <br />
       <button type="button" onclick="runit()">Run</button>
+      <button type="button" onclick="stopit()">Stop</button>
     </form>
     <h4>终端</h4>
     <div style="border: 2px solid grey; height: 50px">
@@ -75,11 +80,14 @@ print(a + 'fds')
         var program = document.getElementById("yourcode").value;
         var prefix = document.getElementById("prefix");
         prefix.innerHTML = "";
+        input.value = ''
+        output.innerHTML = ''
         Sk.configure({
           output: out, // 输出时调用函数
           read: builtinRead, // 导入模块时调用
           inputfun: inputfun, // 输入事件
           inputfunTakesPrompt: true,
+          execLimit: 3000,
           __future__: Sk.python3, // 使用python3语法
         });
         (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "mycanvas"; // 设置海龟绘图元素
@@ -96,6 +104,14 @@ print(a + 'fds')
             console.log(err.toString());
           }
         );
+      }
+
+      function stopit() {
+        Sk.execLimit = 0 // 设置超时限制
+        Sk.timeoutMsg = function () { // 超时后触发
+          Sk.execLimit = Number.POSITIVE_INFINITY
+          return true
+        }
       }
     </script>
   </body>
