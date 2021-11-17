@@ -6,7 +6,7 @@
 
   提供给别人使用：在packages.json 上增加 “types”: "dist/index.d.ts"
 
-  如何给任意js增加类型声明
+  如何给任意js增加类型声明：require 或增加 xxx.d.ts
 
   如果想给文件增加 tsconfig.json, google tsconfig.json example
 
