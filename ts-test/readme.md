@@ -93,9 +93,9 @@ type IProps = {
 }
 ```
 
-13、 类组件的props和state类型：可以在 React.Component后面加泛型，如 React.Component<IProps, IState>
+13、类组件的props和state类型：可以在 React.Component后面加泛型，如 React.Component<IProps, IState>
 
-14、加感叹号表示确定不是 undefined
+14、加感叹号表示确定不是 undefined，这种情况一般可以用断言代替
 
 this.setState({data: this.props.size! + 1})
 
