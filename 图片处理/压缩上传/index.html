@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="file" type="file">
+  <div> 
+    压缩前：<img id="origin"src="" alt=""/>
+    <br />
+    尺寸：<span id="origin-size"></span>
+  </div>
+  <div>
+    压缩后：<img id="press"src="" alt=""/><br />
+    尺寸：<span id="press-size"></span>
+  </div>
+
+  <div>
+    压缩比例：<span id="ratio"></span>
+  </div>
+  </div>
+</body>
+<script>
+  const fileReader = new FileReader()
+  const originImage = document.getElementById('origin')
+  const pressImage = document.getElementById('press')
+
+  // 限制上传尺寸
+  const maxWidth = 400
+  const maxHeight = 400
+  const quality = 1
+
+
+  // 监听上传
+  document.getElementById('file').onchange = e => {
+    const file = e.target.files[0]
+    fileReader.readAsDataURL(file)
+  }
+  // reader 监听
+  fileReader.onload = e => {
+    originImage.src = e.target.result
+    originImage.onload = imgEvent => {
+      
+      // 计算尺寸
+      const originWidth = originImage.width
+      const originHeight = originImage.height
+
+      let targetWidth = originWidth
+      let targetHeight = originHeight
+
+      let radio = targetWidth / targetHeight
+      if(targetWidth > maxWidth || targetHeight > maxHeight){
+        if(radio > maxWidth / maxHeight) {
+          targetWidth = maxWidth
+          targetHeight = maxWidth / radio
+        } else {
+          targetHeight = maxHeight
+          targetWidth = maxHeight *  radio
+        }
+      }
+
+      // canvas 压缩
+      const canvas = document.createElement('canvas')
+      canvas.width = targetWidth
+      canvas.height = targetHeight
+      const context = canvas.getContext('2d')
+      context.clearRect(0, 0, targetWidth, targetHeight);
+      context.drawImage(originImage, 0, 0, targetWidth, targetHeight)
+      const pressSrc = canvas.toDataURL("image/jpeg", quality)
+      pressImage.src = pressSrc
+
+      // 压缩长度比较
+      document.getElementById('origin-size').innerText = `${originWidth} - ${originHeight}`
+      document.getElementById('press-size').innerText = `${targetWidth} - ${targetHeight}`
+      const originSize = originImage.src.length
+      const pressSize = pressSrc.length
+      console.log(originImage.src,pressSrc,originSize, pressSize);
+      document.getElementById('ratio').innerText = ((originSize - pressSize) / originSize * 100).toFixed(2) + '%'
+
+
+      // canvas转为blob并上传
+      canvas.toBlob(function (blob) {
+        // 图片ajax上传
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.status == 200) {
+          }
+        };
+        xhr.open("POST", 'xxx', true);
+        xhr.send(blob);
+      },'image/jpeg');
+
+    }
+  }
+
+</script>
+</html>
