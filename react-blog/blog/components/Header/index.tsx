@@ -6,12 +6,13 @@ import {
   SmileOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
+import Link from 'next/link'
 
 const Header: FunctionComponent = () => {
   return <div className={styles.header}>
     <Row type="flex" justify="space-between">
       <Col xs={24} sm={24} md={10} lg={10} xl={10}>
-        <span className={styles.logo}>小橘子</span>
+        <Link href="/"><a className={styles.logo}>小橘子</a></Link>
         <span className={styles.descrtion}>哈密瓜花蜜瓜</span>
       </Col>
       {/* TODO: 小于 768 使用图标代替 */}

@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Col, Row, Breadcrumb, Divider } from 'antd'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -11,8 +10,19 @@ import 'highlight.js/styles/github.css';
 
 import MarkdownNavbar from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
+import { withRouter, NextRouter } from 'next/router'
 
-export default function Detail() {
+interface WithRouterProps {
+  router: NextRouter
+}
+
+interface IProps extends WithRouterProps { }
+
+
+const Detail = (props: IProps) => {
+  const { router } = props
+  console.log(router);
+  
   const renderer = new marked.Renderer();
 
   marked.setOptions({
@@ -153,3 +163,6 @@ Chicken Chicken Chicken Chicken Chicken Chicken.
     </>
   )
 }
+
+export default withRouter(Detail)
+

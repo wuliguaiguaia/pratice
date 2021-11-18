@@ -5,14 +5,23 @@ import Header from '../components/Header'
 import { useState } from 'react'
 import Author from '../components/Author'
 import Footer from '../components/Footer'
+import { useRouter } from 'next/dist/client/router'
 
 export default function Home() {
   const [mylist, setMylist] = useState(
     [
-      { title: '第一', context: 'desc' },
-      { title: '第而', context: 'desc' },
+      { title: '第一', context: 'desc', id: 1 },
+      { title: '第而', context: 'desc', id: 2 },
     ]
   )
+  const router = useRouter()
+  const routeChange = (id: number) => {
+    router.push({
+      pathname: '/detail',
+      query: { id }
+    } )
+  }
+
   return (
   <>
     <Head>
@@ -26,7 +35,7 @@ export default function Home() {
           dataSource={mylist}
           itemLayout="vertical"
           renderItem={item => (
-            <List.Item>
+            <List.Item onClick={() => { routeChange(item.id)}}>
               <div className="list-title">{item.title}</div>
               <div className="list-context">{item.context}</div>
               <div className="list-keys">
