@@ -11,7 +11,7 @@ import 'highlight.js/styles/github.css';
 import MarkdownNavbar from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import { withRouter, NextRouter } from 'next/router'
-
+import Link from 'next/link'
 interface WithRouterProps {
   router: NextRouter
 }
@@ -131,7 +131,9 @@ Chicken Chicken Chicken Chicken Chicken Chicken.
       <Row className="main" type="flex" justify="center">
         <Col className="main-left" xs={24} sm={24} md={16} lg={18} xl={14}>
           <Breadcrumb>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link href="/"><a >首页</a></Link>
+            </Breadcrumb.Item>
             <Breadcrumb.Item>
               <a href="">Application Center</a>
             </Breadcrumb.Item>

@@ -1,27 +1,28 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Col, Row, List } from 'antd'
 import Header from '../components/Header'
 import { useState } from 'react'
 import Author from '../components/Author'
 import Footer from '../components/Footer'
 import { useRouter } from 'next/dist/client/router'
+import axios from 'axios'
 
-export default function Home() {
+function Home(props) {
+  console.log(props);
+  
   const [mylist, setMylist] = useState(
     [
       { title: '第一', context: 'desc', id: 1 },
       { title: '第而', context: 'desc', id: 2 },
     ]
   )
-  const router = useRouter()
+  const Router = useRouter()
   const routeChange = (id: number) => {
-    router.push({
+    Router.push({
       pathname: '/detail',
       query: { id }
     } )
   }
-
   return (
   <>
     <Head>
@@ -53,3 +54,12 @@ export default function Home() {
   </>
   )
 }
+
+Home.getInitialProps = async () => {
+  // const getData = await axios('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
+  // const data = getData()
+  // console.log(data);
+  return 'fsdfsdfsfsfsdfsdf'
+}
+
+export default Home
