@@ -23,3 +23,11 @@
 - git rm --cached 子模块名称
 
 本项目内推送子模块
+
+- git push --recurse-submodules=check 本项目push时进行check
+  1. 对所有推送都执行检查 设置 git config push.recurseSubmodules check
+
+- git push --recurse-submodules=on-demand 
+
+
+
