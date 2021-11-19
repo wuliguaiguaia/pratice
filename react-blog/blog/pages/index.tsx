@@ -9,9 +9,9 @@ import axios from 'axios'
 // import dynamic from 'next/dynamic'
 // const Eeader = dynamic(import('../components/Header'))
 function Home(props) {    
-  console.log(props)                   
+    console.log(props)                   
       
-  const [mylist, setMylist] = useState (
+    const [mylist, setMylist] = useState (
     [
       { title : '第一', context: 'desc', id: 1 },
       { title: '第而', context: 'desc', id: 2 },
