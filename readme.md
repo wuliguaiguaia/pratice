@@ -26,11 +26,19 @@
 
 本项目内推送子模块：
 
-- git push --recurse-submodules=check 本项目push时进行check
+- git push --recurse-submodules=check 本项目 push 时进行 check
+
   1. 对所有推送都执行检查： git config push.recurseSubmodules check
 
-- git push --recurse-submodules=on-demand 
+- git push --recurse-submodules=on-demand
   1. 默认推送所有：git config push.recurseSubmodules on-demand
 
+子模块遍历:
 
+- foreach 命令，能在每一个子模块中运行任意命令
 
+  git submodule foreach 'git stash' ；
+  git submodule foreach 'git add .'
+  git submodule foreach 'git checkout -b featureA'
+
+[Git 工具 - 子模块](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
