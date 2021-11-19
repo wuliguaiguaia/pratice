@@ -2,3 +2,5 @@
 增加子模块：git submodule add https://github.com/wuliguaiguaia/mini-vite.git
 
 更新项目内子模块到最新版本： git submodule update
+
+克隆一个含有子模块的项目：git clone xxx.git --recurse-submodules

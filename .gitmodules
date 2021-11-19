@@ -7,3 +7,6 @@
 [submodule "z-wheel"]
 	path = z-wheel
 	url = https://github.com/wuliguaiguaia/z-wheel.git
+[submodule "react-blog/blog"]
+	path = react-blog/blog
+	url = https://github.com/wuliguaiguaia/blog.git
