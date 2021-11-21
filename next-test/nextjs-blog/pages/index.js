@@ -4,13 +4,16 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import Category from './../components/tests.tsx'
 
 export default function Home({ allPostsData }) {
+  console.log(allPostsData);
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      <Category/>
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>
@@ -40,6 +43,7 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData()
+  console.log(allPostsData);
   return {
     props: {
       allPostsData

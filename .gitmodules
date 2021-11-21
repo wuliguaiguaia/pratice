@@ -13,3 +13,6 @@
 [submodule "react-blog/blog"]
 	path = react-blog/blog
 	url = https://github.com/wuliguaiguaia/blog.git
+[submodule "react-blog/blog-server"]
+	path = react-blog/blog-server
+	url = https://github.com/wuliguaiguaia/blog-server.git
