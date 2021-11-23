@@ -1,3 +1,2 @@
-import './a.js'
-
-const s = reuqire('./require.js')
+import * as s from './a.js'
+console.log(s);
