@@ -14,5 +14,6 @@
     "lodash-es": "^4.17.21",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.8.0"
-  }
+  },
+  "sideEffects": false
 }

@@ -1,1 +1,1 @@
-import('./a.js').then(res => {})
+import './a.js'

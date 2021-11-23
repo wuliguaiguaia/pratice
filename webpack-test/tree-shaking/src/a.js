@@ -1,4 +1,2 @@
-// import _ from 'lodash';
-// export default a;
-
-export const w = 1
+import _ from 'lodash';
+console.log(123);

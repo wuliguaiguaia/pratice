@@ -31,27 +31,18 @@ webpack production 默认启用
 
 > 副作用：副作用可以大致可以理解成：一个函数会、或者可能会对函数外部变量产生影响的行为。
 
-## webpack 4 5 production 有差异
-
-```js
-import _ from lodash-es
-```
-
-4: 对库的导入和本地代码导入的处理方式不同，本地代码不用就不会打包，库不用还是会完全打包
-5: 不用就不会打包，和本地是一致的
+对库的导入和本地代码导入的处理方式不同，本地代码不用就不会打包，库不用还是会完全打包
 
 [结论] 最好还是使用具名导入或者直接导入具体的模块
 
 ```js
-// 4:全部导入 (不支持 tree-shaking)
+// 全部导入 (不支持 tree-shaking)
 import _ from "lodash";
-// 4:具名导入(支持 tree-shaking)
+// 具名导入(支持 tree-shaking)
 import { debounce } from "lodash";
-// 4:直接导入具体的模块 (支持 tree-shaking)
+// 直接导入具体的模块 (支持 tree-shaking)
 import debounce from "lodash/lib/debounce";
 ```
-
-以上在 5 里面都是可以 tree-shaking 的
 
 ## 问题
 
@@ -92,4 +83,4 @@ export default a;
 
 ## 结论
 
-在 package.json 启用 sideEffets false，在代码中保证所有模块都使用 import export，不用 commonjs，在引入库的使用，尽量使用具名导入，因为 webpack 4 对库做了特殊处理，如果引入整个库，会把所有内容都打包在内，5 不会有这样的情况
+在 package.json 启用 sideEffets false，在代码中保证所有模块都使用 import export，不用 commonjs，在引入库的使用，尽量使用具名导入, webpack 对库做了特殊处理，如果引入整个库，会把所有内容都打包在内(启用了 sideEffets:false 也不会有此问题。。。)
