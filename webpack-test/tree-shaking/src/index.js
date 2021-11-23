@@ -1,1 +1,3 @@
-import * as xx from './a'
+// console.log(w);
+
+import('./a').then(res => { })

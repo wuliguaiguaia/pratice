@@ -1,18 +1,21 @@
 {
-  "name": "test-1",
+  "name": "tree-shaking-5",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
+  "sideEffects": false,
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.64.2",
+    "webpack-cli": "^4.9.1"
+  },
   "dependencies": {
-    "lodash-es": "^4.17.21",
-    "webpack": "^5.36.2",
-    "webpack-cli": "^4.8.0"
+    "lodash-es": "^4.17.21"
   }
 }

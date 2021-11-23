@@ -1,5 +1,4 @@
-const a = { a: 2, b: { c: 3 } };
-fetch('www.baidu.com').then((res) => {
-  console.log(res);
-})
-export default a;
+// import _ from 'lodash';
+// export default a;
+
+export const w = 1
