@@ -83,4 +83,6 @@ export default a;
 
 ## 结论
 
-在 package.json 启用 sideEffets false，在代码中保证所有模块都使用 import export，不用 commonjs，在引入库的使用，尽量使用具名导入, webpack 对库做了特殊处理，如果引入整个库，会把所有内容都打包在内(启用了 sideEffets:false 也不会有此问题。。。)
+1 在 package.json 启用 sideEffets false，在代码中保证所有模块都使用 import export，
+2 不要用 commonjs 语法，他会把 require('./xxx') 这一行直接打包在内
+3 在引入库的使用，尽量使用具名导入, webpack 对库做了特殊处理，如果引入整个库，会把所有内容都打包在内(启用了 sideEffets:false 就不会有此问题。。。)

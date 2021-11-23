@@ -1,2 +1,2 @@
-import _ from 'lodash';
+import 'lodash';
 console.log(123);
