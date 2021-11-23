@@ -10,7 +10,9 @@
 
 更新子模块为远程项目的最新版本：
 
+- git submodule init 在已有子模块的项目中，初始化子模块，在本地生成相关的配置文件
 - git submodule update --remote
+
 
 克隆一个含有子模块的项目：
 
