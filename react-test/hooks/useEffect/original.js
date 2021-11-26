@@ -6,10 +6,10 @@ const HelloFunc = props => {
   const [times, setTimes] = React.useState(0)
   const [x, setX] = React.useState(0)
   //事件
-  const handleChangeN = ()=>{
+  const handleChangeN = () => {
     setN(n + 1)
   }
-  const handleChangeX = ()=>{
+  const handleChangeX = () => {
     setX(x + 1)
   }
   //可代替生命周期
@@ -20,15 +20,15 @@ const HelloFunc = props => {
   React.useEffect(() => {
     console.log("只有当 n 发生变化才会触发，包括初始化，componentDIdMount + componentDidUpdate")
   }, [n])
-  React.useEffect(()=>{
-      console.log("只有当 n 或 x 发生变化才会触发，包括初始化，componentDIdMount + componentDidUpdate")
+  React.useEffect(() => {
+    console.log("只有当 n 或 x 发生变化才会触发，包括初始化，componentDIdMount + componentDidUpdate")
   }, [n, x])
 
   React.useEffect(() => {
     console.log('空数组，仅第一次执行，componentDIdMount')
-    const onResize = (e) => {}
+    const onResize = (e) => { }
     window.addEventListener('resize', onResize)
-    return ()=>{
+    return () => {
       window.removeEventListener('resize', onResize)
       console.log('会在组件卸载调用, componentWillUnmount');
     }
@@ -47,7 +47,7 @@ const HelloFunc = props => {
   }, [n])
   return <>
     定时器：{times}
-    <div style={{marginTop: '100px'}}>函数式组件</div>
+    <div style={{ marginTop: '100px' }}>函数式组件</div>
     <div>props：{props.message}</div>
     <div>state：{n}   <button onClick={handleChangeN}>改变n</button></div>
     <div>state：{x}   <button onClick={handleChangeX}>改变x</button></div>
