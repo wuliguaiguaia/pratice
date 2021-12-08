@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 表单校验 */
+    input:invalid {
+      border-color: red;
+    }
+    input,
+    input:valid {
+      border-color:#ccc;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- https://www.bookstack.cn/read/javascript-tutorial/docs-bom-form.md
+      表单，FormData 对象
+      表单概述
+      FormData 对象
+        概述
+        实例方法
+      表单的内置验证
+        自动校验
+        checkValidity()
+        willValidate 属性
+        validationMessage 属性
+        setCustomValidity()
+        validity 属性
+        表单的 novalidate 属性
+      enctype 属性
+      文件上传
+  -->
+  <form action="/xx" method="post" id="myform">
+    name: <input type="text" name="username" value="123">
+    password: <input type="text" name="password"  value="456">
+    <button>submit</button>
+
+    <!-- 表单发送的数据类型为 formData
+      username: fds
+      password: fsd
+
+      request header里：Content-Type: application/x-www-form-urlencoded
+    -->
+
+    <!-- FormData对象
+
+      ajax操作往往用来传递表单数据。为了方便表单处理，HTML 5新增了一个FormData对象，可以【模拟表单】。
+
+      参数是一个表单元素，这个参数是可选的。如果省略参数，就表示一个空的表单，否则就会处理表单元素里面的键值对。
+
+      // 获取某个控件的值
+      formData.get('username')// ""
+      // 设置某个控件的值
+      formData.set('username','张三');
+      formData.get('username')// "张三"
+
+    -->
+  </form>
+  <script>
+    // let xhr = new XMLHttpRequest()
+    // var form = document.getElementById('myform');
+    // var formData = new FormData(form);
+    // formData.append('ss', 12) /* 增加一条表单项 */
+    // xhr.open('POST', form.action);
+    // xhr.send(formData);
+  </script>
+
+
+  <!-- 表单自动校验 -->
+  <form action="https://sell-base-e.suanshubang.cc/su/api/createshorturl" method="post" id="fff">
+    <input type="number"min="8"max="10">
+  </form>
+  <button id="btn">button</button>
+  <div id="invalidTxt"></div>
+  <script>
+    let fff = document.getElementById('fff')
+    // fff.validationMessage= '表示控件不满足校验条件时，浏览器显示的提示文本'
+    let btn = document.getElementById('btn')
+    btn.onclick = (e) => {
+      /* 除了提交表单的时候，浏览器自动校验表单，还可以手动触发表单的校验。
+        表单元素和表单控件都有checkValidity()方法，用于手动触发校验。 */
+      const isvalid = fff.checkValidity()
+      console.log(isvalid);
+      invalidTxt.innerHTML = fff.validationMessage
+    }
+    
+  </script>
+</body>
+</html>
