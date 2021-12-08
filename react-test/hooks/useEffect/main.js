@@ -14,23 +14,23 @@ function Test() {
   const [name, setName] = React.useState('p')
   const onClick = _ => setNumber(number + 1)
   const onClickName = _ => setName(name + 'k')
-   
+
   useEffect(() => {
     console.log('每次UI更新之后都会执行, 渲染完后之后, componentDidUpdate')
   })
   useEffect(() => {
     console.log("number变了之后才会触发")
   }, [number])
-  useEffect(()=>{
-    console.log("number和name都变了之后才会触发")
+  useEffect(() => {
+    console.log("number或name都变了之后才会触发")
   }, [number, name])
   useEffect(() => {
     console.log('空数组，仅第一次执行，componentDIdMount')
-    return ()=>{
+    return () => {
       console.log('会在组件卸载调用, componentWillUnmount');
     }
   }, [])
-  
+
   return <div>
     {number}
     <br />
@@ -54,8 +54,8 @@ function useEffect(cb, arr) {
     return
   }
   let originArr = alldeps[index]
-    console.log(originArr, arr);
-  let hasChange =  arr.some((item, i) => originArr[i] !== item) // 看是否有变化
+  console.log(originArr, arr);
+  let hasChange = arr.some((item, i) => originArr[i] !== item) // 看是否有变化
   if (hasChange) {
     cb()
     alldeps[index] = arr

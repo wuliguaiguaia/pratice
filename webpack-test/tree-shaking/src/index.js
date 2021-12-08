@@ -1,1 +1,1 @@
-import * as xx from './a'
+import './a.js'

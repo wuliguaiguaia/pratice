@@ -1,5 +1,9 @@
 ## 基础配置测试
 
+0、安装 webpack
+npm i webpack webpack-cli -S
+(测试版本：^5.52.1, ^4.8.0)
+
 1、webpack 会进行默认计算
 ```js
 // src/index.js
@@ -19,7 +23,6 @@ fn()
 setTimeout((()=>{console.log(200)}));
 ```
 
-
 2、使其支持 ie，增加 .browserslistrc 文件
 
 3、用babel-loader打包jsx
@@ -29,7 +32,29 @@ npm i @typescript-eslint/eslint-plugin@^4.0.0  @typescript-eslint/parser@^4.0.0 
 
 eslint-config-react-app
 
-5、让webpack可以感知到eslint的配置,从而在编译的过程中提示报错信息
+4.1、让webpack可以感知到eslint的配置,从而在编译的过程中提示报错信息
+
+npm i html-webpack-plugin
+
+5、支持 stylelint
+
+npm i stylelint stylelint-config-standard
+
+.stylelintrc.json
+
+```json
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-less"
+  ],
+  "customSyntax": "postcss-less",
+  "rules": {
+    "block-no-empty": null,
+    "at-rule-no-unknown": null
+  }
+}
+```
 
 6、用babel-loader打包TypeScript
 @babel/preset-typescript -D
@@ -43,7 +68,7 @@ npx tsc --init
 {
  "jsx": "react", // Specify JS
  "strict": false, // 关闭严格模式  
-  "noImplicitAny": true,  //没有隐式的any
+ "noImplicitAny": true,  //没有隐式的any
 }
 
 9、让js和ts支持@alias
@@ -247,3 +272,11 @@ common: {
 20、增加 spinner 提示，chalk 样式
 
 21、无限页面
+
+22、提交时lint检查
+[husky](https://www.npmjs.com/package/husky)
+
+npm install husky --save-dev
+npm set-script prepare "husky install"
+npm run prepare
+npx husky add .husky/pre-commit "npm test"

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 100px;
+      /*
+      -webkit-border-image-slice: 图像边界向内偏移
+      -webkit-border-slice-width: 图像边界的宽度
+      */
+      
+      position: relative;
+      
+    }
+    
+    #box::before{
+      width: 100%;
+      height: 100%;
+      content: '';
+      border: 28px solid red;
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* 图片原始 81 * 81 平均27px */
+      -webkit-border-image: url("https://mdn.mozillademos.org/files/4127/border.png") 28
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+  </div>
+</body>
+</html>
