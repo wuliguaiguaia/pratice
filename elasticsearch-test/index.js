@@ -1,6 +1,11 @@
 'use strict'
 const { Client } = require('@elastic/elasticsearch')
 const client = new Client({ node: 'http://localhost:9200' })
+
+
+// https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html
+
+
 async function run() {
   // Let's start by indexing some data
   await client.index({
@@ -32,10 +37,13 @@ async function run() {
   const { body } = await client.search({
     index: 'game-of-thrones',
     body: {
-      query: {
+     /* query: {
         match: {
           quote: 'winter'
         }
+      } */
+      query: {
+        match_all: {}
       }
     }
   })
