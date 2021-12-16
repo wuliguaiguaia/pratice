@@ -27,8 +27,8 @@ try {
 }
 
 /* 使用文件描述符修改默认行为 */
-/* filePath = path.resolve(__dirname, 'test2.txt') // 不存在则创建
-fs.writeFile(filePath, content, { flag: 'a+' }, err => { }) */
+filePath = path.resolve(__dirname, 'test2.txt') // 不存在则创建
+fs.writeFile(filePath, content, { flag: 'a+' }, err => { })
 
 /* fs.appendFile() 追加到文件， 不存在则创建 */
 fs.appendFile(filePath, content, (err) => {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>获取数据</title>
+</head>
+<body>
+  <h1> input 获取文件 </h1>
+
+  通用：<input type="file" multiple>
+  <!-- 
+    accept: 进行文件选择过滤，该属性的值必须为一个逗号分割的列表,包含了多个唯一的内容类型声明：
+      以 STOP 字符 (U+002E) 开始的文件扩展名。（例如：".jpg,.png,.doc"）一个有效的 MIME 类型，但没有扩展名
+      audio/* 表示音频文件
+      video/* 表示视频文件
+      image/* 表示图片文件 
+  -->
+
+  <!-- multiple: 多选 -->
+
+  <!-- 
+    capture: 打开摄像拍照或者录像 [未生效？？]
+        multiple属性和capture属性不能同时生效。(移动端里在安卓和ios上有不同的表现，但效果都一样) 
+  -->
+
+  图片：<input type="file" accept="image/*" capture="camera">
+  音频：<input type="file" accept="audio/*" capture="microphone">
+  视频：<input type="file" accept="video/*" capture="camcorder">
+
+
+  <h1>send</h1>
+  1 参数及文件均需要使用 new FormData() 实例 append()
+  2 ajax中的resquest-header: multipart/form-data
+
+  lastModified：最后修改时间戳
+  lastModifiedDate：文件对象最后修改的日期
+  name：文件名,只读字符串,不包含任何路径信息.
+  size：文件大小,单位为字节,只读的64位整数.
+  type：MIME类型,只读字符串,如果类型未知,则返回空字符串.
+
+  （type属性判断用户的文件类型不太准确，用户会改变后缀名；size可以做大小限制判断）
+
+
+</body>
+</html>

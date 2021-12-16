@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #dropbox,#preview {
+      width: 200px;
+      height: 300px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div class='demo-box'>
+    <div class="demo-content">
+      <a href="javascript:;">选择图片文件拖拽至下方框中，实现拖拽上传及图片预览</a>
+      <div id="dropbox" class="dropbox">
+        <div class="area"></div>
+      </div>
+      <div id="preview"></div>
+    </div>
+  </div>
+  
+  <script>
+    var dropbox = document.getElementById("dropbox");
+    var preview = document.getElementById("preview");
+
+    dropbox.addEventListener("dragenter", function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    dropbox.addEventListener("dragover", function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    dropbox.addEventListener("drop", function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      var dt = e.dataTransfer;
+      var files = dt.files;//获取文件
+
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var imageType = /^image\//;
+
+        if (!imageType.test(file.type)) {
+          continue;
+        }
+
+        // 填充选择的图片到展示区
+        var img = document.createElement("img");
+        img.classList.add("obj");
+        img.file = file;
+        preview.appendChild(img);
+
+        // 读取File对象中的内容
+        var reader = new FileReader();
+        reader.onload = (function (aImg) {
+          return function (e) {
+            aImg.src = e.target.result;
+          };
+        })(img);
+        reader.readAsDataURL(file);
+      }
+    }, false);
+  </script>
+</body>
+</html>
