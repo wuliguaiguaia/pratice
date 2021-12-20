@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <audio src="" id="robot-id" controls></audio>
+  <button id="tbn">btn</button>
+  <script>
+    const audioEl = document.querySelector("robot-id");
+      const documentEl = document.documentElement;
+      documentEl.addEventListener("click", () => {
+        audioEl.play(); // 用户点击屏幕后播放空白音频
+        audioEl.pause();  // 然后立刻暂停  
+        audioEl.src = "" // 移除src, 防止之后播放空白音频  
+      });
+
+     const robotAudio = document.getElementById('robot-id')
+     tbn.onclick = function () {
+        robotAudio.onclick = () => {
+          robotAudio.play(robotAudio.src)
+        }
+        robotAudio.click();
+        // setTimeout(() => {
+          robotAudio.src = "./test.wav"
+          robotAudio.load()
+          robotAudio.play()
+        // }, 2000);
+          // // console.log('000');
+        // }
+         
+
+        // robotAudio.play()
+        // // 播放开始，可能会显示loading
+        // var playPromise = robotAudio.play();
+
+        // if (playPromise !== undefined) {
+        //   playPromise.then(_ => {
+        //     // 这里就已经开始播放了
+        //     // 播放UI会出现（如果控件显示的话）
+        //     // 此时可以安全的暂停音视频了
+        //     // robotAudio.pause();
+        //     console.log('play');
+        //   }).catch(error => {
+        //     // 无法自动播放
+        //     console.log('error');
+        //     // 显示暂停的UI
+        //   });
+        // }
+      }
+
+      
+
+  </script>
+</body>
+</html>
