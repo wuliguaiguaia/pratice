@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>伪锚点</title>
+  <style>
+    .anchor1,
+    .anchor2 {
+      width: 100px;
+      height: 100px;
+      margin-top: 2000px;
+      margin-bottom: 2000px;
+    }
+
+    .anchor1 {
+      background: red;
+    }
+
+    .anchor2 {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    <a href="#anchor1">锚点1</a>
+  </p>
+  <p>
+    <a href="#anchor2">锚点2</a>
+  </p>
+  <div  class="anchor1">
+    <a href="#anchor1">锚点1</a>
+  </div>
+
+  <div id="anchor2" class="anchor2">
+    <a href="#anchor2">锚点2</a>
+  </div>
+</body>
+
+</html>
