@@ -1,0 +1,316 @@
+:global {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 14px;
+
+    /* 增加锚点跳转过度效果 */
+    scroll-behavior: smooth;
+    -webkit-box-direction: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+  }
+
+  body {
+    margin: 0;
+    background: #fff;
+    line-height: 1.5;
+    color: #222;
+    width: 100vw !important;
+    font-family:
+      "Chinese Quote",
+      "Segoe UI",
+      "PingFang SC",
+      "Hiragino Sans GB",
+      "Microsoft YaHei",
+      "Helvetica Neue",
+      Helvetica,
+      Arial,
+      sans-serif !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 0;
+    font-weight: normal;
+  }
+
+  ul,
+  li,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  dl,
+  dt,
+  dd,
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+
+  hr {
+    border-color: rgb(251 251 251);
+  }
+
+  label,
+  button {
+    cursor: pointer;
+  }
+
+  button {
+    outline: none;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+
+    &::-moz-focus-inner {
+      border: 0;
+
+      /* firefox outline */
+    }
+  }
+
+  a:focus,
+  button:focus,
+  input[type="range"]:focus,
+  input:focus {
+    outline: 0;
+
+    &::-moz-focus-inner {
+      border: 0; /* firefox */
+    }
+  }
+
+  input {
+    padding-left: 15px;
+  }
+
+  /* range */
+
+  input[type="range"] {
+    margin: 0;
+    width: 100%;
+    appearance: none;
+
+    /* 清除系统默认样式 */
+    background: linear-gradient(#ff7600, #ff7600) no-repeat #ccc;
+    padding-left: 0;
+    height: 1px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    /* width: 100%; */
+    height: 0.125rem;
+    cursor: pointer;
+    border-radius: 1px;
+  }
+
+  /* 拖动块的样式 */
+
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+
+    /* border: 1px solid #ff7600; */
+    height: 0.8rem;
+    width: 0.8rem;
+    border-radius: 50%;
+    background: #fd9500;
+    cursor: pointer;
+    margin-top: -0.3375rem;
+  }
+
+  /* placeholder */
+
+  input::placeholder {
+    color: rgb(193 195 208 / 100%);
+    font-size: 11px;
+  }
+
+  input[type="checkbox"] {
+    margin: 0;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    vertical-align: sub;
+  }
+
+  /* layout */
+
+  .fr {
+    float: right;
+  }
+
+  .fl {
+    float: left;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  /* flex */
+
+  .flex {
+    display: flex;
+  }
+
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .jus-between {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .flex-around {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .jusBetween-alignCenter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .jusCenter-alignCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jusAround-alignCenter {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .jus-around {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .jus-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .align-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .flex-end {
+    justify-self: self-end;
+  }
+
+  .align-baseline {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .align-end {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  /* icon */
+
+  .icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: bottom;
+  }
+
+  /* font */
+
+  .small-font {
+    font-size: 12px;
+    -webkit-transform-origin-x: 0;
+    transform: scale(0.75);
+
+    /* translateX(-19px); */
+  }
+
+  /* position */
+
+  .position-sticky {
+    position: sticky;
+  }
+
+  .absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* 多行省略 */
+  .text-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @mixin multi-ellipsis($lines) {
+    display: box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: $lines;
+
+    /* autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+  }
+}
