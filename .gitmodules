@@ -16,9 +16,6 @@
 [submodule "react-blog/blog-server"]
 	path = react-blog/blog-server
 	url = https://github.com/wuliguaiguaia/blog-server.git
-[submodule "react-blog/blog-admin"]
-	path = react-blog/blog-admin
-	url = https://github.com/wuliguaiguaia/blog-admin.git
 [submodule "git-test"]
 	path = git-test
 	url = https://github.com/wuliguaiguaia/git-test.git
