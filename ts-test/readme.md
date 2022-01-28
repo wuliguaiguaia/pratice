@@ -100,3 +100,78 @@ type IProps = {
 this.setState({data: this.props.size! + 1})
 
 比如有默认props时，组件没有传参的情况
+
+15、setTimeout 返回的类型是 number
+let timer: number = 0
+类型会被清除，因为ts有类型推断，可以不用写
+
+16、KeyboardEvent 使用原生类型，不要使用 React 的，否则会有以下错误
+const handleKeyDown: (e: KeyboardEvent) => void
+没有与此调用匹配的重载。
+  第 1 个重载(共 2 个)，“(type: "keydown", listener: (this: Window, ev: KeyboardEvent) => any, options?: boolean | AddEventListenerOptions | undefined): void”，出现以下错误。
+    类型“(e: KeyboardEvent) => void”的参数不能赋给类型“(this: Window, ev: KeyboardEvent) => any”的参数
+      参数“e”和“ev” 的类型不兼容。
+        类型“KeyboardEvent”缺少类型“KeyboardEvent<Element>”中的以下属性: locale, nativeEvent, isDefaultPrevented, isPropagationStopped, persist
+  第 2 个重载(共 2 个)，“(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void”，出现以下错误。
+    类型“(e: KeyboardEvent) => void”的参数不能赋给类型“EventListenerOrEventListenerObject”的参数。
+      不能将类型“(e: KeyboardEvent) => void”分配给类型“EventListener”。
+        参数“e”和“evt” 的类型不兼容。
+          类型“Event”缺少类型“KeyboardEvent<Element>”的以下属性: altKey, charCode, ctrlKey, code 及其他 15 项
+
+
+17、scroll 的event不是mouseEvent，是Event
+scorll handler 不能使用原生的 mouseEventhandler
+
+使用any就可以
+```js
+export const throttle = (cb: { (e: any): void}, time: number) => {
+  return (e: any) =>  cb(e)
+}
+
+const throttleScroll = throttle(handleScroll, 0)
+window.addEventListener('scroll', throttleScroll)
+```
+推导的类型：const throttleScroll: (e: any) => void
+
+但是使用 MouseEvent 就不行
+
+```js
+export const throttle = (cb: { (e: MouseEvent): void}, time: number) => {
+  return (e: MouseEvent) =>  cb(e)
+}
+```
+const throttleScroll: (e: MouseEvent) => void
+没有与此调用匹配的重载。
+  第 1 个重载(共 2 个)，“(type: "scroll", listener: (this: Window, ev: Event) => any, options?: boolean | EventListenerOptions | undefined): void”，出现以下错误。
+    类型“(e: MouseEvent) => void”的参数不能赋给类型“(this: Window, ev: Event) => any”的参数。
+      参数“e”和“ev” 的类型不兼容。
+        不能将类型“Event”分配给类型“MouseEvent”。
+  第 2 个重载(共 2 个)，“(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void”，出现以下错误。
+    类型“(e: MouseEvent) => void”的参数不能赋给类型“EventListenerOrEventListenerObject”的参数。
+      不能将类型“(e: MouseEvent) => void”分配给类型“EventListener”。ts(2769)
+
+
+18、类型“Element”上不存在属性“offsetTop”
+```js
+const titles: HTMLCollectionOf<Element> = articleContent.current.getElementsByClassName('_artilce-title') || []
+Array.from(titles).forEach(el => {
+  offsetArr.push(el.offsetTop + headerPadding + wrapperTop)
+})
+```
+typescript的类型检查导致, 需要进行类型断言
+const titles = articleContent.current.getElementsByClassName('_artilce-title') as  HTMLCollectionOf<HTMLElement>
+
+
+19、Type error: Property 'dataset' does not exist on type 'EventTarget'.
+element 上没有 dataset 属性，需要做类型断言
+```js
+const handleClick: MouseEventHandler = (e) => {
+  const target = e.target as HTMLElement
+  const dataset = target.dataset
+}
+```
+
+20、此表达式不可调用。类型 "Promise<any>" 没有调用签名
+```js
+  const { data } = await $http.getarticle(params)
+```
