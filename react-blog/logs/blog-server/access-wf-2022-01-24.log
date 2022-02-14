@@ -1,0 +1,18 @@
+{
+  context: undefined,
+  stack: [ 'HttpExceptionFilter' ],
+  url: '/category/li%20st',
+  method: 'GET',
+  params: {},
+  body: {},
+  data: {
+    errNo: 404,
+    errStr: 'Cannot GET /category/li%20st',
+    data: null,
+    date: '2022-01-24T14:39:49.066Z',
+    path: '/category/li%20st'
+  },
+  level: 'error',
+  message: undefined,
+  timestamp: '1/24/2022, 10:38:50 P1'
+}
