@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader');
-
 module.exports = {
   mode: 'production',
   entry: './src/entry-client.js',

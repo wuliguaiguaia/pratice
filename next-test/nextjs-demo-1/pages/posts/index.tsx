@@ -31,7 +31,6 @@ export default PostsIndex;
 export const getStaticProps = async () => {
   const posts = await getPosts();
   console.log(posts);
-  
   return {
     props: {
       posts: JSON.parse(JSON.stringify(posts)) // 序列化

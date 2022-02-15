@@ -7,11 +7,12 @@ type Props = {
   post: Post
 }
 const postsShow: NextPage<Props> = (props) => {
-  const {post} = props;
+  const { post } = props;
+  console.log(Object.keys(post));
   return (
     <div>
       <h1>{post.title}</h1>
-      <article dangerouslySetInnerHTML={   {__html: post.htmlContent}  }>
+      <article dangerouslySetInnerHTML={{__html: post.htmlContent}}>
       </article>
     </div>
   );
@@ -19,7 +20,7 @@ const postsShow: NextPage<Props> = (props) => {
 
 export default postsShow;
 
-export const getStaticPaths = async () => { // 
+export const getStaticPaths = async () => {
   const idList = await getPostIds();
   return {
     paths: idList.map(id => ({params: {id: id}})),
