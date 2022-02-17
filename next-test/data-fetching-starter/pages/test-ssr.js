@@ -1,7 +1,3 @@
-import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
-
 export default function Home(props) {
   const { username, account, time } = props
   return (
@@ -14,13 +10,15 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const { username, account, time } = getData()
+  const time = Date.now()
+  while (Date.now() - time < 3000) {} /* 假设获取数据需要3s */
+  const { username, account } = getData()
   return {
     props: {
       username,
       account,
-      time
-    }
+      time: Date.now()
+    },
   }
 }
 
@@ -28,7 +26,6 @@ function getData(params) {
   return {
     username: 'alias',
     account: 10000000000000,
-    time: Date.now()
   }
 }
 
