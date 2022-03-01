@@ -1,9 +1,13 @@
 <script>
-  var ws = new WebSocket("ws://localhost:3000");
- 
+  var ws = new WebSocket("ws://localhost:3002");
+
   ws.onopen = function (evt) { // 指定连接成功后的回调函数
-    console.log("Connection open ...");
-    ws.send("Hello WebSockets!"); // 发送数据
+    console.log("Connection open ...", evt);
+    ws.send(JSON.stringify({
+      "event": "hello",
+      "data": "测试数据"
+    })); // 发送数据
+    // 注意，服务器数据可能是[文本]，也可能是二进制数据（blob对象或Arraybuffer对象）。
   };
 
 
@@ -22,7 +26,7 @@
     console.log("Connection closed.");
   };
 
-
+  // readyState 属性返回实例对象的当前状态，共有四种。
   switch (ws.readyState) {
     case WebSocket.CONNECTING: // 值为0，表示正在连接。
       break;
