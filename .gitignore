@@ -1,6 +1,7 @@
 /node_modules/
 /**/*/node_modules/
 /**/*/.next/
+/**/*/logs
 
 /webpack-test/node_modules/
 /webpack-test/test-1/node_modules/
