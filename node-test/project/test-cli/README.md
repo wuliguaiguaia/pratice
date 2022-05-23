@@ -24,6 +24,7 @@ command line interface
 #!/usr/bin/env node
 ```
 
+<!-- 读取package.json 将 cli 命令连接到全局 -->
 ```bash
 $ npm link
 

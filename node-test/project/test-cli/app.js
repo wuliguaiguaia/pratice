@@ -9,7 +9,7 @@ console.log(chalk.blue('Hello world!'));
 
 let config = {};
 try {
-  config = require(path.resolve(process.cwd(), './cli-config'));
+  // config = require(path.resolve(process.cwd(), './cli-config'));
 } catch (e) { }
 
 console.log(config);

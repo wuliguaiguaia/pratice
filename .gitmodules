@@ -22,3 +22,9 @@
 [submodule "wheel"]
 	path = wheel
 	url = https://github.com/wuliguaiguaia/wheel.git
+[submodule "react-blog/blog-admin"]
+	path = react-blog/blog-admin
+	url = https://github.com/wuliguaiguaia/blog-admin.git
+[submodule "react-blog/webhook"]
+	path = react-blog/webhook
+	url = https://github.com/wuliguaiguaia/webhook.git
