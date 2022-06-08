@@ -1,0 +1,16 @@
+{
+  "name": "module-transpiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "trans": "compile-modules convert index.js -o build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "es6-module-transpiler": "^0.10.0"
+  }
+}
