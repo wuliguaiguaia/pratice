@@ -13,6 +13,18 @@ console.log(process.memoryUsage());
 /* 自定义模块查找路径 */
 console.log(module.paths);
 
+/*
+[
+  '/Users/alias/code/pratice/node-test/node_modules',
+  '/Users/alias/code/pratice/node_modules',
+  '/Users/alias/code/node_modules',
+  '/Users/alias/node_modules',
+  '/Users/node_modules',
+  '/node_modules'
+]
+*/
+
+
 /* node 已有扩展加载方式 */
 
 console.log(require.extensions);

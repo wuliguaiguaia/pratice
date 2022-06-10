@@ -13,7 +13,7 @@ function r(filename) {
 
   const wrapperContent = wrapper[0] + content + wrapper[1]; // 3、内容包裹
 
-  const script = new vm.Script(wrapperContent, { // vm 虚拟机
+  const script = new vm.Script(wrapperContent, {
     filename: 'index.js'
   })
   const result = script.runInThisContext(); // 4、将字符串变成可执行的函数，类似于eval
