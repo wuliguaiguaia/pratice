@@ -1,1 +1,1 @@
-module.exports = Date.now()
+module.exports = require('./moduleB');

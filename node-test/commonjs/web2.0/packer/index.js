@@ -4,6 +4,7 @@ const path = require('path')
 const { resolve, dirname } = require('path')
 const { existsSync, readFileSync, writeFileSync} = require('fs')
 const root = dirname(require.main.paths[1]); // 执行路径 process.cwd()
+console.log(require.main);
 
 const getFilePath = (module) => [module, `${module}.js`, `${module}/index.js`].find(existsSync)
 

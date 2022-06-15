@@ -1,3 +1,4 @@
+// const runtimeConfig = __runtimeConfig__
 const moduleDepMapList = [
   {},
   {

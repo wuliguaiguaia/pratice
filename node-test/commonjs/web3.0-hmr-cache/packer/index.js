@@ -15,7 +15,6 @@ const funcWrapper = [
 
 const template = fs.readFileSync(path.resolve(__dirname, './bundle.boilerplate'), 'utf-8')
 const defaultConfig = {
-  context: root,
   entry: 'index',
   output: 'dist'
 }
@@ -28,11 +27,11 @@ function main(config) {
   const moduleDepMapList = [] // 模块依赖项与对应内容的映射
   const modulePathIdMap = {} // 模块路径与标识的映射
 
-  const bundleConfig = Object.assign({}, defaultConfig, config)
+  const bundleConfig = Object.assign({}, defaultConfig, config, { context: path.dirname(config.entry) })
   const { entry, output } = bundleConfig
   
   deepTravel(resolve(root, entry), moduleList, moduleDepMapList, modulePathIdMap)
-  
+
   let bundle = template
     .replace('__runtimeConfig__', JSON.stringify(bundleConfig, null, 2))
     .replace('__moduleList__', moduleList.join(','))

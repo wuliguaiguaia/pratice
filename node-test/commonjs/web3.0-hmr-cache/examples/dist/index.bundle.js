@@ -1,3 +1,8 @@
+const runtimeConfig = {
+  "entry": "./examples/index",
+  "output": "./examples/dist",
+  "context": "./examples"
+}
 const moduleDepMapList = [
   {},
   {
@@ -12,20 +17,20 @@ const moduleDepMapList = [
     "./src/index": 3
   }
 ]
-const moduleList = [function(require, module, exports) {
+const moduleList = [function (require, module, exports) {
 console.log('module B');
 module.exports = Date.now()
 
-},function(require, module, exports) {
+},function (require, module, exports) {
 const b = require('./moduleB')
 console.log(b);
 console.log('module A22222222');
-},function(require, module, exports) {
+},function (require, module, exports) {
 module.exports = 'another moduleA11111'
-},function(require, module, exports) {
+},function (require, module, exports) {
 const a = require('./moduleA')
 console.log(a, 'another Inde    fff    xFF   FFF');
-},function(require, module, exports) {
+},function (require, module, exports) {
 const a = require('./moduleA')
 console.log(a);
 require('./src/index')

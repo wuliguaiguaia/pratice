@@ -1,5 +1,5 @@
 
-const map = {"./moduleA":"function(require, module, exports) {\nmodule.exports = Date.now()\n}"}
+const map = {"./moduleB":function(require, module, exports) {module.exports = 1;},"./moduleA":function(require, module, exports) {module.exports = require('./moduleB')}}
 
 function require(id) {
   const module = map[id]

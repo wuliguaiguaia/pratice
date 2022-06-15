@@ -45,6 +45,7 @@ function main(id, isEntry = true) {
   absolutePathToModule[pathToModule] = funcStr // 每次包装后的内容
 
   const tpl = template.replace('__map__', JSON.stringify(requiredToModule))
+
   if (isEntry) {
     return `${tpl}
 (${funcStr})(require)

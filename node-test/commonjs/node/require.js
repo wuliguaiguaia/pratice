@@ -8,15 +8,12 @@ function r(filename) {
   const _path = path.resolve(__dirname, filename); // 1、基于传入的路径拿到绝对路径
   const content = fs.readFileSync(_path, 'utf-8'); // 2、读取文件内容
 
-  const wrapper = ["(function(require, module, exports){",
-    "})"];
+  const wrapper = ['(function(require, module, exports){', '\n})'];
 
   const wrapperContent = wrapper[0] + content + wrapper[1]; // 3、内容包裹
-
-  const script = new vm.Script(wrapperContent, {
-    filename: 'index.js'
-  })
-  const result = script.runInThisContext(); // 4、将字符串变成可执行的函数，类似于eval
+  const result = vm.runInThisContext(wrapperContent, {
+    filename: 'index.js',
+  }); // 4、将字符串变成可执行的函数，或使用 vm.compileFunction
 
   const module = { // 5、构造 module，exports 存储导出接口
     exports: {}

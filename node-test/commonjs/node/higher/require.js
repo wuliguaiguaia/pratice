@@ -10,10 +10,10 @@ const Module = function (id, parent) {
     this.parent = parent?.id;
 };
 
-let __dirname2 = ''
+let root = ''
 Module.cache = Object.create(null);
 Module.prototype.r = function (filename) {
-    const fullFilename = path.resolve(__dirname2, filename); // 1、基于传入的路径拿到绝对路径
+    const fullFilename = path.resolve(root, filename); // 1、基于传入的路径拿到绝对路径
     return Module._load(fullFilename, this, false);
 };
 Module._load = function (_path, parent, isMain) {
@@ -28,7 +28,7 @@ Module._load = function (_path, parent, isMain) {
     Module.cache[_path] = curModule;
     if (isMain) {
         process.mainModule = curModule; // 定义入口模块
-        __dirname2 = path.dirname(_path) // 确定执行路径
+        root = path.dirname(_path) // 确定执行路径
     }
     return curModule.load(_path);
 };
@@ -39,13 +39,11 @@ Module.prototype.load = function (_path) {
 Module._extensions = Object.create(null);
 Module._extensions['.js'] = function (module, _path) {
     const content = fs.readFileSync(_path, 'utf-8'); // 2、读取文件内容
-    const wrapper = ['(function(r, module, exports){',
-        '})'];
+    const wrapper = ['(function(r, module, exports){', '\n})'];
     const wrapperContent = wrapper[0] + content + wrapper[1]; // 3、内容包裹
-    const script = new vm.Script(wrapperContent, {
+    const result = vm.runInThisContext(wrapperContent, {
         filename: 'index.js',
-    });
-    const result = script.runInThisContext(); // 4、将字符串变成可执行的函数，类似于eval
+    }); // 4、将字符串变成可执行的函数，或使用 vm.compileFunction
     return module.compile(result, _path);
 };
 Module.prototype.compile = function (result, _path) {
