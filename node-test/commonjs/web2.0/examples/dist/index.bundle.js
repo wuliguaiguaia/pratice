@@ -5,12 +5,17 @@ const moduleDepMapList = [
     "./moduleB": 0
   },
   {},
+  {},
   {
-    "./moduleA": 2
+    "./moduleA.js": 3
+  },
+  {
+    "./moduleA.js": 2,
+    "./moduleB.js": 4
   },
   {
     "./moduleA": 1,
-    "./src/index": 3
+    "./src/index.js": 5
   }
 ]
 const moduleList = [function(require, module, exports) {
@@ -22,15 +27,58 @@ const b = require('./moduleB')
 console.log(b);
 console.log('module A');
 },function(require, module, exports) {
-module.exports = 'another moduleA'
-},function(require, module, exports) {
-const a = require('./moduleA')
-console.log(a, 'another index');
-},function(require, module, exports) {
-const a = require('./moduleA')
-console.log(a);
+'use strict';
 
-require('./src/index')
+Object.defineProperty(exports, '__esModule', {
+    value: true,
+});
+exports.foo = exports.a = void 0;
+let a = 1;
+exports.a = a;
+
+let foo = () => {
+    exports.a = a = a + 1;
+};
+
+exports.foo = foo;
+},function(require, module, exports) {
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true,
+});
+exports.foo = exports.a = void 0;
+let a = 1;
+exports.a = a;
+
+let foo = () => {
+    exports.a = a = a + 1;
+};
+
+exports.foo = foo;
+},function(require, module, exports) {
+"use strict";
+
+var _a = require("./moduleA.js");
+
+console.log(_a.a);
+(0, _a.foo)();
+console.log(_a.a);
+},function(require, module, exports) {
+"use strict";
+
+var _a = require("./moduleA.js");
+
+require("./moduleB.js");
+
+console.log(_a.a);
+(0, _a.foo)();
+console.log(_a.a); // ./node_modules/.bin/babel src --out-dir dist
+},function(require, module, exports) {
+// const a = require('./moduleA')
+// console.log(a);
+
+require('./src/index.js')
 }]
 
 

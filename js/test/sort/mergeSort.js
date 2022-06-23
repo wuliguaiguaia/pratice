@@ -59,28 +59,39 @@ function mergeSort2(arr) {
 
 console.log(mergeSort2([4, 6, 9, 3, 6, 1, 0]));
 
-// function mergeSort3(arr, start = 0) {
-//     if (arr.length <= 1) { return arr; }
-//     const mid = Math.floor(arr.length / 2);
-//     const left = mergeSort2(arr.slice(0, mid), start);
-//     const right = mergeSort2(arr.slice(mid, arr.length), start + mid);
 
-//     if (arr[mid - 1] < arr[mid]) { // 已排好序
-//         return arr;
-//     }
-//     let i = 0;
-//     let len = right.length;
-//     for (let j = 0; j < len - 1; j++) {
-//         if (left[i] > right[j] && left[i] < right[j + 1]) {
-//             [arr[i + start], arr[start + mid + j]] = [arr[start + mid + j], arr[i + start]];
-//         } else if (left[i] > right[j + 1]) {
-//             arr.push(arr.splice(i + start, 1));
-//         } else {
-//             arr.unshift(arr.splice(i + start, 1));
-//         }
-//         i++;
-//     }
-//     return arr;
-// }
+function mergeSort3(arr) {
+    if (arr.length < 2) { return arr; }
+    split(arr, 0, arr.length - 1);
+    return arr;
+}
+function split(arr, start, end) {
+    if (start >= end) { return; }
+    const mid = Math.floor((start + end) / 2);
+    split(arr, start, mid);
+    split(arr, mid + 1, end);
+    merge(arr, start, mid, end, arr.slice());
+}
+function merge(arr, start, mid, end, tempArr) {
+    let i = start;
+    let j = mid + 1;
+    for (let k = start; k <= end; k++) {
+        if (i > mid) {
+            arr[k] = tempArr[j++];
+        } else if (j > end) {
+            arr[k] = tempArr[i++];
+        } else if (tempArr[i] > tempArr[j]) {
+            arr[k] = tempArr[j++];
+        } else {
+            arr[k] = tempArr[i++];
+        }
+    }
+}
 
-// console.log(mergeSort3([4, 6, 9, 3, 6, 1, 0]));
+/*
+    运行时间：122ms
+    超过13.46 % 用Javascript提交的代码
+    占用内存：11428KB
+    超过13.46 % 用Javascript提交的代码
+*/
+console.log(mergeSort3([9, 4, 3, 6]));

@@ -1,8 +1,8 @@
 "use strict";
 
-var _a = require("./moduleA.js");
+var _a = r("./moduleA.js");
 
-require("./moduleB.js");
+r("./moduleB.js");
 
 console.log(_a.a);
 (0, _a.foo)();

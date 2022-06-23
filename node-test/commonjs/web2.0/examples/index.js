@@ -1,4 +1,4 @@
-const a = require('./moduleA')
-console.log(a);
+// const a = require('./moduleA')
+// console.log(a);
 
-require('./src/index')
+require('./src/index.js')
