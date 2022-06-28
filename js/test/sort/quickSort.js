@@ -18,34 +18,34 @@ function QuickSort0(arr) {
 }
 
 // 原地排序
-const QuickSort1 = function (arr) {
-    sorter(arr, 0, arr.length - 1);
+const QuickSort1 = function (arr, fn) {
+    sorter(arr, 0, arr.length - 1, fn);
     return arr;
 };
 
-function sorter(arr, start, end) {
+function sorter(arr, start, end, fn) {
     let left = start,
         right = end,
         mid = arr[Math.floor((end + start) / 2)];
     while (left <= right) { // 必须全部遍历比较，保证left位置开始向后比mid大
-        if (arr[left] >= mid && arr[right] <= mid) {
+        if (fn(arr[left], mid) >= 0 && fn(arr[right], mid) <= 0) {
             [arr[left], arr[right]] = [arr[right], arr[left]];
             left++;
             right--;
             continue;
         }
 
-        if (arr[left] < mid) { left++; }
-        if (arr[right] > mid) { right--; }
+        if (fn(arr[left], mid) < 0) { left++; }
+        if (fn(arr[right], mid) > 0) { right--; }
     }
     if (left - 1 > start) {
-        sorter(arr, start, left - 1);
+        sorter(arr, start, left - 1, fn);
     }
     if (left < end) {
-        sorter(arr, left, end);
+        sorter(arr, left, end, fn);
     }
 }
 const arr = [4, 9, 2, 0, 9, 7, 6, 4, 3];
-console.log(QuickSort1(arr));
+// console.log(QuickSort1(arr, function (a, b) { return b - a; }));
 
 exports.QuickSort1 = QuickSort1;
