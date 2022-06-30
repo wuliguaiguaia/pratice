@@ -3,9 +3,8 @@ const fs = require('fs')
 const path = require('path')
 const { resolve, dirname } = require('path')
 const { existsSync, readFileSync, writeFileSync} = require('fs')
-const root = dirname(require.main.paths[1]); // 执行路径 process.cwd()
+const root = process.cwd(); // 执行路径 process.cwd()
 const getFilePath = (module) => [module, `${module}.js`, `${module}/index.js`].find(existsSync)
-
 const funcWrapper = [
   'function(require, module, exports) {\n',
   '\n}'
@@ -21,7 +20,6 @@ main(require(resolve(root, 'packer.config')))
 
 function main(config) {
   const { entry, output } = config
-  console.log(root, entry);
   deepTravel(resolve(root, entry))
   
   let bundle = template
@@ -34,20 +32,22 @@ function deepTravel(fullPath) {
   let content = readFileSync(getFilePath(fullPath), 'utf-8')
   const matchesRegExp = /require\(["'`](.+)["'`]\)/g
   const moduleDepMap = {}
+  const funcStr = funcWrapper[0] + content + funcWrapper[1]
+  moduleList.push(funcStr)
+  modulePathIdMap[fullPath] = moduleList.length - 1
 
   let matches = null
   while (matches = matchesRegExp.exec(content)) {
     const [, match] = matches
     const childModuleAbsolutePath = resolve(dirname(fullPath), match)
-    if (false) {
-      continue
+    if (typeof modulePathIdMap[childModuleAbsolutePath] === 'number') { // 已经遍历过了
+      moduleDepMap[match] = modulePathIdMap[childModuleAbsolutePath]
+      continue;
     }
     deepTravel(childModuleAbsolutePath)
     moduleDepMap[match] = modulePathIdMap[childModuleAbsolutePath]
   }
-  const funcStr = funcWrapper[0] + content + funcWrapper[1]
-  moduleList.push(funcStr)
-  moduleDepMapList.push(moduleDepMap)
-  modulePathIdMap[fullPath] = moduleList.length - 1
+
+  moduleDepMapList[modulePathIdMap[fullPath]] = moduleDepMap
 }
 module.exports = main;
