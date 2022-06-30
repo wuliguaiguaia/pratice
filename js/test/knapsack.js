@@ -105,7 +105,7 @@ function knapsack3(arr, arr2, max) {
             }
         }
     }
-    console.log(tempArr);
+    // console.log(tempArr);
     // 找出最大值
     let maxvalue = -1;
     for (let j = 0; j <= max; ++j) {
@@ -142,12 +142,12 @@ function knapsack4(arr, arr2, max) {
         }
     }
     let e = tempArr.filter(v => v);
-    console.log(tempArr);
+    // console.log(tempArr);
     return Math.max(...e);
 
 }
-// console.log(knapsack3([2, 2, 1, 6, 3], [3, 4, 6, 7, 9], 9));
-// console.log(knapsack4([2, 2, 1, 6, 3], [3, 4, 6, 7, 9], 9));
+console.log(knapsack3([2, 2, 1, 6, 3], [3, 4, 6, 7, 9], 9));
+console.log(knapsack4([2, 2, 1, 6, 3], [3, 4, 6, 7, 9], 9));
 
 // 无价值回溯版
 function knapsack5(arr, max) {
@@ -168,9 +168,26 @@ function knapsack5(arr, max) {
     }
     return res;
 }
-console.log(knapsack5([2, 4], 3));
+// console.log(knapsack5([2, 4], 3));
 
 
 // 有价值回溯版
-function knapsack6(arr) {
+function knapsack6(arr, arr1, max) {
+    let curValue = 0;
+    let curCost = 0;
+    let maxCost = 0;
+    fn(0, curValue, curCost);
+    function fn(i, curValue, curCost) {
+        if (i === arr.length || curValue === max) {
+            if (curCost > maxCost) { maxCost = curCost; }
+            return;
+        }
+        fn(i + 1, curValue, curCost);
+        if (curValue + arr[i] < max) {
+            fn(i + 1, curValue + arr[i], curCost + arr1[i]);
+        }
+    }
+    return maxCost;
 }
+console.log(knapsack6([2, 2, 1, 6, 3], [3, 4, 6, 7, 9], 9));
+
