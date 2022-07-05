@@ -68,7 +68,7 @@ function falsyFn1(row, col, n, arr) {
 }
 
 
-// 2 递归 - 多个解决方案
+// 2 回溯 - 多个解决方案
 function queens1(n) {
     const result = new Array(n);// 全局或成员变量,下标表示行, 值表示queen存储在哪一列
     cal8queens(0, result, n);

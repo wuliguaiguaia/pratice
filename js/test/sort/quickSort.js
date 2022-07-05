@@ -18,7 +18,7 @@ function QuickSort0(arr) {
 }
 
 // 原地排序
-const QuickSort1 = function (arr, fn) {
+const QuickSort1 = function (arr, fn = function (a, b) { return a - b; }) {
     sorter(arr, 0, arr.length - 1, fn);
     return arr;
 };
