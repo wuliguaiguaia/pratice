@@ -1,6 +1,6 @@
 'use strict'
 const { Client } = require('@elastic/elasticsearch')
-const client = new Client({ node: 'http://localhost:9200' })
+const client = new Client({ node: 'http://81.70.58.132:9200' })
 
 
 // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html
