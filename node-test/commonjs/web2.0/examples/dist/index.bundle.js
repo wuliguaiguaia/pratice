@@ -62,8 +62,7 @@ console.log(_a.a);
         return require(curId, parentModuleId)
       }
     })(currentModuleId), _Module, _Module.exports)
-    return _Module.exports
-    // cache[currentModuleId] = _Module.exports
-    // return cache[currentModuleId]
+    cache[currentModuleId] = _Module.exports
+    return cache[currentModuleId]
   };
 })(this)

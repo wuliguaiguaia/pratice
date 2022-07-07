@@ -1,2 +1,2 @@
 const result = r('./a.js');
-module.exports = result;
+console.log(result);

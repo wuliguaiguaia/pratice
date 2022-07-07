@@ -1,69 +1,78 @@
-(function(self){
-  const runtimeConfig = __runtimeConfig__
-  const moduleDepMapList = __moduleDepMapList__
-  const moduleList = [__moduleList__]
-  const cache = {}
+(function (self) {
+    const runtimeConfig = __runtimeConfig__;
+    const moduleDepMapList = __moduleDepMapList__;
+    const moduleList = [__moduleList__];
+    const cache = {};
 
-  function require(id, parentId) {
-    const currentModuleId = parentId ? moduleDepMapList[parentId][id] : id 
-    const module = moduleList[currentModuleId]
-    const _Module = { exports: {} }
-    module((function(parentModuleId){ // 构造新的require
-      function closureRequire(curId) {
-        return require(curId, parentModuleId)
-      }
-      closureRequire.ensure = function(curId) {
-        return require.ensure(curId, parentModuleId)
-      }
-      return closureRequire
-    })(currentModuleId), _Module, _Module.exports)
-    return _Module.exports
-  };
-
-  self["__dynamicRequire"] = function(chunkId, chunkFn) { // chunkId 只带有chunk索引
-    const chunkCacheIndex = Object.keys(cache).find(item => item.includes(chunkId)) // 拿到完整的索引
-    const chunkCache = cache[chunkCacheIndex]
-    const resolve = chunkCache[0]
-    const module = {exports: {}}
-    chunkFn((function(parentModuleId){ // 构造新的require
-      function closureRequire(curId) {
-        return require(curId, parentModuleId)
-      }
-      closureRequire.ensure = function(curId) {
-        return require.ensure(curId, parentModuleId)
-      }
-      return closureRequire
-    })(chunkCacheIndex.slice(-1)), module, module.exports)
-    cache[chunkId] = module.exports
-    resolve(module.exports)
-  }
-
-
-  // jsonp 形式获取文件内容
-  require.ensure = function(chunkId, parentId) {
-    const currentChunkId = moduleDepMapList[parentId][chunkId] // chunk_chunk索引_module索引
-    const $script = document.createElement('script')
-    $script.src = 'dist/' + currentChunkId.slice(0, -2) + '.js' // 拿到chunk索引
-    document.body.appendChild($script)
-
-    const statusSymbol = 'pending' // 
-
-    const chunkPromise = cache[currentChunkId]
-    if(chunkPromise) {
-      return chunkPromise[1]
-    } else {
-      // 异步请求，构造promise
-      const promise = new Promise((resolve, reject)=>{
-        const chunkCache = [resolve] // 存储resolve，等实际执行完后 把chunk里 导出的内容 resolve 出去，then接受
-        cache[currentChunkId] = chunkCache
-      })
-      cache[currentChunkId].push(promise)
-      return promise
+    function require(id, parentId) {
+        if (parentId && parentId.includes('_')) { // 异步模块里有异步模块
+            parentId = parentId.split('_').pop();
+        }
+        const currentModuleId = parentId !== undefined ? moduleDepMapList[parentId][id] : id;
+        if (cache.hasOwnProperty(currentModuleId)) {
+            return cache[currentModuleId];
+        }
+        const module = moduleList[currentModuleId];
+        const _Module = { exports: {} };
+        module((function (parentModuleId) { // 构造新的require
+            function closureRequire(curId) {
+                return require(curId, parentModuleId);
+            }
+            closureRequire.ensure = function (curId) {
+                return require.ensure(curId, parentModuleId);
+            };
+            return closureRequire;
+        })(currentModuleId), _Module, _Module.exports);
+        cache[currentModuleId] = _Module.exports;
+        return cache[currentModuleId];
     }
-  }
 
+    // jsonp 形式获取文件内容
+    require.ensure = function (chunkId, parentId) {
+        if (parentId && parentId.includes('_')) { // 异步模块里有异步模块
+            parentId = parentId.split('_').pop();
+        }
+        const currentChunkId = moduleDepMapList[parentId][chunkId]
+        const chunkPromise = cache[currentChunkId];
 
-  // 加载入口文件
-  require(moduleList.length - 1)
+        if (!chunkPromise) {
+            const $script = document.createElement('script');
+            const { output: { path, publicPath } } = runtimeConfig;
+            $script.src = publicPath + path + currentChunkId + '.js';
+            document.body.appendChild($script);
+            // 异步请求，构造promise
+            const promise = new Promise((resolve) => {
+                const chunkCache = [resolve];
+                chunkCache.chunkStatus = true;
+                cache[currentChunkId] = chunkCache;
+                // 存储resolve，等实际执行完后 把chunk里 导出的内容 resolve 出去，then接受
+            });
+            cache[currentChunkId].push(promise);
+            return promise;
+        }
+        if (chunkPromise.chunkStatus) {
+            return chunkPromise[1];
+        }
 
-})(this)
+        return chunkPromise;
+    };
+
+    self['__dynamicRequire'] = function (chunkId, chunkFn) { // chunkId 只带有chunk索引
+        const chunkCache = cache[chunkId];
+        const resolve = chunkCache[0];
+        const module = { exports: {} };
+        chunkFn((function (parentModuleId) { // 构造新的require
+            function closureRequire(curId) {
+                return require(curId, parentModuleId);
+            }
+            closureRequire.ensure = function (curId) {
+                return require.ensure(curId, parentModuleId);
+            };
+            return closureRequire;
+        })(chunkId), module, module.exports);
+        // cache[chunkId] = module.exports;
+        resolve(module.exports);
+    };
+
+    require(0);
+})(this);

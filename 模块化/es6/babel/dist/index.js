@@ -1,9 +1,6 @@
-"use strict";
+import { a, foo } from './a.js';
+console.log(a);
+foo();
+console.log(a); // ./node_modules/.bin/babel src --out-dir dist
 
-var _a = require("./a.js");
-
-require("./b.js");
-
-console.log(_a.a);
-(0, _a.foo)();
-console.log(_a.a); // ./node_modules/.bin/babel src --out-dir dist
+import './b.js';

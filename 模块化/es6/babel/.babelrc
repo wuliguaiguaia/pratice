@@ -3,6 +3,7 @@
     [
       "@babel/env",
       {
+        "modules": false, // 不转化为 commonjs
         "targets": {
           "edge": "17",
           "firefox": "60",

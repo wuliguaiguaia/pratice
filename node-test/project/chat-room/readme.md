@@ -25,3 +25,6 @@ Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
 Sec-WebSocket-Protocol: chat
 
 原生监听 ungrade
+
+
+index.htm：打开无头浏览器

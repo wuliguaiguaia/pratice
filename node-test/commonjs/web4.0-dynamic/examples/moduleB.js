@@ -1,3 +1,2 @@
-console.log('4s后，4');
-require('./moduleC')
-module.exports = 6
+console.log('4');
+module.exports = 6;

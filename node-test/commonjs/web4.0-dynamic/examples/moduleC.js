@@ -1,1 +1,1 @@
-console.log('4s后，5')
+console.log('6');

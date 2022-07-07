@@ -1,4 +1,9 @@
 module.exports = {
-  entry: './examples/index',
-  output: './examples/dist'
-}
+    context: './examples',
+    entry: 'index.js',
+    output: {
+        path: 'dist/',
+        filename: 'index.bundle.js',
+        publicPath: '',
+    },
+};
