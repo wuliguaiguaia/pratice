@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    {{someData.message}}
+  </div>
+  <script>
+     const someStore = {
+        debug: true,
+        state: {
+          message: 'hello world'
+        },
+        updateMessage(str) {
+          if (this.debug) { console.log('message updated') }
+          this.state.message = 'xxx';
+        },
+        clearMessage() {
+          if (this.debug) { console.log('message clear') }
+          this.state.message = ''
+        }
+      }
+
+      // 应用
+      vm2 = new Vue({
+        data: {
+          someData: someStore.state
+        },
+        mounted(){
+          setTimeout(() => {
+            someStore.updateMessage('000')
+          }, 3000);
+        },
+      }).$mount('#app')
+  </script>
+</body>
+
+</html>

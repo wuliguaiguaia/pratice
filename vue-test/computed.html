@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        {{x}}
+        <child></child>
+        <child></child>
+     </div>
+    <script>
+        Vue.component('child', {
+            data(){
+                return {
+                    xx: '1'
+                }
+            },
+            template: '<div>{{xx}}</div>'
+        })
+        new Vue({
+            data: {
+                value: 'One'
+            },  
+            watch : {
+                value(q) {
+                    console.log(111,q );
+                }
+            },
+            computed: {
+                x: {
+                    get() {
+                        console.log(222);
+                        return this.value
+                    }, set(val) {
+                        console.log(val);
+                        this.value = val // 还要反向修改依赖的 哈哈哈哈哈嗝
+                        return val
+                    }
+                }
+            },
+            mounted() {
+                setTimeout(() => {
+                    this.value += ''
+                    this.x = 0
+                }, 5000);
+            }
+        }).$mount('#app')
+    </script>
+</body>
+</html>

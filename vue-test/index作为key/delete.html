@@ -29,8 +29,11 @@
             },
             components: {
                 item: {
-                   props: ['num'], // 如果使用num做为依赖，就不会有问题，因为会进行prop的比较，不用num的话就只会删除第三个导致错误，因为diff不会进行文本节点的比较
-                   template: "<li>{{Math.random()}}</li>",
+                   props: ['num'], 
+                   // 如果使用num做为依赖，就不会有问题，因为会进行prop的比较，
+                   // 不用num的话就只会删除第三个导致错误，因为diff不会进行文本节点的比较
+                   template: "<li>{{num}}</li>",
+                //    template: "<li>{{Math.random()}}</li>",
                 }
             }
 /* sameNode 发现是同一节点时，会走patchnode

@@ -12,7 +12,7 @@ const Utils = {
 const performance = window.performance
 const timing = performance.timing
 class PerformanceReoporter {
-  /*  上报地址 */
+  /* 上报地址 */
   reportUrl = 'www.xxx.com/log/xxx.gif'
 
   /* 公共参数 */
@@ -24,7 +24,7 @@ class PerformanceReoporter {
   /* 业务打点标签 */
   performanceTag = {}
 
-  /* reporter key name */
+  /* reporter key name, timing API 的 所有key */
   TAG_WHITE_LIST = []
 
   /* 临时 timing 记录 */
@@ -74,9 +74,9 @@ class PerformanceReoporter {
     this.performanceData = {
       dns: timing.domainLookupEnd - timing.domainLookupStart,
       tcp: timing.connectEnd - timing.connectStart,
-      request: timing.responseEnd - timing.requestStart,
-      dom: timing.domInteractive - timing.domLoading, // DOM 解析
+      request: timing.responseEnd - timing.requestStart, // 请求与数据传输时间
       screen: timing.responseEnd - timing.navigationStart, // 白屏时间
+      dom: timing.domInteractive - timing.domLoading, // DOM 解析，domInteractive 表示 html与dom构建已完后，后续可开始加载资源
       ready: timing.domContentLoadedEventEnd - timing.fetchStart, // DOM树 准备就绪
       load: timing.loadEventStart - timing.fetchStart, // 页面完全加载
       name: this.name
@@ -94,9 +94,8 @@ class PerformanceReoporter {
   }
 
   send({ publicParameters, data }, callback) {
-    debugger
-    const queryString = Utils.object2String(data)
     const publicParametersString = Utils.object2String(publicParameters)
+    const queryString = Utils.object2String(data)
     const paramsString = `?publicParameters=${encodeURIComponent(publicParametersString)}${queryString}`
     let img = new Image()
     img.src = this.reportUrl + paramsString
@@ -113,7 +112,7 @@ class PerformanceReoporter {
     Vue.prototype.$normalReporter = this.sendNormalData.bind(this)
   }
 
-  /* 发送得性能数据 */
+  /* 发送普通数据 */
   sendNormalData(data) {
     debugger
     console.log(data,'lll');
@@ -146,9 +145,8 @@ class PerformanceReoporter {
   setPerformanceTag(name, tag) {
     const tagString = `${name}-${tag}`
     const isTagInWhiteList = this.TAG_WHITE_LIST.includes(tag)
-    let record = this.timingRecord[name]
     if (isTagInWhiteList) {
-      record = {
+      let record = {
         start: timing[tag],
         end: +new Date()
       }

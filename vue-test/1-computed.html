@@ -13,7 +13,7 @@
         <div>{{valid}}</div>
      </div>
     <script>
-        new Vue({
+        let vm = new Vue({
             data: {
                 xx: '234',
                 xx2: '989'
@@ -41,6 +41,7 @@
             }
         }).$mount('#app')
 
+        console.log(vm);
     </script>
 </body>
 </html>

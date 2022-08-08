@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    <!-- {{firstName}} -->
+    <div id="mount-point"></div>
+  </div>
+
+  <script>
+    const data = {
+      template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+      data: function () {
+        return {
+          firstName: 'Walter',
+          lastName: 'White',
+          alias: 'Heisenberg'
+        }
+      }
+    }
+    // 1 Vue.extend() 创建一个可复用的组件构造器，Vue.component 默认调用了，还可以直接mount到元素上
+   var Profile1 = Vue.extend(data)
+    // new Profile1().$mount('#mount-point')
+
+    new Vue({
+      // 2 extends 可以传入 构造函数（可直接extends vue文件, 返回一个对象） 或选项
+      // extends: data
+      // extends: Profile1
+
+      // 3 mixin 只能传入选项
+      mixins: [data]
+    }).$mount('#app')
+  </script>
+</body>
+
+</html>

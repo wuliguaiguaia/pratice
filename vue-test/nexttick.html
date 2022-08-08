@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    
+    在数据变化后执行的某个操作，而这个操作需要使用随数据变化而变化的DOM结构的时候，这个操作就需要方法在nextTick()的回调函数中。
+
+    在vue生命周期中，如果在created()钩子进行DOM操作，也一定要放在nextTick()的回调函数中。
+
+  <div id="example">{{message}}</div>
+
+  </div>
+  <script>
+    var vm = new Vue({
+        el: '#example',
+        data: {
+          message: '123'
+        }
+      })
+      vm.message = 'new message' // 更改数据
+     console.log(vm.$el.textContent === 'new message') // false
+      Vue.nextTick(function () {
+        console.log(vm.$el.textContent === 'new message' )// true
+      })
+  </script>
+</body>
+
+</html>

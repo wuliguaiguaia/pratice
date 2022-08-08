@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+      此处监听了两个事件，可以在B组件或者C组件中直接触发
+      <child1 class="123" xx="1" p-child1="child1" p-child2="child2" @test1="onTest1" @test2="onTest2"></child1>
+      </div>
+  </div>
+  <script>
+    Vue.component("Child1", {
+      template:`<div class="child-1">
+      <p>props: {{pChild1}}</p>
+      <p>$attrs: {{$attrs}}</p>
+      <child2 v-bind="$attrs" v-on="$listeners"></child2>
+    </div>`,
+    props: ['pChild1'],
+      inheritAttrs: false,
+      mounted() {
+        this.$emit('test1'); // 触发APP.vue中的test1方法
+      }
+    });
+    Vue.component("Child2", {
+      template:`<div class="child-2">
+        <p>props: {{pChild2}}</p>
+        <p>$attrs: {{$attrs}}</p>
+      </div>`,
+      props: ['pChild2'],
+      inheritAttrs: false,
+      mounted() {
+        this.$emit('test2');// 触发APP.vue中的test2方法
+      }
+    });
+
+    new Vue({
+      el: "#app",
+      methods: {
+        onTest1() {
+          console.log('test1 running');
+        },
+        onTest2() {
+          console.log('test2 running');
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

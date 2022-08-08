@@ -1,6 +1,8 @@
 /*
     6.21
     建最大小堆，堆排序
+
+    nlogn
  */
 class MinHeap {
     constructor(compareFn) {
@@ -42,7 +44,7 @@ class MinHeap {
     getRightIndex(index) {
         return index * 2 + 2;
     }
-    extract(size) {
+    extract() {
         if (this.size === 0) { return null; }
         if (this.size === 1) { return this.heap.shift(); }
         this.swap(0, this.size - 1); // 第一个数尽量的大
@@ -103,3 +105,6 @@ function buildMaxHeap(arr) {
 }
 
 console.log(heapSort([5, 4, 3, 2, 1]));
+
+
+module.exports = MinHeap;
