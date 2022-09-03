@@ -1,4 +1,5 @@
 //  合并区间
+// https://leetcode.cn/problems/SsGoHC/
 
 // 1 排序后比较
 var merge = function (intervals) {

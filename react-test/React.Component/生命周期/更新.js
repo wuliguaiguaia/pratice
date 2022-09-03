@@ -33,6 +33,8 @@ class Test extends React.Component {
     // 此方法仅作为性能优化的方式而存在。不要企图依靠此方法来“阻止”渲染，因为这可能会产生 bug。
     // 你应该考虑使用内置的 PureComponent?? 组件，而不是手动编写 shouldComponentUpdate()
 
+    // PureComponent(https://github.com/BigSharkLx/front-end-interview/blob/main/7%20offer%E6%94%B6%E5%89%B2%E6%9C%BA%E4%B9%8BReact%E7%AF%87.md#6-reactcomponent-%E5%92%8C-reactpurecomponent-%E7%9A%84%E5%8C%BA%E5%88%AB)
+
     console.log('shouldComponentUpdate', nextProps, nextState);
     return true
     // 返回 false 并不会阻止子组件在 state 更改时重新渲染

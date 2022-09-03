@@ -1,4 +1,5 @@
-// Promise 中的异常不能被 try-catch 和 window.onerror 捕获，这时候我们就需要监听 unhandledrejection 来帮我们捕获这部分错误。
+// Promise 中的异常不能被 try-catch 和 window.onerror 捕获，
+// 这时候我们就需要监听 unhandledrejection 来帮我们捕获这部分错误。
 
 window.addEventListener('unhandledrejection', function (e) {
     e.preventDefault();

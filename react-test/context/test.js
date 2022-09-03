@@ -5,7 +5,7 @@ class App extends React.Component {
   render() {
     return (
       <ThemeContext.Provider value="dark">
-        <Toolbar theme="dark" />
+        <Toolbar />
       </ThemeContext.Provider>
     )
   }

@@ -7,7 +7,7 @@ function QuickSort0(arr) {
     let right = [];
     for (let i = 0; i < len; i++) {
         let item = arr[i];
-        if (mid === i) { continue; }
+        if (mid === i) { continue; } // 可能有重复！
         if (item < arr[mid]) {
             left.push(item);
         } else {
@@ -26,6 +26,7 @@ const QuickSort1 = function (arr, fn = function (a, b) { return a - b; }) {
 function sorter(arr, start, end, fn) {
     let left = start,
         right = end,
+        // 预选一个主元，在交换的过程中找到真正的主元
         mid = arr[Math.floor((end + start) / 2)];
     while (left <= right) { // 必须全部遍历比较，保证left位置开始向后比mid大
         if (fn(arr[left], mid) >= 0 && fn(arr[right], mid) <= 0) {
@@ -38,10 +39,11 @@ function sorter(arr, start, end, fn) {
         if (fn(arr[left], mid) < 0) { left++; }
         if (fn(arr[right], mid) > 0) { right--; }
     }
-    if (left - 1 > start) {
+    // 结束循环后left 为真正的主元
+    if (left - 1 > start) { // left 左边都是比它小的
         sorter(arr, start, left - 1, fn);
     }
-    if (left < end) {
+    if (left < end) { // left 右边都是比他大的
         sorter(arr, left, end, fn);
     }
 }

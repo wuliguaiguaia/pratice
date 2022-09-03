@@ -87,11 +87,4 @@ function merge(arr, start, mid, end, tempArr) {
         }
     }
 }
-
-/*
-    运行时间：122ms
-    超过13.46 % 用Javascript提交的代码
-    占用内存：11428KB
-    超过13.46 % 用Javascript提交的代码
-*/
 console.log(mergeSort3([9, 4, 3, 6]));

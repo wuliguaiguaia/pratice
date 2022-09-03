@@ -1,4 +1,4 @@
-/* 
+/*
 MDN：迭代协议具体分为两个协议：可迭代协议和迭代器协议
 
 可迭代协议：对象可以通过 for...of遍历，比如Array，map实现了可迭代协议，原理是对象内部有一个 @@iterator方法，当对象被迭代的时候，调用iterator方法内部返回相应的值
@@ -7,32 +7,33 @@ MDN：迭代协议具体分为两个协议：可迭代协议和迭代器协议
 
  */
 let obj = {
-  val: [1, 2, 3, 4],
-  key: 0,
-  next() {
-    let keys = Object.keys(this.val)
-    let value = this.val[keys[this.key]]
-    if (!value) {
-      return {
-        value: undefined,
-        done: true
-      }
-    } else {
-      this.key++
-      return {
-        value,
-        done: false
-      }
-    }
-  },
-  [Symbol.iterator]() { return this }
-}
+    val: [1, 2, 3, 4],
+    key: 0,
+    next() {
+        let keys = Object.keys(this.val);
+        let value = this.val[keys[this.key]];
+        if (!value) {
+            return {
+                value: undefined,
+                done: true,
+            };
+        } else {
+            this.key++;
+            return {
+                value,
+                done: false,
+            };
+        }
+    },
+    [Symbol.iterator]() { return this; },
+};
 
 // console.log(obj.next());
 // console.log(obj.next());
 // console.log(obj.next());
 // console.log(obj.next());
 // console.log(obj.next());
+
 /*
 { value: 1, done: false }
 { value: 2, done: false }
@@ -42,7 +43,7 @@ let obj = {
 */
 
 for (let item of obj) {
-  console.log(item);
+    console.log(item);
 }
 
 /* 遍历的时候，会先拿到对象的 [Symbol.Iterator]，执行后去调用对象的next方法拿到value值，直到 done 为true时结束遍历
@@ -51,3 +52,52 @@ for...of / ... / Array.from 使用了迭代器协议，可如上面自制
 [] / Set / Map / generators 实现了Iterators
 
 */
+
+// 2
+let o = {
+    a: 1,
+    b: 2,
+    c: 3,
+};
+
+o[Symbol.iterator] = function () {
+    let keys = Object.keys(o);
+    let count = 0;
+    return {
+        next() {
+            if (count === keys.length) {
+                return {
+                    value: undefined,
+                    done: true,
+                };
+            } else {
+                return {
+                    value: o[keys[count++]],
+                    done: false,
+                };
+            }
+        },
+    };
+};
+
+for (let i of o) {
+    console.log(i);
+}
+
+
+// 3
+var obj1 = {
+    a: 1,
+    b: 2,
+    c: 3,
+};
+obj1[Symbol.iterator] = function* () {
+    var keys = Object.keys(obj1);
+    for (var k of keys) {
+        yield [k, obj1[k]];
+    }
+};
+
+for (var [k, v] of obj1) {
+    console.log(k, v);
+}

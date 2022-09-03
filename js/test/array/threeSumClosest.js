@@ -1,9 +1,7 @@
-/* eslint-disable max-depth */
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number}
- */
+// 最接近的三数之和
+// https://leetcode.cn/problems/3sum-closest/
+
+// 排序加双指针
 var threeSumClosest = function (nums, target) {
     let res = Number.MAX_SAFE_INTEGER;
     let len = nums.length;

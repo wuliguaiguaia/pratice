@@ -41,22 +41,20 @@ function shuffle(arr) {
 
 
 // 使用二分找到数组旋转后的最小值
-function rotateSearch(arr) {
-    let len = arr.length;
-    let low = 0;
-    let high = len - 1;
-    let mid = Math.floor((low + high) / 2);
-    while (low < high) {
-        let val = arr[mid];
-        if (val > arr[high]) {
-            low = mid + 1; // 可跳过
-        } else if (val < arr[high]) {
-            high = mid;
+var minArray = function (arr) {
+    let left = 0, right = arr.length - 1;
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid] > arr[right]) {
+            left = mid + 1;
+        } else if (arr[mid] < arr[right]) {
+            right = mid;
+        } else {
+            right--; // 相等就略过 缩小范围！！！
         }
-        mid = Math.floor((low + high) / 2);
     }
-    return arr[low];
-}
+    return arr[left];
+};
 
 // console.log(rotateSearch([3, 4, 5, 1, 2])); // 1
 

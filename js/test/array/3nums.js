@@ -1,5 +1,6 @@
 /* 三数之和 */
 // https://leetcode.cn/problems/3sum/
+// nums[i] + nums[j] + nums[k] == 0
 
 // 暴力法超时了
 var threeSum = function (nums) {

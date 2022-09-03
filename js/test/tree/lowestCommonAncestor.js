@@ -1,5 +1,5 @@
 /* 二叉树的最近公共祖先 */
-
+// https://leetcode.cn/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/
 // 1 根据索引查找父元素，过程好麻烦。。。最后还超时了 T T
 var lowestCommonAncestor = function (root, p, q) {
   let queue = [root];

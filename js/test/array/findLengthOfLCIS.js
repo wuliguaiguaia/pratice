@@ -6,7 +6,6 @@ var findLengthOfLCIS = function (nums) {
     let res = 1;
     for (let i = 0; i < nums.length; i++) {
         let cur = 1;
-        // for (let j = 1; j < nums.length; j++) {
         for (let j = i + 1; j < nums.length; j++) { // 服了，就这 j 也能错？？？？？
             if (nums[j] > nums[j - 1]) {
                 cur++;

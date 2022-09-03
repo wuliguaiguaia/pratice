@@ -1,5 +1,5 @@
-// 搜索旋转数组
-
+// 搜索旋转排序数组
+// https://leetcode.cn/problems/search-in-rotated-sorted-array/
 
 // 先看无序还不如先看有序。。
 

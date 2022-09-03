@@ -1,3 +1,4 @@
+// 递归往往有重复的计算，复杂度为指数级增长
 function fibona1(n) {
     if (n === 0) { return 0; }
     if (n === 1) { return 1; }
