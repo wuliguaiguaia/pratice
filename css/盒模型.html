@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      border: 10px solid red;
+      padding: 10px;
+      margin: 10px;
+
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  盒模型：
+  内容 + 内边距 + 边框
+  box-sizing:定义盒模型
+  border-box：设定的宽度 包括 设定的 内边距和边框
+  <script>
+    const el = document.querySelector('div')
+    console.log(el.offsetWidth); // border-box: 100px
+    console.log(el.offsetWidth); // content-box: 140px
+  </script>
+</body>
+</html>

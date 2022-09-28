@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border: 1px solid red;
+      white-space: nowrap;
+    }
+    .box2 {
+      width: 200px;
+      overflow: hidden;
+
+      border: 1px solid red;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    一行 省略Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae laborum nemo necessitatibus iste obcaecati soluta distinctio tempore voluptate! Voluptatem, natus.
+  </div>
+  <div class="box2">
+    多行 省略Lorem ipsum doddddlor sit, amet consectetur adipisicing elit. Vitae laborum nemo necessitatibus iste obcaecati soluta distinctio tempore voluptate! Voluptatem, natus.
+  </div>
+</body>
+</html>

@@ -1,18 +1,17 @@
 // 二维数组中的查找
 
-// 从右上角开始搜索，逐步缩小查找范围
-function findNumberIn2DArray(matrix, target) {
-    if (!matrix.length) { return false; }
-    if (target === undefined) { return false; }
-    let rows = matrix.length, columns = matrix[0].length;
-    let row = 0, column = columns - 1;
-    while (row < rows & column >= 0) {
-        let item = matrix[row][column];
+// 从右上角开始搜索，【逐步缩小查找范围】
+function findNumberIn2DArray(arr, target) {
+    if (!arr.length) { return false; }
+    let row = arr.length, col = arr[0].length;
+    let i = 0, j = col - 1;
+    while (i < row && j >= 0) {
+        let item = arr[i][j];
         if (item === target) { return true; }
         if (item > target) {
-            column--;
+            j--;
         } else {
-            row++;
+            i++;
         }
     }
     return false;

@@ -55,7 +55,51 @@ function deepClone(data) {
     return res;
 }
 
+
 let a = { a: 1, b: { c: 2 } };
 let b = deepClone(a);
 a.b = 1;
 console.log(b);
+
+function copy(obj, map = new WeakMap()) {
+    let type = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
+    let result;
+    switch (type) {
+        case 'number':
+        case 'boolean':
+        case 'string':
+        case 'error':
+        case 'date':
+            const Ctor = obj.constructor;
+            return new Ctor(obj);
+        case 'array':
+            return Object.keys(obj).reduce((res, key) => {
+                obj[key] = copy(obj[key]);
+                return obj;
+            }, []);
+        case 'object':
+            result = {};
+            if (map.get(obj)) {
+                return map.get(obj);
+            }
+            map.set(obj, result);
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    result[key] = copy(obj[key], map);
+                }
+            }
+            return result;
+        case 'set':
+            break;
+        case 'map':
+            break;
+        case 'function':
+            break;
+        case 'symbol':
+            return Object(Symbol.prototype.valueOf.call(obj));
+        case 'regexp':
+            break;
+        default:
+            return obj;
+    }
+}

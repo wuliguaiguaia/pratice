@@ -3,6 +3,20 @@
 // 初始化 A 和 B 的元素数量分别为 m 和 n。
 
 // 涉及到多次移动，可以从尾到头进行替换！
+var merge1 = function (A, m, B, n) {
+    let len = m + n - 1;
+    m = m - 1;
+    n = n - 1;
+    while (n >= 0) {
+        if (A[m] > B[n]) {
+            A[len--] = A[m--]; // arr[-1] === undefined 直接超出比较undefiend
+        } else {
+            A[len--] = B[n--];
+        }
+    }
+    return A;
+};
+
 var merge = function (A, m, B, n) {
     if (!A.length) { return B; }
     if (!B.length) { return A; }
@@ -45,6 +59,8 @@ var merge2 = function (A, m, B, n) {
     }
     return A;
 };
+
+
 console.log(merge(
     [1, 2, 3, 0, 0, 0]
     , 3

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    简化父组件传递自定义事件的步骤
+    
+    parent: {{title1}}
+    <blog :title.sync="title1"></blog>
+  </div>
+  <script>
+    Vue.component('blog', {
+      props: ['title'],
+      template: `
+   <div>{{title}}</div>`,
+   created() {
+    // 5s 后 父子的title都变了
+     setTimeout(() => {
+       this.myTitle = "my hello";
+       this.$emit("update:title", this.myTitle);
+     }, 5000)
+   }
+    })
+    new Vue({
+      data: {
+        title1: '1'
+      },
+    }).$mount('#app')
+  </script>
+</body>
+
+</html>

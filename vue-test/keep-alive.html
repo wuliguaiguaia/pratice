@@ -102,6 +102,9 @@
           selectedPost: null
         };
       },
+      mounted() {
+        console.log('post');
+      },
       activated() {
         console.log('进入 post');
       },
@@ -143,6 +146,9 @@
       },
       deactivated() {
         console.log('离开 archive');
+      },
+      mounted() {
+        console.log('archive');
       },
     });
 

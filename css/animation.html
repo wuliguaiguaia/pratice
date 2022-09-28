@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+  width: 50px;
+  height: 50px;
+  background: red;
+  /* @keyframes 
+    duration |
+    timing-function | 
+    delay |
+    iteration-count | 
+    direction: normal | reverse | alternate(交替) | alternate-reverse
+    fill-mode: none  | forwards(最后一个关键帧) | backwards(第一个关键帧) | both （受 count 和 direction影响）
+    play-state: pause | running (可暂停动画，开启将从停止的位置)
+    name 
+  */
+  animation: 2s ease-in 0s 3 alternate-reverse  test;
+}
+
+@keyframes test {
+  from {
+     transform: translateX(0)
+  }
+  to {
+    transform: translateX(100px)
+  }
+}
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+</body>
+</html>

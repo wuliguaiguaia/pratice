@@ -83,3 +83,26 @@ console.log(reverseList4({
         },
     },
 }, 2, 3));
+
+
+// 从尾到头打印 递归
+function fn(head) {
+    if (!head) { return; }
+    if (head.next) {
+        fn(head.next);
+    }
+    console.log(head.val);
+}
+
+console.log(fn({
+    val: 1,
+    next: {
+        val: 2,
+        next: {
+            val: 3,
+            next: {
+                val: 4,
+            },
+        },
+    },
+}));

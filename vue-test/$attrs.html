@@ -12,6 +12,11 @@
 
 <body>
   <div id="app">
+    v-bind="$attrs" v-on="$listeners"
+    跨层级传递属性和事件
+
+    inheritAttrs
+
       此处监听了两个事件，可以在B组件或者C组件中直接触发
       <child1 class="123" xx="1" p-child1="child1" p-child2="child2" @test1="onTest1" @test2="onTest2"></child1>
       </div>

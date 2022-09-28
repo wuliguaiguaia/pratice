@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .app {
+      border: 2px solid red;
+      /* 创建 bfc 清楚浮动 */
+      display: flow-root;
+      /* display: inline-block; */
+      /* overflow: hidden; */
+      /* position: fixed; */
+    }
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: green;
+
+      float: right;
+    }
+
+    .app2{
+      background-color: blue;
+      margin: 20px;
+      display: flow-root;
+    }
+
+    .box2 {
+      margin: 50px;
+      width: 200px;
+      height: 200px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+<body>
+  <!-- 清楚浮动 解决高度塌陷 -->
+  <div class="app">
+    <div class="box"></div>
+  </div>
+
+  <!-- 解决margin合并 -->
+  <div class="app2">
+    <div class="box2"></div>
+  </div>
+</body>
+</html>

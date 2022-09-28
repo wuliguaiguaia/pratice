@@ -75,12 +75,19 @@ interface PersoneP {
   age: number
 }
 
+/* type Pick<T, K extends keyof T> = {
+    [P in K]: T[P];
+}; */
 const god: Pick<PersoneP, 'name'|'id'> = {
   id: 1,
   name: '122',
 }
 
 /* 6、Omit: Pick的反向操作，不要部分 key，其他都要 */
+
+/* 
+  type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
+ */
 interface PersoneP {
   id: number;
   name: string;

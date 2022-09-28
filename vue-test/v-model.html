@@ -11,26 +11,24 @@
 </head>
 
 <body>
-  <div id="app">
-   parent: {{value}}
-  <custom-input v-model="searchText"></custom-input>
-
-  </div>
+<div id="app">
+  {{message}}
+  <test v-model="message"></test>
+</div>
   <script>
-   Vue.component('custom-input', {
-      props: ['value'],
-      template: `
-    <input
-      v-bind:value="value"
-      v-on:input="$emit('input', $event.target.value)"
-    >
-  `
+   Vue.component('test', {
+      props: ['xx'],
+      mounted() {
+        setTimeout(() => {
+          this.$emit('input', 'fsd')
+        }, 3000);
+      },
+      template: '<div>{{xx}}</div>'
     })
     new Vue({
       data: {
-        searchText: '1'
-      },
-      component: ['custom-input'],
+        message: '234',
+      }
     }).$mount('#app')
   </script>
 </body>

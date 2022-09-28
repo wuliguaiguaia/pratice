@@ -1,20 +1,20 @@
-class App extends React.Component {
-    render() {
-        let obj = {
-            a: 1,
-            b: 2,
-            c: 3,
-        };
-        return (
-            <ul>
-                {
-                    Object.entries(obj).map(([key, value], index) => { // item是一个数组，把item解构，写法是[key, value]
-                        return <li key={key}>{value}</li>;
-                    })
-                }
-            </ul>
-        );
-    }
+function App() {
+    const [value, setValue] = React.useState('ss');
+    const value2 = usePrevious(value);
+    console.log(value, value2);
+    return <div>
+        prevCount: {value2}
+        <hr />
+        <input value={value} onChange={(e) => setValue(e.target.value)} />
+    </div>;
+}
+
+function usePrevious(value) {
+    const ref = React.useRef(value);
+    React.useEffect(() => {
+        ref.current = value;
+    }, [value]);
+    return ref.current;
 }
 
 ReactDOM.render(
