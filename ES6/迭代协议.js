@@ -81,7 +81,7 @@ o[Symbol.iterator] = function () {
 };
 
 for (let i of o) {
-    console.log(i);
+    console.log(i, 'p');
 }
 
 

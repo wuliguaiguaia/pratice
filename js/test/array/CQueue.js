@@ -1,4 +1,4 @@
-// 用两个栈实现列表
+// 用两个栈实现队列
 // 不能用shift()
 var CQueue = function () {
     this.arr1 = [];
@@ -20,7 +20,7 @@ CQueue.prototype.deleteHead = function () {
     return arr2.pop();
 };
 
-// 用两个列表实现栈
+// 用两个队列实现栈
 // 不能用pop()
 var CQueue2 = function () {
     this.arr1 = [];

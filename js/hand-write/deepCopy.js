@@ -69,6 +69,7 @@ function copy(obj, map = new WeakMap()) {
         case 'boolean':
         case 'string':
         case 'error':
+        case 'regexp':
         case 'date':
             const Ctor = obj.constructor;
             return new Ctor(obj);
@@ -97,8 +98,6 @@ function copy(obj, map = new WeakMap()) {
             break;
         case 'symbol':
             return Object(Symbol.prototype.valueOf.call(obj));
-        case 'regexp':
-            break;
         default:
             return obj;
     }

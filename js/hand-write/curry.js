@@ -38,27 +38,25 @@ function curry(fn) {
 }
 
 var abc = function (a, b, c) {
-    return [a, b, c];
+    console.log([a, b, c]);
 };
 
 var curried = curry(abc);
-console.log(curried(1)(2)(3));
-console.log(curried(1, 2)(3));
-console.log(curried(1, 2, 3));
+curried(1)(2)(3);
+curried(1, 2)(3);
+curried(1, 2, 3);
 
 // 参数不固定
 // add(3)(4)(5)()
 
-function curry2(fn) {
-    let args = [];
-    return function tempFn(...args1) {
-        if (args1.length === 0) {
-            let val = fn(...args);
-            args = [];
-            return val;
+
+function curry2(fn, ...rest) {
+    return function temp(...args) {
+        let arg = rest.concat(args);
+        if (args.length === 0) {
+            return fn(...arg);
         } else {
-            args = [...args, ...args1];
-            return tempFn;
+            return curry2(fn, ...arg);
         }
     };
 }
@@ -67,7 +65,7 @@ function add(...args) {
     return args.reduce((a, b) => a + b);
 }
 
-let addCurry = curry2(add);
+let addCurry = curry4(add);
 console.log(addCurry(1)(2)(3)(4, 5)()); // 15
 console.log(addCurry(1)(2)(3, 4, 5)()); // 15
 console.log(addCurry(1)(2, 3, 4, 5)()); // 15

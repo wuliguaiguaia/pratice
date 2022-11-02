@@ -12,7 +12,7 @@ function reverseList(l) {
 
 // 喵的，返回的是指针尾 T T
 
-// 迭代
+// 迭代 空间复杂度O(n)
 function reverseList2(l) {
     if (!l || !l.next) { return l; }
     let res = null;

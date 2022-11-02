@@ -39,7 +39,7 @@ function fn2(url) {
     tempArr.forEach(item => {
         if (item.includes('=')) {
             let [key, val] = item.split('=')
-            if (obj[key]) {
+            if (obj[key] !== undefined) {
                 if (!Array.isArray(obj[key])) {
                     obj[key] = [obj[key]]
                 }
@@ -54,4 +54,5 @@ function fn2(url) {
     return obj
 }
 console.log(fn2('http://www.domain.com/#99999fsdjfjkaj?user=anonymous&id=123&id=456&city=%E5%8C%97%E4%BA%AC&a=&enabled#999'));
+console.log(fn2('http://www.domain.com/#99999fsdjfjkaj?enabled#'));
 console.log(fn2('http://www.domain.com/#99999fsdjfjkaj?enabled#'));

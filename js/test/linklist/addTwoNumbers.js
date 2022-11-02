@@ -50,6 +50,10 @@ function fn(str1, str2) {
     return res;
 }
 
+console.log(fn('1234', '9999'));
+
+console.log(parseInt(undefined)); // NaN
+
 /* 注意：
     从后到为遍历
     不存在的情况

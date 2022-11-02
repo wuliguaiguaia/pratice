@@ -1,4 +1,5 @@
-/* 最大子数组和 */
+/* 剑指 Offer 42. 连续子数组的最大和 */
+// https://leetcode.cn/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/
 
 // 暴力搜索 O(N^2)
 function maxSubArray(arr) {
@@ -16,6 +17,7 @@ function maxSubArray(arr) {
     return max;
 }
 
+// O(n) 的复杂度大多动态规划思路
 
 // 动态规划 O(N)
 // 从dp[i] 递推到 dp[i+1]
@@ -66,3 +68,7 @@ function maxSubArray2(arr) {
 
 console.log(maxSubArray2([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
 console.log(maxSubArray2([5, 4, -1, 7, 8]));
+
+Number(undefined); // NaN
+
+console.log(2 > undefined); // false

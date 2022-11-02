@@ -11,7 +11,7 @@ Function.prototype.mycall = function (context, ...args) {
     return res;
 };
 
-Function.prototype.myapply = function (context, args) {
+Function.prototype.myapply = function (context, args) { // 仅获取参数方式不同
     let fn = this;
     if (typeof fn !== 'function') {
         throw new Error('不是函数');
