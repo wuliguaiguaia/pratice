@@ -33,6 +33,7 @@ app.use(async (req, res, next) => {
 
 app.use(async (req, res, next) => {
   console.log('2 start express');
+const sleep = (time) => new Promise(resolve => setTimeout(resolve, time * 1000))
   await sleep(2).then(next)
   console.log('2 end express');
 })
@@ -44,6 +45,7 @@ app.use(async (req, res, next) => {
 */
 
 app.get('/', (req, res) => {
+  console.log(123);
   // cookieParser 会在req上多一个cookies对象，返回所有的cookie
   if (!req.cookies.loginToken) {
     res.sendFile(path.resolve(__dirname, './login.html'));
