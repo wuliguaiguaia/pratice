@@ -57,7 +57,7 @@ var findLengthOfLCIS4 = function (nums) {
     let dp = new Array(len).fill(1);
     for (let i = 1; i < len; i++) {
         if (nums[i - 1] < nums[i]) {
-            dp[i] = Math.max(dp[i - 1], dp[i]) + 1;
+            dp[i] = dp[i - 1], dp[i] + 1;
         }
         if (res < dp[i]) { res = dp[i]; }
     }

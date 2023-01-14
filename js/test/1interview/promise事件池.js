@@ -24,11 +24,12 @@ function createRequest({ pool }) {
 
 
 function fetch(url, param) {
+    let randomTime = Math.floor((Math.random() * 4 + 1)); // 模拟每个任务随机事件完成
     return new Promise((res) => {
         setTimeout(() => {
-            console.log(url, '请求成功', String(new Date(Date.now())).slice(15, 25));
+            console.log(`${url} 请求成功, 花费时间: ${randomTime}s, 当前时间点: ${String(new Date(Date.now())).slice(15, 25)}`);
             res(url);
-        }, 1000); // 时间不一样时
+        }, randomTime * 1000); // 时间不一样时
     });
 }
 
@@ -39,6 +40,8 @@ const urlList = (Array.from(new Array(10))).map((item, idx) => ({
     url: idx,
     param: idx,
 }));
+
+console.log(`当前时间点: ${ String(new Date(Date.now())).slice(15, 25)}`);
 
 urlList.map(item => myRequest(item.url, item.param));
 

@@ -1,4 +1,5 @@
 // 剑指 Offer 03. 数组中重复的数字
+// https://leetcode.cn/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 // 【所有数字都在 0 ~ n - 1 之间，不会出现超出长度的数字】
 
 // 1 排序对比 i和i+1： 时间：O(nlgn)
