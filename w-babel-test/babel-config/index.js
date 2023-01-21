@@ -1,5 +1,2 @@
-require('@babel/register');
-
-import './fdfsdfsd'
-export const arr = Array.from('foo');
-console.log(arr);  // [ 'f', 'o', 'o' ]
+const h1 = '<p><h1></p>'
+const c = <div dangerouslySetInnerHTML={{__html: h1}}></div>
