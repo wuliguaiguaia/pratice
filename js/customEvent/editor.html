@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProseMirror Example</title>
+  <script src="https://unpkg.com/prosemirror-view@1.18.6/dist/index.js"></script>
+  <script src="https://unpkg.com/prosemirror-state@1.3.4/dist/index.js"></script>
+  <script src="https://unpkg.com/prosemirror-model@1.13.5/dist/index.js"></script>
+  <script src="https://unpkg.com/prosemirror-schema-basic@1.1.3/dist/index.js"></script>
+  <script src="https://unpkg.com/prosemirror-commands@1.1.9/dist/index.js"></script>
+  <style>
+    .editable {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="content" class="editable">点击这里开始编辑</div>
+  <script>
+    const content = document.getElementById("content");
+
+    function initProseMirror(element, content) {
+      const { schema } = window.prosemirrorSchemaBasic;
+      const { EditorState } = window.prosemirrorState;
+      const { EditorView } = window.prosemirrorView;
+
+      const state = EditorState.create({
+        doc: schema.nodeFromJSON({ type: "doc", content: content }),
+        schema,
+      });
+
+      const view = new EditorView(element, {
+        state,
+      });
+
+      return view;
+    }
+
+    function getRelativeCoordinates(element, event) {
+      const rect = element.getBoundingClientRect();
+      return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+      };
+    }
+
+    function setCursorAtPos(view, x, y) {
+      const pos = view.posAtCoords({ left: x, top: y });
+      if (pos) {
+        const { tr } = view.state;
+        tr.setSelection(window.prosemirrorState.TextSelection.create(view.state.doc, pos.pos));
+        view.dispatch(tr);
+      }
+    }
+
+    content.addEventListener("click", (event) => {
+      // 保存原始内容
+      const contentJSON = [{
+        type: "paragraph",
+        content: [{ type: "text", text: content.textContent }],
+      }];
+
+      // 替换元素
+      const editorWrapper = document.createElement("div");
+      content.replaceWith(editorWrapper);
+
+      // 初始化 ProseMirror 编辑器
+      const view = initProseMirror(editorWrapper, contentJSON);
+
+      // 获取鼠标点击的相对坐标
+      const { x, y } = getRelativeCoordinates(editorWrapper, event);
+
+      // 将光标定位到鼠标点击的位置
+      setCursorAtPos(view, x, y);
+
+      // 移除点击事件监听器
+      content.removeEventListener("click", arguments.callee);
+    });
+  </script>
+</body>
+</html>
+在这个示例中，我们首先监听 content 元素的点击事件。当点击事件触发时，我们创建一个新的 <div> 元素，用它替换原先的 content 元素，并初始化 ProseMirror 编辑器。然后，我们获取鼠标点击的相对坐标，并使用 ProseMirror 的 posAtCoords 方法将光标定位到相应的位置。最后，我们移除点击事件监听器，以防止重复执行。

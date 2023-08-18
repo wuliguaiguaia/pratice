@@ -129,3 +129,10 @@ type b = {
 }
 
 type AA1 = Record<'id'|'age', string>
+
+/* 11、ReturnType 获取函数返回值类型 */
+
+function fn1():Promise<number> {
+  return new Promise(r=>r(1))
+}
+type Fn1 = ReturnType<typeof fn1> // type Fn1 = Promise<number>

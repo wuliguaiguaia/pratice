@@ -49,6 +49,13 @@ try {
   console.error(err)
 }
 
+/* 递归创建目录 */
+fs.mkdir('./2019/1/2/3', { recursive: true }).then(function(data){
+  console.log(data)
+}).catch(function(){
+})
+
+
 /* 读取目录的内容 */
     // 会读取文件夹的内容（全部的文件和子文件夹），并返回它们的相对路径：非递归
 let folderPath = path.resolve(__dirname, 'test')

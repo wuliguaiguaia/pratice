@@ -15,10 +15,9 @@
 
 
 const a11 = [1, 2, 3]
-type A1 = typeof a11 // number[]
+type A11 = typeof a11 // number[]
 
 const b1 = [1,2,3] as const  
 type A2 = typeof a11 //readonly [1,2,3]
 const o11:A2 = [3, 4, 5]
-console.log(2);
 
