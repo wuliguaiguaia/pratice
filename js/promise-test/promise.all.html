@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //  Promise.all 的请求是会并发执行的
+    const sleep = t =>
+        new Promise(resolve => {
+            setTimeout(resolve, t * 1000);
+        });
+    const fn = async () => {
+        const promise1 = sleep(1).then(() => {
+            console.log('1s', Date.now());
+            return 1;
+        }); // 异步函数1
+        const promise2 =  async () => {
+            await sleep(2) // 虽然有await，但是该函数是正常执行的，除非是 await syncFn
+            console.log('2s', Date.now());
+            return 2;
+        }
+        const promise3 = sleep(3).then(() => {
+            console.log('3s', Date.now());
+            return 3;
+        });// 异步函数3
+        const results = await Promise.all([promise1, promise2(), promise3]);
+        console.log(results);
+    };
+    fn();
+// 1s 1692703841278
+// 2s 1692703842276
+// 3s 1692703843278
+// [1, 2, 3]
+    </script>
+</body>
+</html>
