@@ -27,6 +27,17 @@ enum EPageId {
 type TPageId = keyof typeof EPageId; // "Theatre" | "SubscribedVideo" | "News" | "Mine" | "Video" | "AboutUs" | "UserRecord" | "Webview"
 type IPageIdValue = `${EPageId}`  // 'all' | 'some' | 'little'
 
+// 2、枚举值转换为一个常量数组
+enum EVideoOfflineStatus {
+  Online, // 未下架
+  Full, // 整剧下架
+  Episode, // 单集下架
+}
+
+const statusValues = Object.values(EVideoOfflineStatus);
+
+// 使用示例
+console.log(statusValues); // 输出: [0, 1, 2]
 
 // 3、获取方法名集合
 let obj = {
