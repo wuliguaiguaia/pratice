@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+            text-align: center;
+        }
+        .text {
+            width: 100%;
+            /*  有个奇怪的点：
+                button在text上面的时候
+                text的 opacity 为 1，按钮可点击，为0不可以 */
+            /* opacity可以触发gpu加速 */
+            opacity: 0;
+            background-color: aqua;
+        }
+        .button {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="button">button</div>
+    <div class="text">texttexttexttext</div>
+    <script>
+        document.getElementsByClassName('button')[0].addEventListener('click', function(){
+            console.log(111);
+        })
+    </script>
+</body>
+</html>

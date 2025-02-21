@@ -5,5 +5,15 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js'
+  },
+  module: {
+    // rules: [
+    //   {
+    //     test: /\.[j]sx?$/,
+    //     exclude: /(node_modules|bower_components)/,
+    //     use: {
+    //       loader: 'babel-loader',
+    //     }
+    //   }]
   }
 }

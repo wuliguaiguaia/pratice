@@ -1,0 +1,42 @@
+<style>
+    .bg-red {
+        background-color: red;
+    }
+    .bg-green {
+        background-color: green;
+    }
+    .bg-transparent {
+        background-color: transparent;
+    }
+</style>
+<body class="bg-green bg-red"></body>
+<!-- 样式生效顺序是以在css文件的顺序决定的 -->
+<style type="text/css">
+    .class1 {color: green}
+    .class2 {color: red}
+    /* .class3 {color: transparent;} */
+</style>
+<p class="class2 class1"> 111111111 </p>
+
+
+<style>
+    .wrapper {
+        position: relative;
+    }
+    #box {
+        position: absolute;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+    #box2 {
+        width: 150px;
+        height: 150px;
+        background-color: blue;
+    }
+</style>
+<div class="wrapper">
+    <div id="box">1</div>
+    <div id="box2">2</div>
+</div>
